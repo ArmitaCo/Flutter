@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class Authentication {
   static SharedPreferences _prefs;
-
+  String x;
   static String at;
   static String rt;
   static bool firstTime = true;
