@@ -8,6 +8,8 @@ class RegisterPage extends StatefulWidget {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
+  String y;
+  String errorMessage="";
   String errorMessage = "";
   String x;
 
