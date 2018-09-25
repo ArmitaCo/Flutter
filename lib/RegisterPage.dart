@@ -9,6 +9,7 @@ class RegisterPage extends StatefulWidget {
   TextEditingController password = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
   String errorMessage = "";
+  String x;
 
   @override
   State<StatefulWidget> createState() {
