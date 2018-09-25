@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:http/http.dart';
 
 //class PackagesPage extends StatefulWidget {
 //  @override
