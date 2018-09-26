@@ -3,8 +3,26 @@ import 'package:flutter_app_rote/Login.dart';
 import 'Dispacher.dart';
 import 'RegisterPage.dart';
 import 'package:flutter_app_rote/Authentication.dart';
+import 'package:flutter_app_rote/PackagesPage2.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(
+    new MaterialApp(
+
+      routes: {
+        "/account/login": (context) => new LoginPage(),
+        "/packages": (context) =>
+        new MyHomePage(title: 'Flutter Demo Home Page'),
+        "/account/register" :(context)=> new RegisterPage(),
+      },
+      title: 'Flutter Demo',
+      theme: new ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: new MyHomePage(title: 'Flutter Demo Home Page'),
+
+    )
+
+);
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -16,7 +34,7 @@ class MyApp extends StatelessWidget {
         "/account/login": (context) => new LoginPage(),
         "/packages": (context) =>
             new MyHomePage(title: 'Flutter Demo Home Page'),
-        "/account/register" :(context)=> new RegisterPage()
+        "/account/register" :(context)=> new RegisterPage(),
       },
       title: 'Flutter Demo',
       theme: new ThemeData(

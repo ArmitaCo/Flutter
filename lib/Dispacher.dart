@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/PackagesPage.dart';
+import 'package:flutter_app_rote/CategoryPage.dart';
 import 'Authentication.dart';
 
 Future<Widget> dispatch(pages page,BuildContext context) async
@@ -15,7 +15,7 @@ Future<Widget> dispatch(pages page,BuildContext context) async
     case pages.challenge:
       return Text("challenge");
     case pages.packages:
-      return PackagesPage();
+      return CategoryPage();
     case pages.search:
       return Text("search");
     case pages.profile:
