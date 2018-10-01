@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'MyPackages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/CategoryPage.dart';
 import 'Authentication.dart';
@@ -11,11 +11,11 @@ Future<Widget> dispatch(pages page,BuildContext context) async
   switch(page)
   {
     case pages.buy:
-      return Text("buy");
+      return CategoryPage();
     case pages.challenge:
       return Text("challenge");
     case pages.packages:
-      return CategoryPage();
+      return new MyPackages();
     case pages.search:
       return Text("search");
     case pages.profile:
