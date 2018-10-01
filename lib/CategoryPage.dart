@@ -17,6 +17,9 @@ class CategoryPage extends StatefulWidget {
 class CategoryPageState extends State<CategoryPage> {
   List<CategoryModel> data = new List<CategoryModel>();
 
+  //int ListCount = data.length;
+  //String ItemTitle = CategoryPageState().data[index].title;
+
   @override
   void initState() {
     super.initState();
@@ -33,46 +36,26 @@ class CategoryPageState extends State<CategoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-        itemCount: data.length,
-        gridDelegate:
-            new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,),
-
-        itemBuilder: (BuildContext context, int index) {
-          return new GestureDetector(onTap: (){
-           final int SelectedPackageId = data[index].id;
-           GetPackages(context, SelectedPackageId).then((packageList){
-             Navigator.push(
-               context,
-               MaterialPageRoute(builder: (context) => PackagePage(packageList: packageList,)),
-             );
-           });
-
-          },child: new Card(
-            margin: EdgeInsets.all(10.0),
-            shape: RoundedRectangleBorder(
-                side: BorderSide(width: 1.0, color: Colors.blueGrey),
-                borderRadius: BorderRadius.all(Radius.circular(5.0))),
-            child: GridTileBar(
-                subtitle: Center(
-                  child: Text(
-                    data[index].title,
-
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                    textAlign: TextAlign.center,
-
-                  ),
-                ),
-                title: Image.network(
-                  data[index].absoluteImageUrl,
-                  fit: BoxFit.cover,
-                ),
-            ),
-          ));
-        });
+    return new GridView.count(
+        crossAxisCount: 2,
+        padding: EdgeInsets.all(2.0),
+        children: data
+            .map((x) => new GridTile(
+                child: Image.network(x.absoluteImageUrl),
+                header: Text(x.title)))
+            .toList());
   }
 }
+
+//new GridView.count(crossAxisCount: 2,
+//        padding: EdgeInsets.all(2.0),
+//        childAspectRatio: 1.0,
+//        children: List < Widget>.generate((CategoryPageState().data.length),(index)
+//    {
+//    return new GridTile(footer: Text(CategoryPageState().data[index].title),
+//    header: Image.network(CategoryPageState().data[index].absoluteImageUrl, fit: BoxFit.cover, ), child: Text("Salam"),
+//    );
+//    }
+//    ),
+//    );
+//  }

@@ -5,25 +5,7 @@ import 'RegisterPage.dart';
 import 'package:flutter_app_rote/Authentication.dart';
 import 'package:flutter_app_rote/PackagesPage2.dart';
 
-void main() => runApp(
-    new MaterialApp(
-
-      routes: {
-        "/account/login": (context) => new LoginPage(),
-        "/packages": (context) =>
-        new MyHomePage(title: 'Flutter Demo Home Page'),
-        "/account/register" :(context)=> new RegisterPage(),
-      },
-      title: 'Flutter Demo',
-      theme: new ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: new MyHomePage(title: 'Flutter Demo Home Page'),
-
-    )
-
-);
-
+void main() => runApp(new MyApp());
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -33,15 +15,15 @@ class MyApp extends StatelessWidget {
       routes: {
         "/account/login": (context) => new LoginPage(),
         "/packages": (context) =>
-            new MyHomePage(title: 'Flutter Demo Home Page'),
-        "/account/register" :(context)=> new RegisterPage(),
+        new MyHomePage(title: 'Flutter Demo Home Page'),
+        "/account/register": (context) => new RegisterPage(),
       },
       title: 'Flutter Demo',
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: new MyHomePage(title: 'Flutter Demo Home Page'),
-      
+
     );
   }
 }
@@ -70,7 +52,7 @@ class MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     dispatch(pages.packages, context).then((w) {
-      if(w!=null) {
+      if (w != null) {
         setBody(w);
       }
     });
@@ -78,9 +60,8 @@ class MyHomePageState extends State<MyHomePage> {
   }
 
   navigationTapped(int i) {
-
     dispatch(pages.values[i], context).then((w) {
-      if(w!=null) {
+      if (w != null) {
         setBody(w);
         index = i;
       }
@@ -93,17 +74,22 @@ class MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: Center(child: new Text(widget.title)),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.exit_to_app),tooltip: "خروج", onPressed: (){
-            Authentication.Signout(context);})
+          IconButton(
+              icon: Icon(Icons.exit_to_app), tooltip: "خروج", onPressed: () {
+            Authentication.Signout(context);
+          })
         ],
       ),
       body: Center(child: body),
       bottomNavigationBar: new Theme(
           data: Theme.of(context).copyWith(
-              // sets the background color of the `BottomNavigationBar`
+            // sets the background color of the `BottomNavigationBar`
               canvasColor: Colors.blue,
               // sets the active color of the `BottomNavigationBar` if `Brightness` is light
-              textTheme: Theme.of(context).textTheme.copyWith(
+              textTheme: Theme
+                  .of(context)
+                  .textTheme
+                  .copyWith(
                   caption: TextStyle(
                       color: Colors.red,
                       fontSize: 50.0,
