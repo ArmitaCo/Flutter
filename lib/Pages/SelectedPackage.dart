@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Authentication.dart';
-import 'package:flutter_app_rote/PackageBoxModel.dart';
-import 'package:flutter_app_rote/PackageModel.dart';
+import 'package:flutter_app_rote/Model/PackageBoxModel.dart';
+import 'package:flutter_app_rote/Model/PackageModel.dart';
+import 'package:flutter_app_rote/Tools/Authentication.dart';
 
 class SelectedPackage extends StatefulWidget {
   List<PackageBoxModel> packageBoxList = new List();
