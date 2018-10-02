@@ -3,7 +3,6 @@ import 'package:flutter_app_rote/Login.dart';
 import 'Dispacher.dart';
 import 'RegisterPage.dart';
 import 'package:flutter_app_rote/Authentication.dart';
-import 'package:flutter_app_rote/PackagesPage2.dart';
 
 void main() => runApp(
     new MaterialApp(

@@ -12,7 +12,7 @@ class PackageModel {
   final String title;
   final String imageUrl;
   final String coverUrl;
-  final String description;
+   String description;
   final int userPackageId;
   final int userPackageState;
 

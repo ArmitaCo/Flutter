@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'PackageModel.dart';
-import 'package:flutter_app_rote/CategoryPage.dart';
 import 'package:flutter_app_rote/Authentication.dart';
 
 class PackagePage extends StatefulWidget {
