@@ -1,11 +1,11 @@
 import 'dart:convert';
-import 'package:flutter_app_rote/PackagesPage2.dart';
+import 'package:flutter_app_rote/Pages/PackagesPage.dart';
 
-import 'PackageModel.dart';
+import 'package:flutter_app_rote/Model/PackageModel.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'Authentication.dart';
-import 'CategoryModel.dart';
+import 'package:flutter_app_rote/Model/CategoryModel.dart';
+import 'package:flutter_app_rote/Tools/Authentication.dart';
 
 class CategoryPage extends StatefulWidget {
   @override

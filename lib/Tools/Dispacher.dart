@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'MyPackages.dart';
+import 'package:flutter_app_rote/Pages/MyPackages.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/CategoryPage.dart';
-import 'Authentication.dart';
+import 'package:flutter_app_rote/Pages/CategoryPage.dart';
+import 'package:flutter_app_rote/Tools/Authentication.dart';
 
 Future<Widget> dispatch(pages page,BuildContext context) async
 {
