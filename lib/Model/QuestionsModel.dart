@@ -1,7 +1,5 @@
 import 'AnswersModel.dart';
 class QuestionsModel {
-  final int code;
-  final String message;
   final int id;
   final String questionText;
   final int correctAnswer;
@@ -9,8 +7,6 @@ class QuestionsModel {
   final List<AnswersModel> answersModel;
 
   QuestionsModel({
-    this.code,
-    this.message,
     this.id,
     this.questionText,
     this.correctAnswer,
@@ -20,8 +16,6 @@ class QuestionsModel {
 
   factory QuestionsModel.fromJson(Map<String, dynamic> json) {
     return QuestionsModel(
-        code:  json['Code'],
-        message:  json['Message'],
         id: json['Id'],
         questionText: json['QuestionText'],
         correctAnswer: json['CorrextAnswer'],

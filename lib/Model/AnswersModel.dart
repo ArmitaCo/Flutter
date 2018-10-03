@@ -1,7 +1,7 @@
 class AnswersModel {
   final int id;
   final String text;
-  final String isCorrect;
+  final bool isCorrect;
   final int choiceLabel;
 
   AnswersModel({
