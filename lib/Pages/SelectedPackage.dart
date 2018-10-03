@@ -78,9 +78,9 @@ class MySelectedPackage extends State<SelectedPackage> {
                     onTap: () {},
                     child: Row(
                       children: <Widget>[
-                        Text(widget.packageBoxList[index].title)
+                        Text(widget.packageBoxList[index].title,style: TextStyle(fontSize: 25.0),)
                       ],
-                      textDirection: TextDirection.rtl,
+
                     ),
                   );
                 },
