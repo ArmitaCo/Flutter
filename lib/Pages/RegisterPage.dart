@@ -1,8 +1,7 @@
 import 'dart:convert';
-
+import 'package:flutter_app_rote/Tools/Authentication.dart';
 import 'package:flutter/material.dart';
-import 'Authentication.dart';
-import 'RegisterModel.dart';
+import 'package:flutter_app_rote/Model/RegisterModel.dart';
 
 class RegisterPage extends StatefulWidget {
   TextEditingController email = TextEditingController();

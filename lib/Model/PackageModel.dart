@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:core';
 
-import 'package:flutter_app_rote/Authentication.dart';
+import 'package:flutter_app_rote/Tools/Authentication.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ class PackageModel {
   final String title;
   final String imageUrl;
   final String coverUrl;
-  final String description;
+   String description;
   final int userPackageId;
   final int userPackageState;
 

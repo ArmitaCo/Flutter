@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'PackageModel.dart';
-import 'package:flutter_app_rote/CategoryPage.dart';
-import 'package:flutter_app_rote/Authentication.dart';
+import 'package:flutter_app_rote/Model/PackageModel.dart';
+import 'package:flutter_app_rote/Tools/Authentication.dart';
 
 class PackagePage extends StatefulWidget {
   List<PackageModel> packageList;
@@ -22,7 +21,7 @@ class PackagePageState extends State<PackagePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-            title: Center(child: new Text("نرمافزار مطلب")),
+            title: Center(child: new Text("نرم افزار مطلب")),
         actions: <Widget>[
       IconButton(icon: Icon(Icons.exit_to_app), tooltip: "خروج", onPressed: () {
         Authentication.Signout(context);
