@@ -1,10 +1,16 @@
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Model/ExternalArticleModel.dart';
+import 'package:flutter_app_rote/Tools/Authentication.dart';
+import 'package:http/http.dart' as http;
 
 class ArticleModel {
   final int id;
   final String title;
   final String imageUrl;
-  final String order;
+  final int order;
   final List<ExternalArticleModel> externalArticles;
 
   ArticleModel({this.id,
@@ -16,15 +22,29 @@ class ArticleModel {
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) {
     return ArticleModel(
-      title:  json['Title'],
-      id:  json['Id'],
-      imageUrl: json['ImageUrl'],
-      order: json['Order'],
-      externalArticles: ExternalArticleModel.fromJsonArray(json['ExternalArticles'])
+        title:  json['Title'],
+        id:  json['Id'],
+        imageUrl: json['ImageUrl'],
+        order: json['Order'],
+        externalArticles: ExternalArticleModel.fromJsonArray(json['ExternalArticles'])
     );
   }
+
   static fromJsonArray(List json) {
     return json.map((i)=>ArticleModel.fromJson(i)).toList();
   }
 }
 
+Future<List<ArticleModel>> GetBoxArticles(BuildContext context,
+    int userPackageBoxId) async
+{
+  final header = await Authentication.getHeader(context);
+  Map<String, String> x = {"id": userPackageBoxId.toString()};
+  List<ArticleModel> articles = new List<ArticleModel>();
+  final response = await http.post(
+      "http://31.25.130.239/api/boxes/UserBoxArticles",
+      body: x, headers: header);
+  articles = ArticleModel.fromJsonArray(
+      json.decode(response.body)["Data"]["Result"]);
+  return articles;
+}
