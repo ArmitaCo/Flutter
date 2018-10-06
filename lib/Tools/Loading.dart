@@ -1,21 +1,25 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
-class PopLoading {
-  void onLoading(BuildContext c) {
-    showDialog(
-      context: c,
-      barrierDismissible: false,
-      builder: (Loader) {
-        return new Dialog(
-          child: new Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              new CircularProgressIndicator(),
-              new Text("Loading"),
-            ],
-          ),
+Future<Null> showLoadingDialog(BuildContext context) async {
+  await showDialog(
+      context: context,
+      builder: (ctx) {
+        return SimpleDialog(
+          title: Text("Loading"),
+          children: <Widget>[
+            new FittedBox(
+              child: Padding(
+                padding: EdgeInsets.all(5.0),
+                child: new CircularProgressIndicator(
+                  value: null,
+                ),
+              ),
+            )
+          ],
         );
-      },
-    );
-  }
+      });
+
+  return;
 }
