@@ -22,7 +22,7 @@ class LearningPageState extends State<LearningPage> {
   @override
   void initState() {
     super.initState();
-    GetBoxArticles(context, widget.box.userPackageBoxId).then((articles2) {
+    getBoxArticles(context, widget.box.userPackageBoxId).then((articles2) {
       setState(() {
         articles = articles2;
         pages = articles
@@ -31,7 +31,9 @@ class LearningPageState extends State<LearningPage> {
               article: x,
             ))
             .toList();
-        currentArticle = 0;
+        currentArticle =
+        widget.box.stateValue == 0 ? 0 : widget.box.stateValue - 1;
+        _articleLearned();
       });
     });
   }
@@ -46,7 +48,10 @@ class LearningPageState extends State<LearningPage> {
         ),
         centerTitle: true,
       ),
-      body: IndexedStack(children: pages, index: currentArticle,),
+      body: IndexedStack(
+        children: pages,
+        index: currentArticle,
+      ),
       bottomSheet: LinearProgressIndicator(
         value: (currentArticle.ceilToDouble() + 1) / articles.length,
       ),
@@ -67,12 +72,18 @@ class LearningPageState extends State<LearningPage> {
     setState(() {
       currentArticle++;
     });
+    _articleLearned();
   }
 
   _decrementIndex() {
     setState(() {
       currentArticle--;
     });
+    _articleLearned();
+  }
+
+  _articleLearned() {
+    articles[currentArticle].articleLearned(context, widget.box.id);
   }
 }
 
