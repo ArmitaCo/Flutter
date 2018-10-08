@@ -1,10 +1,12 @@
 import 'dart:convert';
-import 'package:flutter_app_rote/Pages/PackagesPage.dart';
-import 'package:flutter_app_rote/Model/PackageModel.dart';
+
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter_app_rote/Model/CategoryModel.dart';
+import 'package:flutter_app_rote/Model/PackageModel.dart';
+import 'package:flutter_app_rote/Pages/PackagesPage.dart';
 import 'package:flutter_app_rote/Tools/Authentication.dart';
+import 'package:flutter_app_rote/Tools/Loading.dart';
+import 'package:http/http.dart' as http;
 
 class CategoryPage extends StatefulWidget {
   @override
@@ -40,22 +42,7 @@ class CategoryPageState extends State<CategoryPage> {
         itemBuilder: (BuildContext context, int index) {
           return new GestureDetector(
               onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (ctx) {
-                      return new Column(
-                        children: <Widget>[
-                          new CircularProgressIndicator(
-                            strokeWidth: 10.0,
-                            value: null,
-                          ),
-                          new Text("Loading")
-                        ],
-                      );
-                    });
-
-                //new Row(children: <Widget>[CircularProgressIndicator(strokeWidth: 2.0,backgroundColor: Colors.blue,),Text("Loading")]);
-                //final int SelectedPackageId = data[index].id;
+                showLoadingDialog(context);
                 GetPackages(context, data[index].id).then((packageList) {
                   Navigator.pop(context);
 

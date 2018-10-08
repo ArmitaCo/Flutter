@@ -2,12 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Tools/Authentication.dart';
 import 'package:http/http.dart' as http;
 
 class PackageBoxModel {
   final int id;
-  final int userPackageId;
+  final int userPackageBoxId;
   final int packageId;
   final int code;
   final int boxState;
@@ -16,7 +17,7 @@ class PackageBoxModel {
 
   PackageBoxModel({
     this.id,
-    this.userPackageId,
+    this.userPackageBoxId,
     this.packageId,
     this.code,
     this.boxState,
@@ -31,13 +32,27 @@ class PackageBoxModel {
       boxState: json['BoxState'],
       code: json['Code'],
       packageId: json['PackageId'],
-      userPackageId: json['UserPackageId'],
+      userPackageBoxId: json['UserPackageBoxId'],
       id: json['Id'],
     );
   }
 
   static fromJsonArray(List json) {
     return json.map((i) => PackageBoxModel.fromJson(i)).toList();
+  }
+
+  Icon GetBoxIcon() {
+    int boxStateIcon = boxState;
+    switch (boxStateIcon) {
+      case 0:
+        return new Icon(Icons.not_interested);
+      case 1:
+        return new Icon(Icons.cloud_upload);
+      case 2:
+        return new Icon(Icons.done);
+      case 3:
+        return new Icon(Icons.done_all);
+    }
   }
 }
 

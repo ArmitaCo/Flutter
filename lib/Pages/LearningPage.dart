@@ -17,13 +17,23 @@ class LearningPage extends StatefulWidget {
 class LearningPageState extends State<LearningPage> {
   List<ArticleModel> articles = new List();
   int currentArticle = 0;
+  List<Widget> pages = new List();
 
   @override
   void initState() {
     super.initState();
-    GetBoxArticles(context, widget.box.userPackageId).then((articles2) {
+    getBoxArticles(context, widget.box.userPackageBoxId).then((articles2) {
       setState(() {
         articles = articles2;
+        pages = articles
+            .map<Widget>((x) =>
+            ArticleWidget(
+              article: x,
+            ))
+            .toList();
+        currentArticle =
+        widget.box.stateValue == 0 ? 0 : widget.box.stateValue - 1;
+        _articleLearned();
       });
     });
   }
@@ -31,38 +41,48 @@ class LearningPageState extends State<LearningPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          widget.box.title,
+          textDirection: TextDirection.rtl,
+        ),
+        centerTitle: true,
+      ),
       body: IndexedStack(
-        children:
-        articles.map<Widget>((x) => ArticleWidget(article: x)).toList(),
+        children: pages,
         index: currentArticle,
-        sizing: StackFit.expand,
       ),
       bottomSheet: LinearProgressIndicator(
         value: (currentArticle.ceilToDouble() + 1) / articles.length,
       ),
       persistentFooterButtons: <Widget>[
         IconButton(
-          icon: Icon(Icons.navigate_next),
-          onPressed: () {
-            setState((currentArticle < articles.length - 1)
-                ? _incrementIndex()
-                : null);
-          },
+          icon: Icon(Icons.navigate_before),
+          onPressed: (currentArticle > 0) ? _decrementIndex : null,
         ),
         IconButton(
-            icon: Icon(Icons.navigate_before),
-            onPressed: (currentArticle > 0) ? _decrementIndex() : null),
+            icon: Icon(Icons.navigate_next),
+            onPressed:
+            (currentArticle < articles.length - 1) ? _incrementIndex : null)
       ],
     );
   }
 
   _incrementIndex() {
-    currentArticle++;
+    setState(() {
+      currentArticle++;
+    });
+    _articleLearned();
   }
 
   _decrementIndex() {
-    currentArticle--;
+    setState(() {
+      currentArticle--;
+    });
+    _articleLearned();
+  }
+
+  _articleLearned() {
+    articles[currentArticle].articleLearned(context, widget.box.id);
   }
 }
-
-//
