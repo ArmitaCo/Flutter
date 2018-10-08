@@ -31,7 +31,7 @@ class PackageBoxModel {
       boxState: json['BoxState'],
       code: json['Code'],
       packageId: json['PackageId'],
-      userPackageId: json['UserPackageId'],
+      userPackageId: json['UserPackageBoxId'],
       id: json['Id'],
     );
   }
