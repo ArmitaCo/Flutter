@@ -8,6 +8,7 @@ class ExaminingPage extends StatefulWidget {
   PackageBoxModel pModel;
   List<QuestionsModel> questionsList;
   List<AnswersModel> answersList;
+
   ExaminingPage({this.questionsList, this.answersList});
 
   @override
@@ -20,10 +21,9 @@ class ExaminingPageState extends State<ExaminingPage> {
   @override
   void initState() {
     super.initState();
-GetQuestions(context, widget.pModel.userPackageId).then((q){
-  widget.questionsList = q;
-
-});
+    GetQuestions(context, widget.pModel.userPackageBoxId).then((q) {
+      widget.questionsList = q;
+    });
   }
 
   @override
@@ -55,15 +55,14 @@ GetQuestions(context, widget.pModel.userPackageId).then((q){
                   textDirection: TextDirection.rtl,
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[new GestureDetector(onTap: (){
-                    if (widget.answersList[index].isCorrect == true){
-
-                    }
-                    else {
-
-                    }
-                  },child:
-                    new Text(widget.answersList[index].text),)
+                  children: <Widget>[
+                    new GestureDetector(
+                      onTap: () {
+                        if (widget.answersList[index].isCorrect ==
+                            true) {} else {}
+                      },
+                      child: new Text(widget.answersList[index].text),
+                    )
                   ],
                 )
               ]));
