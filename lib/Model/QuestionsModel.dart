@@ -1,3 +1,9 @@
+import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_app_rote/Tools/Authentication.dart';
+
 import 'AnswersModel.dart';
 class QuestionsModel {
   final int id;
@@ -27,4 +33,16 @@ class QuestionsModel {
     return json.map((i)=>QuestionsModel.fromJson(i)).toList();
   }
 }
-
+Future<List<QuestionsModel>> GetQuestions(BuildContext context,
+    int userPackageBoxId) async
+{
+  final header = await Authentication.getHeader(context);
+  Map<String, String> x = {"id": userPackageBoxId.toString()};
+  List<QuestionsModel> questions = new List<QuestionsModel>();
+  final response = await http.post(
+      "http://31.25.130.239/api/boxes/UserBoxQuestions",
+      body: x, headers: header);
+  questions = QuestionsModel.fromJsonArray(
+      json.decode(response.body)["Data"]["Result"]);
+  return questions;
+}
