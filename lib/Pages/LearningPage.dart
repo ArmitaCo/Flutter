@@ -46,9 +46,7 @@ class LearningPageState extends State<LearningPage> {
         ),
         centerTitle: true,
       ),
-      body: Column(children: <Widget>[IndexedStack(
-        children: pages, sizing: StackFit.passthrough, index: currentArticle,)
-      ],),
+      body: IndexedStack(children: pages, index: currentArticle,),
       bottomSheet: LinearProgressIndicator(
         value: (currentArticle.ceilToDouble() + 1) / articles.length,
       ),
@@ -56,7 +54,6 @@ class LearningPageState extends State<LearningPage> {
         IconButton(
           icon: Icon(Icons.navigate_before),
           onPressed: (currentArticle > 0) ? _decrementIndex : null,
-          alignment: Alignment.centerLeft,
         ),
         IconButton(
             icon: Icon(Icons.navigate_next),

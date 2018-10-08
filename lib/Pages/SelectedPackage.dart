@@ -8,8 +8,7 @@ import 'package:flutter_app_rote/Pages/ReviewingPage.dart';
 import 'package:flutter_app_rote/Tools/Authentication.dart';
 
 class SelectedPackage extends StatefulWidget {
-  List<PackageBoxModel> packageBoxList = new List();
-  PackageModel package;
+  final PackageModel package;
 
   SelectedPackage({this.package});
 
@@ -20,12 +19,14 @@ class SelectedPackage extends StatefulWidget {
 }
 
 class MySelectedPackage extends State<SelectedPackage> {
+  List<PackageBoxModel> packageBoxList = new List();
+
   @override
   void initState() {
     super.initState();
-    GetPackageBox(context, widget.package.id).then((packageBoxList) {
+    GetPackageBox(context, widget.package.id).then((packageBoxList2) {
       setState(() {
-        widget.packageBoxList = packageBoxList;
+        packageBoxList = packageBoxList2;
       });
     });
     setState(() {
@@ -35,7 +36,7 @@ class MySelectedPackage extends State<SelectedPackage> {
     });
   }
 
-  int BoxState;
+  int boxState;
 
   @override
   Widget build(BuildContext context) {
@@ -77,46 +78,48 @@ class MySelectedPackage extends State<SelectedPackage> {
               ),
               Flexible(
                   child: ListView.builder(
-                padding: EdgeInsets.all(5.0),
-                itemCount: widget.packageBoxList.length,
-                scrollDirection: Axis.vertical,
-                itemBuilder: (BuildContext context, int index) {
-                  return new GestureDetector(
-                      onTap: () {
-                        BoxState = widget.packageBoxList[index].boxState;
-                        switch (BoxState) {
-                          case 0:
-                            Text("you dont Own this Box");
-                            break;
-                          case 1:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LearningPage(box: widget.packageBoxList[index],)));
-                            break;
-                          case 2:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ExaminingPage()));
-                            break;
-                          case 3:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ReviewingPage()));
-                            break;
-                          default:
-                            Text("Wrong chiz");
-                        }
-                      },
-                      child: Row(children: <Widget>[
-                        widget.packageBoxList[index].GetBoxIcon(),
-                        Text(widget.packageBoxList[index].title,
-                            style: TextStyle(fontSize: 25.0))
-                      ]));
-                },
-              ))
+                    padding: EdgeInsets.all(5.0),
+                    itemCount: packageBoxList.length,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (BuildContext context, int index) {
+                      return new GestureDetector(
+                          onTap: () {
+                            boxState = packageBoxList[index].boxState;
+                            switch (boxState) {
+                              case 0:
+                                Text("you dont Own this Box");
+                                break;
+                              case 1:
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            LearningPage(
+                                              box: packageBoxList[index],)));
+                                break;
+                              case 2:
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ExaminingPage()));
+                                break;
+                              case 3:
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ReviewingPage()));
+                                break;
+                              default:
+                                Text("Wrong chiz");
+                            }
+                          },
+                          child: Row(children: <Widget>[
+                            packageBoxList[index].GetBoxIcon(),
+                            Text(packageBoxList[index].title,
+                                style: TextStyle(fontSize: 25.0))
+                          ]));
+                    },
+                  ))
             ],
           )),
     );
