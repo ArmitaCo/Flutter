@@ -26,7 +26,7 @@ class QuestionsModel {
         questionText: json['QuestionText'],
         correctAnswer: json['CorrextAnswer'],
         answerText: json['AnswerText'],
-        answersModel: AnswersModel.fromJsonArray(json['AnswersModel'])
+        answersModel: AnswersModel.fromJsonArray(json['Answers'])
     );
   }
   static fromJsonArray(List json) {

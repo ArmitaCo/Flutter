@@ -75,5 +75,3 @@ class LearningPageState extends State<LearningPage> {
     });
   }
 }
-
-//

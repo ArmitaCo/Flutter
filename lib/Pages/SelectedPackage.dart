@@ -101,7 +101,7 @@ class MySelectedPackage extends State<SelectedPackage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => ExaminingPage()));
+                                        builder: (context) => ExaminingPage(pModel: packageBoxList[index],)));
                                 break;
                               case 3:
                                 Navigator.push(
