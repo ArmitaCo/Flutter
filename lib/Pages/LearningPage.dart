@@ -17,13 +17,21 @@ class LearningPage extends StatefulWidget {
 class LearningPageState extends State<LearningPage> {
   List<ArticleModel> articles = new List();
   int currentArticle = 0;
+  List<Widget> pages = new List();
 
   @override
   void initState() {
     super.initState();
-    GetBoxArticles(context, widget.box.userPackageId).then((articles2) {
+    GetBoxArticles(context, widget.box.userPackageBoxId).then((articles2) {
       setState(() {
         articles = articles2;
+        pages = articles
+            .map<Widget>((x) =>
+            ArticleWidget(
+              article: x,
+            ))
+            .toList();
+        currentArticle = 0;
       });
     });
   }
@@ -31,37 +39,43 @@ class LearningPageState extends State<LearningPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        children:
-        articles.map<Widget>((x) => ArticleWidget(article: x)).toList(),
-        index: currentArticle,
-        sizing: StackFit.expand,
+      appBar: AppBar(
+        title: Text(
+          widget.box.title,
+          textDirection: TextDirection.rtl,
+        ),
+        centerTitle: true,
       ),
+      body: Column(children: <Widget>[IndexedStack(
+        children: pages, sizing: StackFit.passthrough, index: currentArticle,)
+      ],),
       bottomSheet: LinearProgressIndicator(
         value: (currentArticle.ceilToDouble() + 1) / articles.length,
       ),
       persistentFooterButtons: <Widget>[
         IconButton(
-          icon: Icon(Icons.navigate_next),
-          onPressed: () {
-            setState((currentArticle < articles.length - 1)
-                ? _incrementIndex()
-                : null);
-          },
+          icon: Icon(Icons.navigate_before),
+          onPressed: (currentArticle > 0) ? _decrementIndex : null,
+          alignment: Alignment.centerLeft,
         ),
         IconButton(
-            icon: Icon(Icons.navigate_before),
-            onPressed: (currentArticle > 0) ? _decrementIndex() : null),
+            icon: Icon(Icons.navigate_next),
+            onPressed:
+            (currentArticle < articles.length - 1) ? _incrementIndex : null)
       ],
     );
   }
 
   _incrementIndex() {
-    currentArticle++;
+    setState(() {
+      currentArticle++;
+    });
   }
 
   _decrementIndex() {
-    currentArticle--;
+    setState(() {
+      currentArticle--;
+    });
   }
 }
 

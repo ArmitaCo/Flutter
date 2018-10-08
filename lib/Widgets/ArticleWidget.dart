@@ -3,23 +3,25 @@ import 'package:flutter_app_rote/Model/ArticleModel.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class ArticleWidget extends StatelessWidget {
-  final ArticleModel article;
+  ArticleModel article;
 
   ArticleWidget({this.article});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.max,
+      verticalDirection: VerticalDirection.down,
       children: <Widget>[
-        Image.network(
+        article.imageUrl != null ? Image.network(
           article.imageUrl,
           fit: BoxFit.fitWidth,
-        ),
+        ) : Text("Salam"),
         Text(
           article.title,
-          textScaleFactor: 2.0,
+          textScaleFactor: 1.0,
         ),
-        ListView.builder(itemBuilder: (ctx, index) {
+        Flexible(child: ListView.builder(itemBuilder: (ctx, index) {
           FlatButton.icon(
               onPressed: () {
                 Navigator.push(
@@ -30,7 +32,7 @@ class ArticleWidget extends StatelessWidget {
               },
               icon: Icon(Icons.link),
               label: Text(article.externalArticles[index].title));
-        })
+        }),)
       ],
     );
   }
