@@ -19,9 +19,6 @@ class MyApp extends StatelessWidget {
         "/packages": (context) =>
         new MyHomePage(title: 'Flutter Demo Home Page'),
         "/account/register": (context) => new RegisterPage(),
-        "/Package/Learning": (context) => new LearningPage(),
-        "/Package/Examining": (context) => new ExaminingPage(),
-        "/Package/Reviewing": (context) => new ReviewingPage(),
       },
       title: 'Flutter Demo',
       theme: new ThemeData(

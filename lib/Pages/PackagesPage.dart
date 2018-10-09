@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Model/PackageModel.dart';
+import 'package:flutter_app_rote/Pages/SelectedPackage.dart';
 import 'package:flutter_app_rote/Tools/Authentication.dart';
 
 class PackagePage extends StatefulWidget {
@@ -34,7 +35,9 @@ class PackagePageState extends State<PackagePage> {
         ),
         itemBuilder: (BuildContext context, int index) {
           return new GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedPackage(package: widget.packageList[index],)));
+              },
               child: new Card(
                 margin: EdgeInsets.all(10.0),
                 shape: RoundedRectangleBorder(
