@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Model/ExternalArticleModel.dart';
 import 'package:flutter_app_rote/Tools/Authentication.dart';
+import 'package:flutter_app_rote/Tools/ConstValues.dart';
 import 'package:http/http.dart' as http;
 
 class ArticleModel {
@@ -41,7 +42,7 @@ Future<List<ArticleModel>> getBoxArticles(BuildContext context,
   Map<String, String> x = {"id": userPackageBoxId.toString()};
   List<ArticleModel> articles = new List<ArticleModel>();
   final response = await http.post(
-      "http://31.25.130.239/api/boxes/UserBoxArticles",
+      Values.Host+"api/boxes/UserBoxArticles",
       body: x,
       headers: header);
   articles =
@@ -55,6 +56,6 @@ Future learningArticle(BuildContext context, int boxId, int order) async {
     "BoxId": boxId.toString(),
     "Order": order.toString()
   };
-  await http.post("http://31.25.130.239/api/learning/LearnedArticle",
+  await http.post(Values.Host+"api/learning/LearnedArticle",
       body: x, headers: header);
 }
