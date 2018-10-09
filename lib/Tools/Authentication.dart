@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_rote/Tools/ConstValues.dart';
 
 class Authentication {
   static SharedPreferences _prefs;
@@ -21,7 +22,7 @@ class Authentication {
       "password": password
     };
 
-    final response = await http.post("http://31.25.130.239/token", body: b);
+    final response = await http.post(Values.Host+"token", body: b);
     if (response.statusCode == 200) {
       if (_prefs == null) _prefs = await SharedPreferences.getInstance();
       final atByRt = TokenModel.fromJson(json.decode(response.body));
@@ -53,7 +54,7 @@ class Authentication {
           };
 
           final response =
-              await http.post("http://31.25.130.239/token", body: b);
+              await http.post(Values.Host+"token", body: b);
           final atByRt = TokenModel.fromJson(json.decode(response.body));
           at = atByRt.accessToken;
           _prefs.setString("at", at);
@@ -66,7 +67,7 @@ class Authentication {
           "refresh_token": rt
         };
 
-        final response = await http.post("http://31.25.130.239/token", body: b);
+        final response = await http.post(Values.Host+"token", body: b);
         final atByRt = TokenModel.fromJson(json.decode(response.body));
         at = atByRt.accessToken;
         _prefs.setString("at", at);
@@ -94,7 +95,7 @@ class Authentication {
     };
 
     final response =
-        await http.post("http://31.25.130.239/api/account/register", body: x);
+        await http.post(Values.Host+"api/account/register", body: x);
     return response;
   }
 

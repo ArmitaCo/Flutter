@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:core';
 
 import 'package:flutter_app_rote/Tools/Authentication.dart';
+import 'package:flutter_app_rote/Tools/ConstValues.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -62,7 +63,7 @@ Icon GetIcon (){
   Map<String, String> x = {"id": Id.toString()};
    List<PackageModel> PackageData = new List<PackageModel>();
   final response =
-  await http.post("http://31.25.130.239/api/packages/packages",body: x,headers: header);
+  await http.post(Values.Host+"api/packages/packages",body: x,headers: header);
   PackageData = PackageModel.fromJsonArray(
       json.decode(response.body)["Data"]["Result"]);
   return PackageData;
@@ -71,7 +72,7 @@ Future<List<PackageModel>> GetMyPackages(BuildContext context) async {
   final header = await Authentication.getHeader(context);
   List<PackageModel> MyPackageData = new List<PackageModel>();
   final response =
-  await http.post("http://31.25.130.239/api/packages/mypackages2",headers: header);
+  await http.post(Values.Host+"api/packages/mypackages2",headers: header);
   MyPackageData = PackageModel.fromJsonArray(
       json.decode(response.body)["Data"]["Result"]);
   return MyPackageData;
