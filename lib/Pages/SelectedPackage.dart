@@ -24,6 +24,7 @@ class MySelectedPackage extends State<SelectedPackage> {
   @override
   void initState() {
     super.initState();
+    _getPackageBoxes();
   }
 
   _getPackageBoxes() {
@@ -43,7 +44,6 @@ class MySelectedPackage extends State<SelectedPackage> {
 
   @override
   Widget build(BuildContext context) {
-    _getPackageBoxes();
     return new Scaffold(
       appBar: AppBar(
           title: Center(child: new Text("نرم افزار مطلب")),
