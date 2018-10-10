@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Pages/ExaminingPage.dart';
 import 'package:flutter_app_rote/Pages/LoginPage.dart';
 import 'package:flutter_app_rote/Tools/Dispacher.dart';
 import 'package:flutter_app_rote/Pages/RegisterPage.dart';
 import 'package:flutter_app_rote/Tools/Authentication.dart';
-import 'package:flutter_app_rote/Pages/LearningPage.dart';
-import 'package:flutter_app_rote/Pages/ReviewingPage.dart';
 
 void main() => runApp(new MyApp());
 class MyApp extends StatelessWidget {
