@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter_app_rote/Pages/ChallengePage.dart';
 import 'package:flutter_app_rote/Pages/MyPackages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Pages/CategoryPage.dart';
@@ -13,7 +14,7 @@ Future<Widget> dispatch(pages page,BuildContext context) async
     case pages.buy:
       return CategoryPage();
     case pages.challenge:
-      return Text("challenge");
+      return ChallengePage();
     case pages.packages:
       return new MyPackages();
     case pages.search:
