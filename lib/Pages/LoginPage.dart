@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Tools/Authentication.dart';
+import 'package:flutter_app_rote/Tools/Loading.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -46,9 +47,11 @@ class LoginPageState extends State<LoginPage> {
                 ),
                 RaisedButton(
                     onPressed: () {
+                      showLoadingDialog(context);
                       if (_loginFormKey.currentState.validate()) {
                         Authentication.login(context, _userNameController.text,
                             _passwordController.text).then((val){
+                              Navigator.pop(context);
                              if(val) Navigator.pop(context);
                         });
                       }
