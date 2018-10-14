@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter_app_rote/Tools/Authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Model/RegisterModel.dart';
+import 'package:flutter_app_rote/Tools/Loading.dart';
 
 class RegisterPage extends StatefulWidget {
   TextEditingController email = TextEditingController();
@@ -53,12 +54,14 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     RaisedButton(
                       onPressed: () {
+                        showLoadingDialog(context);
                         Authentication.RegisterAndLogin(
                                 context,
                                 widget.email.text,
                                 widget.password.text,
                                 widget.confirmPassword.text)
                             .then((response) {
+                              Navigator.pop(context);
                           final registerResponse = RegisterModel.fromJson(
                               json.decode(response.body)["Data"]);
                           if (registerResponse.code == 200) {

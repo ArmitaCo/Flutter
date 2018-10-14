@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'package:flutter_app_rote/Pages/ChallengePage.dart';
 import 'package:flutter_app_rote/Pages/MyPackages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Pages/CategoryPage.dart';
+import 'package:flutter_app_rote/Pages/ProfilePage.dart';
+import 'package:flutter_app_rote/Pages/SearchPage.dart';
 import 'package:flutter_app_rote/Tools/Authentication.dart';
 
 Future<Widget> dispatch(pages page,BuildContext context) async
@@ -13,13 +16,13 @@ Future<Widget> dispatch(pages page,BuildContext context) async
     case pages.buy:
       return CategoryPage();
     case pages.challenge:
-      return Text("challenge");
+      return ChallengePage();
     case pages.packages:
       return new MyPackages();
     case pages.search:
-      return Text("search");
+      return SearchPage();
     case pages.profile:
-      return Text("profile");
+      return ProfilePage();
     case pages.login:
       return Text("Login");
     case pages.register:

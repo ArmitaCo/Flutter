@@ -4,8 +4,8 @@ import 'package:flutter_app_rote/Model/PackageBoxModel.dart';
 import 'package:flutter_app_rote/Model/PackageModel.dart';
 import 'package:flutter_app_rote/Pages/ExaminingPage.dart';
 import 'package:flutter_app_rote/Pages/LearningPage.dart';
-import 'package:flutter_app_rote/Pages/ReviewingPage.dart';
 import 'package:flutter_app_rote/Tools/Authentication.dart';
+import 'package:flutter_app_rote/Tools/Loading.dart';
 
 class SelectedPackage extends StatefulWidget {
   final PackageModel package;
@@ -24,6 +24,10 @@ class MySelectedPackage extends State<SelectedPackage> {
   @override
   void initState() {
     super.initState();
+    _getPackageBoxes();
+  }
+
+  _getPackageBoxes() {
     GetPackageBox(context, widget.package.id).then((packageBoxList2) {
       setState(() {
         packageBoxList = packageBoxList2;
@@ -95,7 +99,8 @@ class MySelectedPackage extends State<SelectedPackage> {
                                     MaterialPageRoute(
                                         builder: (context) =>
                                             LearningPage(
-                                              box: packageBoxList[index],)));
+                                              box: packageBoxList[index],
+                                              isLearning: true,)));
                                 break;
                               case 2:
                                 Navigator.push(
@@ -107,7 +112,10 @@ class MySelectedPackage extends State<SelectedPackage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => ReviewingPage()));
+                                        builder: (context) =>
+                                            LearningPage(
+                                              box: packageBoxList[index],
+                                              isLearning: false,)));
                                 break;
                               default:
                                 Text("Wrong chiz");

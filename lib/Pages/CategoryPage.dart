@@ -5,6 +5,7 @@ import 'package:flutter_app_rote/Model/CategoryModel.dart';
 import 'package:flutter_app_rote/Model/PackageModel.dart';
 import 'package:flutter_app_rote/Pages/PackagesPage.dart';
 import 'package:flutter_app_rote/Tools/Authentication.dart';
+import 'package:flutter_app_rote/Tools/ConstValues.dart';
 import 'package:flutter_app_rote/Tools/Loading.dart';
 import 'package:http/http.dart' as http;
 
@@ -22,7 +23,7 @@ class CategoryPageState extends State<CategoryPage> {
   void initState() {
     super.initState();
     Authentication.getHeader(context).then((header) {
-      final response = http.post("http://31.25.130.239/api/packages/categories",
+      final response = http.post(Values.Host+"api/packages/categories",
           headers: header);
       response.then((resp) {
         data = CategoryModel.fromJsonArray(

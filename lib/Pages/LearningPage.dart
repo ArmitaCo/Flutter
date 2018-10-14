@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Model/ArticleModel.dart';
 import 'package:flutter_app_rote/Model/PackageBoxModel.dart';
+import 'package:flutter_app_rote/Pages/ExaminingPage.dart';
 import 'package:flutter_app_rote/Widgets/ArticleWidget.dart';
 
 class LearningPage extends StatefulWidget {
   final PackageBoxModel box;
+  final bool isLearning;
 
-  LearningPage({this.box});
+  LearningPage({this.box, this.isLearning});
 
   @override
   State<StatefulWidget> createState() {
@@ -18,10 +20,14 @@ class LearningPageState extends State<LearningPage> {
   List<ArticleModel> articles = new List();
   int currentArticle = 0;
   List<Widget> pages = new List();
+  IconButton goToExamButton;
 
   @override
   void initState() {
     super.initState();
+//    if (widget.isLearning) {
+//      goToExamButton = IconButton(icon: Icon(Icons.extension), onPressed: null);
+//    }
     getBoxArticles(context, widget.box.userPackageBoxId).then((articles2) {
       setState(() {
         articles = articles2;
@@ -63,8 +69,10 @@ class LearningPageState extends State<LearningPage> {
         IconButton(
             icon: Icon(Icons.navigate_next),
             onPressed:
-            (currentArticle < articles.length - 1) ? _incrementIndex : null)
+            (currentArticle < articles.length - 1) ? _incrementIndex : null),
+        goToExamButton
       ],
+
     );
   }
 
@@ -83,6 +91,21 @@ class LearningPageState extends State<LearningPage> {
   }
 
   _articleLearned() {
-    articles[currentArticle].articleLearned(context, widget.box.id);
+    if (widget.isLearning) {
+      articles[currentArticle].articleLearned(context, widget.box.id);
+      if (currentArticle + 1 == articles.length) {
+        goToExamButton = IconButton(
+            icon: Icon(Icons.extension),
+            onPressed: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          ExaminingPage(
+                            pModel: widget.box,
+                          )));
+            });
+      }
+    }
   }
 }
