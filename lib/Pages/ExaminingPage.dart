@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Model/AnswersModel.dart';
 import 'package:flutter_app_rote/Model/PackageBoxModel.dart';
 import 'package:flutter_app_rote/Model/QuestionsModel.dart';
-import 'package:flutter_app_rote/Tools/Authentication.dart';
 import 'package:flutter_app_rote/Widgets/QuestionsWidget.dart';
 
 class ExaminingPage extends StatefulWidget {
@@ -19,23 +17,42 @@ class ExaminingPage extends StatefulWidget {
 class ExaminingPageState extends State<ExaminingPage> {
   List<QuestionsModel> questionsList = new List();
   List<Widget> questionss = new List();
+  int currentQuestion = 0;
+  IconButton finishExam;
+
   @override
   void initState() {
     super.initState();
     GetQuestions(context, widget.pModel.userPackageBoxId).then((q) {
       setState(() {
         questionsList = q;
-        questionss = questionsList.map<Widget>((x) =>
-            QuestionsWidget(
-              questions: x,
-            ))
-            .toList();
+        currentQuestion =
+        widget.pModel.stateValue == 0 ? 0 : widget.pModel.stateValue - 1;
+        if (!questionsList.any((x) => x.userAnswerId == null)) {
+          finishExam = IconButton(icon: Icon(Icons.message), onPressed: null);
+        }
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    questionss = questionsList
+        .map<Widget>((x) =>
+        QuestionsWidget(
+          question: x,
+        ))
+        .toList();
+
+    if (questionsList != null &&
+        questionsList.length > 0 &&
+        !questionsList.any((x) => x.userAnswerId == null)) {
+      finishExam = IconButton(
+          icon: Icon(Icons.send),
+          onPressed: () {
+            Navigator.pop(context);
+          });
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -43,9 +60,59 @@ class ExaminingPageState extends State<ExaminingPage> {
           textDirection: TextDirection.rtl,
         ),
         centerTitle: true,
+        actions: <Widget>[
+          new IconButton(
+              icon: Icon(Icons.live_help),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (c) =>
+                        SimpleDialog(
+                          children: <Widget>[
+                            Text(questionsList[currentQuestion].hint)
+                          ],
+                        ));
+              })
+        ],
       ),
-      body: IndexedStack(children: questionss),
-
+      body: IndexedStack(
+        children: questionss,
+        index: currentQuestion,
+      ),
+      bottomSheet: LinearProgressIndicator(
+        value: (currentQuestion.ceilToDouble() + 1) / questionsList.length,
+      ),
+      persistentFooterButtons: <Widget>[
+        IconButton(
+          icon: Icon(Icons.navigate_before),
+          onPressed: (currentQuestion > 0) ? _decrementIndex : null,
+        ),
+        IconButton(
+            icon: Icon(Icons.navigate_next),
+            onPressed: (currentQuestion < questionsList.length - 1)
+                ? _incrementIndex
+                : null),
+        finishExam
+      ],
     );
+  }
+
+  _incrementIndex() {
+    setState(() {
+      currentQuestion++;
+    });
+    _articleLearned();
+  }
+
+  _decrementIndex() {
+    setState(() {
+      currentQuestion--;
+    });
+    _articleLearned();
+  }
+
+  _articleLearned() {
+    QuestionViewed(
+        context, questionsList[currentQuestion].id, widget.pModel.id);
   }
 }
