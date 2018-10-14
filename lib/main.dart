@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Pages/LoginPage.dart';
 import 'package:flutter_app_rote/Pages/RegisterPage.dart';
-import 'package:flutter_app_rote/Tools/Authentication.dart';
+import 'package:flutter_app_rote/Tools/MyColors.dart';
 import 'package:flutter_app_rote/Tools/Dispacher.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() => runApp(new MyApp());
+
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-
       routes: {
         "/account/login": (context) => new LoginPage(),
         "/packages": (context) =>
-        new MyHomePage(title: 'Flutter Demo Home Page'),
+            new MyHomePage(title: 'Flutter Demo Home Page'),
         "/account/register": (context) => new RegisterPage(),
       },
       title: 'Flutter Demo',
       theme: new ThemeData(
-        primarySwatch: Colors.blue,
-
+        primaryColor: MyColors.appBarAndNavigationBar,
       ),
       localizationsDelegates: [
         // ... app-specific localization delegate[s] here
@@ -32,8 +30,7 @@ class MyApp extends StatelessWidget {
         const Locale('fa', 'IR'), // Farsi
       ],
       locale: Locale("fa"),
-      home: new MyHomePage(title: 'Flutter Demo Home Page'),
-
+      home: new MyHomePage(title: 'نرم افزار مطلب'),
     );
   }
 }
@@ -83,23 +80,12 @@ class MyHomePageState extends State<MyHomePage> {
     return new Scaffold(
       appBar: new AppBar(
         title: Center(child: new Text(widget.title)),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.exit_to_app), tooltip: "خروج", onPressed: () {
-            Authentication.Signout(context);
-          })
-        ],
       ),
       body: Center(child: body),
       bottomNavigationBar: new Theme(
           data: Theme.of(context).copyWith(
-            // sets the background color of the `BottomNavigationBar`
-              canvasColor: Colors.blue,
-              // sets the active color of the `BottomNavigationBar` if `Brightness` is light
-              textTheme: Theme
-                  .of(context)
-                  .textTheme
-                  .copyWith(
+              canvasColor: MyColors.appBarAndNavigationBar,
+              textTheme: Theme.of(context).textTheme.copyWith(
                   caption: TextStyle(
                       color: Colors.red,
                       fontSize: 50.0,

@@ -18,10 +18,11 @@ class ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return new Center(
-      child: Column(
+      child: Row(
         children: <Widget>[
-          Image.network(Values.Host+"Images/UC.gif"),
-          new Text("به زودی...")
+          Column(children: <Widget>[
+            CircleAvatar(radius: 100.0,child: Text("s",style: TextStyle(fontSize: 15.0,background: Paint()),))
+          ],),Column()
         ],
       ),
     );

@@ -17,13 +17,30 @@ class SelectedPackage extends StatefulWidget {
   }
 }
 
-class MySelectedPackage extends State<SelectedPackage> {
+class MySelectedPackage extends State<SelectedPackage>
+    with SingleTickerProviderStateMixin {
+  AnimationController animationController;
+  Animation<double> animation;
   List<PackageBoxModel> packageBoxList = new List();
 
   @override
   void initState() {
     super.initState();
     _getPackageBoxes();
+    animationController = new AnimationController(
+      duration: new Duration(milliseconds: 1000),
+      vsync: this,
+    );
+    animation =
+        new CurvedAnimation(parent: animationController, curve: Curves.easeIn)
+          ..addListener(() => this.setState(() {}))
+          ..addStatusListener((AnimationStatus status) {});
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
   }
 
   _getPackageBoxes() {
@@ -31,6 +48,7 @@ class MySelectedPackage extends State<SelectedPackage> {
       setState(() {
         packageBoxList = packageBoxList2;
       });
+      animationController.forward();
     });
     setState(() {
       if (widget.package.description == null) {
@@ -45,25 +63,20 @@ class MySelectedPackage extends State<SelectedPackage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-          title: Center(child: new Text("نرم افزار مطلب")),
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.exit_to_app),
-                tooltip: "خروج",
-                onPressed: () {
-                  Authentication.Signout(context);
-                })
-          ]),
+        title: Center(child: new Text("نرم افزار مطلب")),
+      ),
       body: Padding(
           padding: EdgeInsets.all(10.0),
           child: Column(
             textDirection: TextDirection.rtl,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Image.network(
-                widget.package.coverUrl,
-                fit: BoxFit.fitWidth,
-              ),
+              Transform.scale(
+                  scale: animation.value,
+                  child: Image.network(
+                    widget.package.coverUrl,
+                    fit: BoxFit.fitWidth,
+                  )),
               Text(
                 widget.package.title,
                 textDirection: TextDirection.rtl,
@@ -81,63 +94,60 @@ class MySelectedPackage extends State<SelectedPackage> {
               ),
               Flexible(
                   child: ListView.builder(
-                    padding: EdgeInsets.all(5.0),
-                    itemCount: packageBoxList.length,
-                    scrollDirection: Axis.vertical,
-                    itemBuilder: (BuildContext context, int index) {
-                      return new GestureDetector(
-                          onTap: () {
-                            boxState = packageBoxList[index].boxState;
-                            switch (boxState) {
-                              case 0:
-                                Text("you dont Own this Box");
-                                break;
-                              case 1:
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            LearningPage(
-                                              box: packageBoxList[index],
-                                              isLearning: true,
-                                            ))).then((x) {
-                                  _getPackageBoxes();
-                                });
-                                break;
-                              case 2:
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            ExaminingPage(
-                                              pModel: packageBoxList[index],
-                                            ))).then((x) {
-                                  _getPackageBoxes();
-                                });
-                                break;
-                              case 3:
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            LearningPage(
-                                              box: packageBoxList[index],
-                                              isLearning: false,
-                                            ))).then((x) {
-                                  _getPackageBoxes();
-                                });
-                                break;
-                              default:
-                                Text("Wrong chiz");
-                            }
-                          },
-                          child: Row(children: <Widget>[
-                            packageBoxList[index].GetBoxIcon(),
-                            Text(packageBoxList[index].title,
-                                style: TextStyle(fontSize: 25.0))
-                          ]));
-                    },
-                  ))
+                padding: EdgeInsets.all(5.0),
+                itemCount: packageBoxList.length,
+                scrollDirection: Axis.vertical,
+                itemBuilder: (BuildContext context, int index) {
+                  return new GestureDetector(
+                      onTap: () {
+                        boxState = packageBoxList[index].boxState;
+                        switch (boxState) {
+                          case 0:
+                            Text("you dont Own this Box");
+                            break;
+                          case 1:
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LearningPage(
+                                          box: packageBoxList[index],
+                                          isLearning: true,
+                                        ))).then((x) {
+                              _getPackageBoxes();
+                            });
+                            break;
+                          case 2:
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ExaminingPage(
+                                          pModel: packageBoxList[index],
+                                        ))).then((x) {
+                              _getPackageBoxes();
+                            });
+                            break;
+                          case 3:
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LearningPage(
+                                          box: packageBoxList[index],
+                                          isLearning: false,
+                                        ))).then((x) {
+                              _getPackageBoxes();
+                            });
+                            break;
+                          default:
+                            Text("Wrong chiz");
+                        }
+                      },
+                      child: Row(children: <Widget>[
+                        packageBoxList[index].GetBoxIcon(),
+                        Text(packageBoxList[index].title,
+                            style: TextStyle(fontSize: 25.0))
+                      ]));
+                },
+              ))
             ],
           )),
     );

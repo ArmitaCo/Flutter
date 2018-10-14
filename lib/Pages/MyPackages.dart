@@ -2,12 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Model/PackageModel.dart';
 import 'package:flutter_app_rote/Pages/SelectedPackage.dart';
-import 'package:flutter_app_rote/Tools/Loading.dart';
+import 'package:flutter_app_rote/Tools/MyColors.dart';
 
 class MyPackages extends StatefulWidget {
   List<PackageModel> MyPackageList = new List();
-
-  //MyPackages({this.MyPackageList});
 
   @override
   State<StatefulWidget> createState() {
@@ -15,15 +13,34 @@ class MyPackages extends StatefulWidget {
   }
 }
 
-class MyPackagesState extends State<MyPackages> {
+class MyPackagesState extends State<MyPackages>
+    with SingleTickerProviderStateMixin {
+  AnimationController animationController;
+  Animation<double> animation;
+
   @override
   void initState() {
     super.initState();
+    animationController = new AnimationController(
+      duration: new Duration(milliseconds: 1000),
+      vsync: this,
+    );
+    animation =
+        new CurvedAnimation(parent: animationController, curve: Curves.easeIn)
+          ..addListener(() => this.setState(() {}))
+          ..addStatusListener((AnimationStatus status) {});
     GetMyPackages(context).then((ml) {
       setState(() {
         widget.MyPackageList = ml;
       });
+      animationController.forward();
     });
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -32,43 +49,57 @@ class MyPackagesState extends State<MyPackages> {
         itemCount: widget.MyPackageList.length,
         gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 0.9,
+          childAspectRatio: 0.8,
         ),
         itemBuilder: (BuildContext context, int index) {
           return new GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => SelectedPackage(package: widget.MyPackageList[index],)));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SelectedPackage(
+                              package: widget.MyPackageList[index],
+                            )));
               },
-              child: Card(
-                  margin: EdgeInsets.all(10.0),
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 1.0, color: Colors.blueGrey),
-                      borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                  child: new Stack(
-                    fit: StackFit.passthrough,
-                    children: <Widget>[
-                      GridTileBar(
-                        subtitle: Center(
-                          child: Text(
-                            widget.MyPackageList[index].title,
-                            maxLines: 2,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
+              child: Transform.scale(
+                  scale: animation.value,
+                  child: Card(
+                      elevation: animation.value * 15.0,
+                      color: MyColors.packages,
+                      margin: EdgeInsets.all(10.0),
+                      shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              width: animation.value * 3.0,
+                              color: MyColors.appBarAndNavigationBar),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(15.0))),
+                      child: new Stack(
+                        fit: StackFit.passthrough,
+                        children: <Widget>[
+                          GridTileBar(
+                            subtitle: Center(
+                              child: SizedBox(
+                                  child: Text(
+                                widget.MyPackageList[index].title,
+                                maxLines: 2,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                                textAlign: TextAlign.center,
+                              )),
                             ),
-                            textAlign: TextAlign.center,
+                            title: Image.network(
+                              widget.MyPackageList[index].imageUrl,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                        title: Image.network(
-                          widget.MyPackageList[index].imageUrl,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      new Container(
-                          alignment: Alignment.topLeft,
-                          child: widget.MyPackageList[index].GetIcon()),
-                    ],
-                  )));
+                          new Container(
+                              padding: EdgeInsets.all(5.0),
+                              alignment: Alignment.bottomLeft,
+                              child: widget.MyPackageList[index].GetIcon()),
+                        ],
+                      ))));
         });
   }
 }

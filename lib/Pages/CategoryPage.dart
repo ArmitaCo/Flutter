@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Model/CategoryModel.dart';
 import 'package:flutter_app_rote/Model/PackageModel.dart';
@@ -7,6 +6,7 @@ import 'package:flutter_app_rote/Pages/PackagesPage.dart';
 import 'package:flutter_app_rote/Tools/Authentication.dart';
 import 'package:flutter_app_rote/Tools/ConstValues.dart';
 import 'package:flutter_app_rote/Tools/Loading.dart';
+import 'package:flutter_app_rote/Tools/MyColors.dart';
 import 'package:http/http.dart' as http;
 
 class CategoryPage extends StatefulWidget {
@@ -16,21 +16,38 @@ class CategoryPage extends StatefulWidget {
   }
 }
 
-class CategoryPageState extends State<CategoryPage> {
+class CategoryPageState extends State<CategoryPage>
+    with SingleTickerProviderStateMixin {
+  AnimationController animationController;
+  Animation<double> animation;
   List<CategoryModel> data = new List<CategoryModel>();
 
   @override
   void initState() {
     super.initState();
+    animationController = new AnimationController(
+      duration: new Duration(milliseconds: 1000),
+      vsync: this,
+    );
+    animation =
+        new CurvedAnimation(parent: animationController, curve: Curves.easeIn)
+          ..addListener(() => this.setState(() {}))
+          ..addStatusListener((AnimationStatus status) {});
     Authentication.getHeader(context).then((header) {
-      final response = http.post(Values.Host+"api/packages/categories",
-          headers: header);
+      final response =
+          http.post(Values.Host + "api/packages/categories", headers: header);
       response.then((resp) {
         data = CategoryModel.fromJsonArray(
             json.decode(resp.body)["Data"]["Result"]);
         setState(() {});
+        animationController.forward();
       });
     });
+  }
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -56,29 +73,38 @@ class CategoryPageState extends State<CategoryPage> {
                   );
                 });
               },
-              child: new Card(
-                margin: EdgeInsets.all(10.0),
-                shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 1.0, color: Colors.blueGrey),
-                    borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                child: GridTileBar(
-                  subtitle: Center(
-                    child: Text(
-                      data[index].title,
-                      textDirection: TextDirection.rtl,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  title: Image.network(
-                    data[index].absoluteImageUrl,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ));
+              child: new Transform.scale(
+                  scale: animation.value,
+                  child: Card(
+                    color: MyColors.packages,
+                    elevation: animation.value * 15.0,
+                    margin: EdgeInsets.all(10.0),
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                            width: 3.0, color: MyColors.appBarAndNavigationBar),
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                    child: Stack(fit: StackFit.passthrough, children: <Widget>[
+                      GridTileBar(
+                        subtitle: Center(
+                          child:
+                              Text(
+                            data[index].title,
+                            maxLines: 2,
+                            textDirection: TextDirection.rtl,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        title: Image.network(
+                          data[index].absoluteImageUrl,
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                    ]),
+                  )));
         });
   }
 }
