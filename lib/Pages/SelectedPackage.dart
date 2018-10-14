@@ -5,7 +5,6 @@ import 'package:flutter_app_rote/Model/PackageModel.dart';
 import 'package:flutter_app_rote/Pages/ExaminingPage.dart';
 import 'package:flutter_app_rote/Pages/LearningPage.dart';
 import 'package:flutter_app_rote/Tools/Authentication.dart';
-import 'package:flutter_app_rote/Tools/Loading.dart';
 
 class SelectedPackage extends StatefulWidget {
   final PackageModel package;
@@ -100,13 +99,21 @@ class MySelectedPackage extends State<SelectedPackage> {
                                         builder: (context) =>
                                             LearningPage(
                                               box: packageBoxList[index],
-                                              isLearning: true,)));
+                                              isLearning: true,
+                                            ))).then((x) {
+                                  _getPackageBoxes();
+                                });
                                 break;
                               case 2:
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => ExaminingPage(pModel: packageBoxList[index],)));
+                                        builder: (context) =>
+                                            ExaminingPage(
+                                              pModel: packageBoxList[index],
+                                            ))).then((x) {
+                                  _getPackageBoxes();
+                                });
                                 break;
                               case 3:
                                 Navigator.push(
@@ -115,7 +122,10 @@ class MySelectedPackage extends State<SelectedPackage> {
                                         builder: (context) =>
                                             LearningPage(
                                               box: packageBoxList[index],
-                                              isLearning: false,)));
+                                              isLearning: false,
+                                            ))).then((x) {
+                                  _getPackageBoxes();
+                                });
                                 break;
                               default:
                                 Text("Wrong chiz");
