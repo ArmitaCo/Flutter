@@ -1,16 +1,11 @@
 import 'dart:convert';
-import 'package:flutter_app_rote/Tools/Authentication.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Model/RegisterModel.dart';
+import 'package:flutter_app_rote/Tools/Authentication.dart';
 import 'package:flutter_app_rote/Tools/Loading.dart';
 
 class RegisterPage extends StatefulWidget {
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
-  TextEditingController confirmPassword = TextEditingController();
-  String y;
-  String errorMessage="";
-  String x;
 
   @override
   State<StatefulWidget> createState() {
@@ -19,6 +14,13 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController confirmPassword = TextEditingController();
+  String y;
+  String errorMessage="";
+  String x;
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -31,7 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   padding: EdgeInsets.all(20.0),
                   child: Column(children: <Widget>[
                     TextFormField(
-                      controller: widget.email,
+                      controller: email,
                       decoration: InputDecoration(
                           hintText: "نام کاربری",
                           prefixIcon: Icon(Icons.child_care),
@@ -39,14 +41,14 @@ class _RegisterPageState extends State<RegisterPage> {
                       textAlign: TextAlign.start,
                     ),
                     TextFormField(
-                      controller: widget.password,
+                      controller: password,
                       decoration: InputDecoration(
                           hintText: "رمز عبور",
                           prefixIcon: Icon(Icons.vpn_key),
                           contentPadding: EdgeInsets.all(5.0)),
                     ),
                     TextFormField(
-                      controller: widget.confirmPassword,
+                      controller: confirmPassword,
                       decoration: InputDecoration(
                           hintText: "تکرار رمز عبور",
                           prefixIcon: Icon(Icons.vpn_key),
@@ -55,13 +57,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     RaisedButton(
                       onPressed: () {
                         showLoadingDialog(context);
-                        Authentication.RegisterAndLogin(
-                                context,
-                                widget.email.text,
-                                widget.password.text,
-                                widget.confirmPassword.text)
+                        Authentication.registerAndLogin(
+                            context,
+                            email.text,
+                            password.text,
+                            confirmPassword.text)
                             .then((response) {
-                              Navigator.pop(context);
+                          Navigator.pop(context);
                           final registerResponse = RegisterModel.fromJson(
                               json.decode(response.body)["Data"]);
                           if (registerResponse.code == 200) {
@@ -74,7 +76,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 s += f + "\n";
                               });
                               if (s == "") s = registerResponse.message;
-                              widget.errorMessage = s;
+                              errorMessage = s;
                             });
                           }
                         });
@@ -84,7 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           borderRadius: BorderRadius.circular(30.0)),
                       child: Text("ثبت نام"),
                     ),
-                    Text(widget.errorMessage)
+                    Text(errorMessage)
                   ])),
             )));
   }

@@ -1,11 +1,11 @@
+import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter_app_rote/Model/TokenModel.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_rote/Model/TokenModel.dart';
 import 'package:flutter_app_rote/Tools/ConstValues.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Authentication {
   static SharedPreferences _prefs;
@@ -86,7 +86,7 @@ class Authentication {
       return null;
   }
 
-  static Future<http.Response> Register(BuildContext context, String email,
+  static Future<http.Response> register(BuildContext context, String email,
       String password, String confirmPassword) async {
     Map<String, String> x = {
       "Email": email,
@@ -99,16 +99,16 @@ class Authentication {
     return response;
   }
 
-  static Future<http.Response> RegisterAndLogin(BuildContext context,
+  static Future<http.Response> registerAndLogin(BuildContext context,
       String email, String password, String confirmPassword) async {
-    final response = await Register(context, email, password, confirmPassword);
+    final response = await register(context, email, password, confirmPassword);
     if (response.statusCode == 200) {
       await login(context, email, password);
     }
     return response;
   }
 
-  static Future Signout(BuildContext context) async {
+  static Future signout(BuildContext context) async {
     at = rt = null;
     if (_prefs == null) _prefs = await SharedPreferences.getInstance();
     _prefs.setString("at", at);

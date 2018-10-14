@@ -2,11 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Model/PackageModel.dart';
 import 'package:flutter_app_rote/Pages/SelectedPackage.dart';
-import 'package:flutter_app_rote/Tools/Authentication.dart';
 import 'package:flutter_app_rote/Tools/MyColors.dart';
 
 class PackagePage extends StatefulWidget {
-  List<PackageModel> packageList;
+  final List<PackageModel> packageList;
 
   PackagePage({this.packageList});
 

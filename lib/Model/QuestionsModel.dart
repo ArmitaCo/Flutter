@@ -41,7 +41,7 @@ class QuestionsModel {
   }
 }
 
-Future<List<QuestionsModel>> GetQuestions(BuildContext context,
+Future<List<QuestionsModel>> getQuestions(BuildContext context,
     int userPackageBoxId) async {
   final header = await Authentication.getHeader(context);
   Map<String, String> x = {"id": userPackageBoxId.toString()};
@@ -53,14 +53,14 @@ Future<List<QuestionsModel>> GetQuestions(BuildContext context,
   return questions;
 }
 
-Future<Null> AnswerQuestion(BuildContext context, int answerId) async {
+Future<Null> answerQuestion(BuildContext context, int answerId) async {
   final header = await Authentication.getHeader(context);
   Map<String, String> x = {"AnswerId": answerId.toString()};
   await http.post(Values.Host + "api/learning/AnsweringArticle",
       body: x, headers: header);
 }
 
-Future<Null> QuestionViewed(BuildContext context, int questionId,
+Future<Null> questionViewed(BuildContext context, int questionId,
     int boxId) async
 {
   final header = await Authentication.getHeader(context);

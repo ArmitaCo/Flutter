@@ -4,7 +4,6 @@ import 'package:flutter_app_rote/Model/PackageBoxModel.dart';
 import 'package:flutter_app_rote/Model/PackageModel.dart';
 import 'package:flutter_app_rote/Pages/ExaminingPage.dart';
 import 'package:flutter_app_rote/Pages/LearningPage.dart';
-import 'package:flutter_app_rote/Tools/Authentication.dart';
 
 class SelectedPackage extends StatefulWidget {
   final PackageModel package;
@@ -44,7 +43,7 @@ class MySelectedPackage extends State<SelectedPackage>
   }
 
   _getPackageBoxes() {
-    GetPackageBox(context, widget.package.id).then((packageBoxList2) {
+    getPackageBox(context, widget.package.id).then((packageBoxList2) {
       setState(() {
         packageBoxList = packageBoxList2;
       });
@@ -94,60 +93,65 @@ class MySelectedPackage extends State<SelectedPackage>
               ),
               Flexible(
                   child: ListView.builder(
-                padding: EdgeInsets.all(5.0),
-                itemCount: packageBoxList.length,
-                scrollDirection: Axis.vertical,
-                itemBuilder: (BuildContext context, int index) {
-                  return new GestureDetector(
-                      onTap: () {
-                        boxState = packageBoxList[index].boxState;
-                        switch (boxState) {
-                          case 0:
-                            Text("you dont Own this Box");
-                            break;
-                          case 1:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LearningPage(
-                                          box: packageBoxList[index],
-                                          isLearning: true,
-                                        ))).then((x) {
-                              _getPackageBoxes();
-                            });
-                            break;
-                          case 2:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ExaminingPage(
-                                          pModel: packageBoxList[index],
-                                        ))).then((x) {
-                              _getPackageBoxes();
-                            });
-                            break;
-                          case 3:
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LearningPage(
-                                          box: packageBoxList[index],
-                                          isLearning: false,
-                                        ))).then((x) {
-                              _getPackageBoxes();
-                            });
-                            break;
-                          default:
-                            Text("Wrong chiz");
-                        }
-                      },
-                      child: Row(children: <Widget>[
-                        packageBoxList[index].GetBoxIcon(),
-                        Text(packageBoxList[index].title,
-                            style: TextStyle(fontSize: 25.0))
-                      ]));
-                },
-              ))
+                    padding: EdgeInsets.all(5.0),
+                    itemCount: packageBoxList.length,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (BuildContext context, int index) {
+                      return new GestureDetector(
+                          onTap: () {
+                            boxState = packageBoxList[index].boxState;
+                            switch (boxState) {
+                              case 0:
+                                Scaffold.of(context).showSnackBar(new SnackBar(
+                                  content: Text("شما مالک این جعبه نیستید"),
+                                ));
+                                break;
+                              case 1:
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            LearningPage(
+                                              box: packageBoxList[index],
+                                              isLearning: true,
+                                            ))).then((x) {
+                                  _getPackageBoxes();
+                                });
+                                break;
+                              case 2:
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ExaminingPage(
+                                              pModel: packageBoxList[index],
+                                            ))).then((x) {
+                                  _getPackageBoxes();
+                                });
+                                break;
+                              case 3:
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            LearningPage(
+                                              box: packageBoxList[index],
+                                              isLearning: false,
+                                            ))).then((x) {
+                                  _getPackageBoxes();
+                                });
+                                break;
+                              default:
+                                Text("Wrong chiz");
+                            }
+                          },
+                          child: Row(children: <Widget>[
+                            packageBoxList[index].getBoxIcon(),
+                            Text(packageBoxList[index].title,
+                                style: TextStyle(fontSize: 25.0))
+                          ]));
+                    },
+                  ))
             ],
           )),
     );

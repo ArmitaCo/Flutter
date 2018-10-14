@@ -44,7 +44,8 @@ class PackageModel {
   static fromJsonArray(List json) {
     return json.map((i) => PackageModel.fromJson(i)).toList();
   }
-Icon GetIcon (){
+
+  Icon getIcon() {
    int packageState = userPackageState;
    switch(packageState) {
      case 0:  return new Icon(Icons.sim_card,color: Colors.white,);
@@ -58,23 +59,24 @@ Icon GetIcon (){
 
 }
 
-  Future<List<PackageModel>> GetPackages(BuildContext context, int Id) async {
+Future<List<PackageModel>> getPackages(BuildContext context, int id) async {
    final header = await Authentication.getHeader(context);
-  Map<String, String> x = {"id": Id.toString()};
-   List<PackageModel> PackageData = new List<PackageModel>();
+   Map<String, String> x = {"id": id.toString()};
+   List<PackageModel> packageData = new List<PackageModel>();
   final response =
   await http.post(Values.Host+"api/packages/packages",body: x,headers: header);
-  PackageData = PackageModel.fromJsonArray(
+   packageData = PackageModel.fromJsonArray(
       json.decode(response.body)["Data"]["Result"]);
-  return PackageData;
+   return packageData;
 }
-Future<List<PackageModel>> GetMyPackages(BuildContext context) async {
+
+Future<List<PackageModel>> getMyPackages(BuildContext context) async {
   final header = await Authentication.getHeader(context);
-  List<PackageModel> MyPackageData = new List<PackageModel>();
+  List<PackageModel> myPackageData = new List<PackageModel>();
   final response =
   await http.post(Values.Host+"api/packages/mypackages2",headers: header);
-  MyPackageData = PackageModel.fromJsonArray(
+  myPackageData = PackageModel.fromJsonArray(
       json.decode(response.body)["Data"]["Result"]);
-  return MyPackageData;
+  return myPackageData;
 }
 

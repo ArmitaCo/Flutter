@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Pages/LoginPage.dart';
 import 'package:flutter_app_rote/Pages/RegisterPage.dart';
-import 'package:flutter_app_rote/Tools/MyColors.dart';
 import 'package:flutter_app_rote/Tools/Dispacher.dart';
+import 'package:flutter_app_rote/Tools/MyColors.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
