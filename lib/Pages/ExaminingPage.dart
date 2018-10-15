@@ -27,10 +27,10 @@ class ExaminingPageState extends State<ExaminingPage> {
       setState(() {
         questionsList = q;
         currentQuestion =
-        widget.pModel.stateValue == 0 ? 0 : widget.pModel.stateValue - 1;
-        if (!questionsList.any((x) => x.userAnswerId == null)) {
-          finishExam = IconButton(icon: Icon(Icons.message), onPressed: null);
-        }
+            widget.pModel.stateValue == 0 ? 0 : widget.pModel.stateValue - 1;
+//        if (!questionsList.any((x) => x.userAnswerId == null)) {
+//          finishExam = IconButton(icon: Icon(Icons.message), onPressed: null);
+//        }
       });
     });
   }
@@ -38,10 +38,9 @@ class ExaminingPageState extends State<ExaminingPage> {
   @override
   Widget build(BuildContext context) {
     questionss = questionsList
-        .map<Widget>((x) =>
-        QuestionsWidget(
-          question: x,
-        ))
+        .map<Widget>((x) => QuestionsWidget(
+              question: x,
+            ))
         .toList();
 
     if (questionsList != null &&
@@ -50,7 +49,38 @@ class ExaminingPageState extends State<ExaminingPage> {
       finishExam = IconButton(
           icon: Icon(Icons.send),
           onPressed: () {
-            Navigator.pop(context);
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return new SizedBox.shrink(child:AlertDialog(
+                  titlePadding: EdgeInsets.all(10.0),
+                  contentPadding: EdgeInsets.all(10.0),
+                  title: Text(
+                    widget.pModel.title,
+                    textAlign: TextAlign.center,
+                  ),
+                  content:
+                      Text("شما از تعداد" +
+                          questionss.length.toString() +
+                          " سوال" +
+                          _getScore().toString() +
+                          " را درست جواب دادید\n""امتیاز شما : " + (_getScore()*5).toString()),
+
+
+                  actions: <Widget>[
+                    new FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("بستن"),
+                    ),
+                  ],
+                ));
+              },
+            ).then((x) {
+              Navigator.pop(context);
+            });
+            // Navigator.pop(context);
           });
     }
     return Scaffold(
@@ -66,8 +96,7 @@ class ExaminingPageState extends State<ExaminingPage> {
               onPressed: () {
                 showDialog(
                     context: context,
-                    builder: (c) =>
-                        SimpleDialog(
+                    builder: (c) => SimpleDialog(
                           children: <Widget>[
                             Text(questionsList[currentQuestion].hint)
                           ],
@@ -114,5 +143,9 @@ class ExaminingPageState extends State<ExaminingPage> {
   _articleLearned() {
     QuestionViewed(
         context, questionsList[currentQuestion].id, widget.pModel.id);
+  }
+
+  _getScore() {
+    return 1;
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_app_rote/Model/PackageBoxModel.dart';
 import 'package:flutter_app_rote/Model/PackageModel.dart';
 import 'package:flutter_app_rote/Pages/ExaminingPage.dart';
 import 'package:flutter_app_rote/Pages/LearningPage.dart';
+import 'package:flutter_app_rote/Pages/MoneyPage.dart';
 import 'package:flutter_app_rote/Tools/Authentication.dart';
 
 class SelectedPackage extends StatefulWidget {
@@ -19,6 +20,7 @@ class SelectedPackage extends StatefulWidget {
 
 class MySelectedPackage extends State<SelectedPackage>
     with SingleTickerProviderStateMixin {
+  Widget buyButton;
   AnimationController animationController;
   Animation<double> animation;
   List<PackageBoxModel> packageBoxList = new List();
@@ -26,6 +28,18 @@ class MySelectedPackage extends State<SelectedPackage>
   @override
   void initState() {
     super.initState();
+    if(widget.package.userPackageState == 0 || widget.package.userPackageState == null){
+      buyButton = new IconButton(icon: Icon(Icons.shopping_basket,color: Colors.green,), onPressed: (){
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => MoneyPage(
+                )));
+      });
+      setState(() {
+
+      });
+    }
     _getPackageBoxes();
     animationController = new AnimationController(
       duration: new Duration(milliseconds: 1000),
@@ -84,7 +98,7 @@ class MySelectedPackage extends State<SelectedPackage>
                 overflow: TextOverflow.clip,
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20.0),
-              ),
+              ),SizedBox.fromSize(child: buyButton),
               Text(
                 widget.package.description,
                 textDirection: TextDirection.rtl,
