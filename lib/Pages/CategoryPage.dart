@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Model/CategoryModel.dart';
 import 'package:flutter_app_rote/Model/PackageModel.dart';
@@ -61,7 +62,7 @@ class CategoryPageState extends State<CategoryPage>
           return new GestureDetector(
               onTap: () {
                 showLoadingDialog(context);
-                GetPackages(context, data[index].id).then((packageList) {
+                getPackages(context, data[index].id).then((packageList) {
                   Navigator.pop(context);
 
                   Navigator.push(

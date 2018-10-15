@@ -59,7 +59,7 @@ class QuestionsWidgetState extends State<QuestionsWidget> {
   _questionAnswer(BuildContext c, AnswersModel a) {
     String message;
     if (widget.question.userAnswerId == null) {
-      AnswerQuestion(c, a.id);
+      answerQuestion(c, a.id);
       setState(() {
         widget.question.userAnswerId = a.id;
       });

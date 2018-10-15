@@ -42,7 +42,7 @@ class PackageBoxModel {
     return json.map((i) => PackageBoxModel.fromJson(i)).toList();
   }
 
-  Icon GetBoxIcon() {
+  Icon getBoxIcon() {
     int boxStateIcon = boxState;
     switch (boxStateIcon) {
       case 0:
@@ -53,19 +53,22 @@ class PackageBoxModel {
         return new Icon(Icons.done);
       case 3:
         return new Icon(Icons.done_all);
+      default:
+        return null;
     }
   }
 }
 
-Future<List<PackageBoxModel>> GetPackageBox(BuildContext context, int Id) async {
+Future<List<PackageBoxModel>> getPackageBox(BuildContext context,
+    int id) async {
   final header = await Authentication.getHeader(context);
-  Map<String, String> x = {"id": Id.toString()};
-  List<PackageBoxModel> PackageBoxData = new List<PackageBoxModel>();
+  Map<String, String> x = {"id": id.toString()};
+  List<PackageBoxModel> packageBoxData = new List<PackageBoxModel>();
   final response = await http.post(Values.Host+"api/packages/UserPackageBoxes",
       body: x, headers: header);
-  PackageBoxData = PackageBoxModel.fromJsonArray(
+  packageBoxData = PackageBoxModel.fromJsonArray(
       json.decode(response.body)["Data"]["Result"]);
-  return PackageBoxData;
+  return packageBoxData;
 }
 
 

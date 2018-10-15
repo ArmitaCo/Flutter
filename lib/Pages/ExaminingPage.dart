@@ -23,7 +23,7 @@ class ExaminingPageState extends State<ExaminingPage> {
   @override
   void initState() {
     super.initState();
-    GetQuestions(context, widget.pModel.userPackageBoxId).then((q) {
+    getQuestions(context, widget.pModel.userPackageBoxId).then((q) {
       setState(() {
         questionsList = q;
         currentQuestion =
@@ -141,7 +141,7 @@ class ExaminingPageState extends State<ExaminingPage> {
   }
 
   _articleLearned() {
-    QuestionViewed(
+    questionViewed(
         context, questionsList[currentQuestion].id, widget.pModel.id);
   }
 
