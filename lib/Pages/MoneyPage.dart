@@ -11,7 +11,7 @@ class MoneyPageState extends State<MoneyPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-        title: Text("خرید بسته",
+        title: Text("خرید",
             textScaleFactor: 1.6,textAlign: TextAlign.center,)
       ),
       body: Center(

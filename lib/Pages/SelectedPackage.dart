@@ -5,7 +5,6 @@ import 'package:flutter_app_rote/Model/PackageModel.dart';
 import 'package:flutter_app_rote/Pages/ExaminingPage.dart';
 import 'package:flutter_app_rote/Pages/LearningPage.dart';
 import 'package:flutter_app_rote/Pages/MoneyPage.dart';
-import 'package:flutter_app_rote/Tools/Authentication.dart';
 
 class SelectedPackage extends StatefulWidget {
   final PackageModel package;
@@ -108,7 +107,7 @@ class MySelectedPackage extends State<SelectedPackage>
               ),
               Flexible(
                   child: ListView.builder(
-                    padding: EdgeInsets.all(5.0),
+                    padding: EdgeInsets.all(8.0),
                     itemCount: packageBoxList.length,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (BuildContext context, int index) {
@@ -162,8 +161,8 @@ class MySelectedPackage extends State<SelectedPackage>
                           },
                           child: Row(children: <Widget>[
                             packageBoxList[index].getBoxIcon(),
-                            Text(packageBoxList[index].title,
-                                style: TextStyle(fontSize: 25.0))
+                            FlatButton(onPressed: null,child: Text(packageBoxList[index].title,
+                                style: TextStyle(fontSize: 25.0)),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),)
                           ]));
                     },
                   ))
