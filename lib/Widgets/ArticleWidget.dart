@@ -13,7 +13,7 @@ class ArticleWidget extends StatelessWidget {
       article.imageUrl != null ? Image.network(
         article.imageUrl,
         fit: BoxFit.fitWidth,
-      ) : Text("Salam"),
+      ) : Text(""),
       Text(
         article.title,
       ),

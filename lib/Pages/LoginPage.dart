@@ -35,7 +35,7 @@ class LoginPageState extends State<LoginPage> {
                       icon: Icon(Icons.email), labelText: "ایمیل"),
                   controller: _userNameController,
                 ),
-                TextFormField(
+                TextFormField(obscureText: true,
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'این مقدار الزامی است';
