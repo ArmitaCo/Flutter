@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_rote/Model/LeaderBoardItemModel.dart';
 import 'package:flutter_app_rote/Model/LeaderBoardModel.dart';
-import 'package:flutter_app_rote/Widgets/LeaderBoardItemWidget.dart';
 
 class ChallengePage extends StatefulWidget {
   @override
@@ -10,6 +10,7 @@ class ChallengePage extends StatefulWidget {
 class ChallengePageState extends State<ChallengePage> {
   LeaderBoardModel model;
   Widget upperImage = Text("");
+  Widget table = Text("");
   int itemsCount = 0;
 
   @override
@@ -23,39 +24,42 @@ class ChallengePageState extends State<ChallengePage> {
           fit: BoxFit.fitWidth,
         );
         itemsCount = model.leaderBoardItems.length;
+        table = Table(border: TableBorder.all(color: Colors.black,width: 1.0,style: BorderStyle.solid),
+          children:
+              model.leaderBoardItems.map((lbi) => _getTableRow(lbi)).toList(),
+          columnWidths: const <int, TableColumnWidth>{
+            0: FlexColumnWidth(0.1),
+            1: FlexColumnWidth(0.7),
+            2: FlexColumnWidth(0.2),
+          },
+        );
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-//    return new Scaffold(
-//      body: new Column(
-//        children: <Widget>[
-//          upperImage,
-//          Flexible(
-//              child: GridView.builder(
-//            gridDelegate:
-//                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
-//            itemBuilder: (BuildContext context, int index) {
-//              return new LeaderBoardItemWidget(
-//                item: model.leaderBoardItems[index],
-//              );
-//            },
-//            itemCount: itemsCount,
-//          ))
-//        ],
-//      ),
-//    );
     return new Scaffold(
       body: Column(
-        children: <Widget>[
-          upperImage,
-          Flexible(child: ListView.builder(itemCount: itemsCount,itemBuilder: (c, i) {
-            return LeaderBoardItemWidget(item: model.leaderBoardItems[i]);
-          }))
-        ],
+        children: <Widget>[upperImage, table],
       ),
     );
+  }
+
+  TableRow _getTableRow(LeaderBoardItem item) {
+    List<Widget> widgetList = new List();
+    widgetList.add(Padding(
+        padding: EdgeInsets.all(5.0),
+        child: Text(
+          item.order.toString() + " - ",
+          textScaleFactor: 1.2,
+        )));
+    widgetList.add(Padding(
+        padding: EdgeInsets.all(5.0),
+        child: Text(item.name, textScaleFactor: 1.2)));
+    widgetList.add(Padding(
+        padding: EdgeInsets.all(5.0),
+        child: Text("امتیاز: " + item.score.toString(), textScaleFactor: 1.2)));
+    return TableRow(children: widgetList);
   }
 }

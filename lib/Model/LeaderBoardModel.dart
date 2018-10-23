@@ -24,6 +24,8 @@ class LeaderBoardModel {
         challenge: ChallengeModel.fromJson(json['Challenge']),
         leaderBoardItems: LeaderBoardItem.fromJsonArray(json['Items']));
   }
+
+
 }
 
 Future<LeaderBoardModel> getLeaderBoard(BuildContext context) async {

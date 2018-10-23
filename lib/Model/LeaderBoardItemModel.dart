@@ -1,3 +1,4 @@
+
 class LeaderBoardItem {
   int order;
   String name;
@@ -13,4 +14,6 @@ class LeaderBoardItem {
   static fromJsonArray(List json) {
     return json.map((i) => LeaderBoardItem.fromJson(i)).toList();
   }
+
+
 }
