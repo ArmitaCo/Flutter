@@ -8,18 +8,17 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
       routes: {
         "/account/login": (context) => new LoginPage(),
         "/packages": (context) =>
-            new MyHomePage(title: 'Flutter Demo Home Page'),
+        new MyHomePage(title: 'Flutter Demo Home Page'),
         "/account/register": (context) => new RegisterPage(),
       },
-      title: 'Flutter Demo',
-      theme: new ThemeData(
+
+      theme: new ThemeData(buttonColor: MyColors.appBarAndNavigationBar,
         primaryColor: MyColors.appBarAndNavigationBar,
       ),
       localizationsDelegates: [
@@ -86,7 +85,10 @@ class MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: new Theme(
           data: Theme.of(context).copyWith(
               canvasColor: MyColors.appBarAndNavigationBar,
-              textTheme: Theme.of(context).textTheme.copyWith(
+              textTheme: Theme
+                  .of(context)
+                  .textTheme
+                  .copyWith(
                   caption: TextStyle(
                       color: Colors.red,
                       fontSize: 50.0,

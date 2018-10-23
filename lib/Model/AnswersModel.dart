@@ -11,7 +11,7 @@ class AnswersModel {
         id: json['Id'],
         text: json['Text'],
         isCorrect: json['IsCorrect'],
-        choiceLabel: json['ChoiceLable']);
+        choiceLabel: json['ChoiceLabel']);
   }
 
   static fromJsonArray(List json) {

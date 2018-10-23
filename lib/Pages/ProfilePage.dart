@@ -43,6 +43,8 @@ class ProfilePageState extends State<ProfilePage> {
                     maxRadius: 80.0,
                   )),
               RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0)),
                 onPressed: () {
                   Navigator.push(context,
                           MaterialPageRoute(builder: (context) => AvatarPage()))
@@ -57,15 +59,12 @@ class ProfilePageState extends State<ProfilePage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-
-                  Text("نام: " + (profileModel?.firstName ?? "..."),
-                      maxLines: 2),
-                  Text("نام خانوادگی: " + (profileModel?.lastName ?? "..."),
-                      maxLines: 2),
-                  Text("شماره تلفن: " + (profileModel?.mobile ?? "..."),
-                      maxLines: 2),
-                  //Text("ایمیل: " + profileModel?.email ?? "...", maxLines: 2)
-
+              Text("نام: " + (profileModel?.firstName ?? "..."), maxLines: 2),
+              Text("نام خانوادگی: " + (profileModel?.lastName ?? "..."),
+                  maxLines: 2),
+              Text("شماره تلفن: " + (profileModel?.mobile ?? "..."),
+                  maxLines: 2),
+              //Text("ایمیل: " + profileModel?.email ?? "...", maxLines: 2)
             ],
           )
         ],

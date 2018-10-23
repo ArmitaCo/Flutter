@@ -23,7 +23,7 @@ class LoginPageState extends State<LoginPage> {
             title: Text("ورود"),
           ),
           body: Center(
-            child: Column(
+            child: Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 TextFormField(
                   validator: (value) {
@@ -32,7 +32,7 @@ class LoginPageState extends State<LoginPage> {
                     }
                   },
                   decoration: InputDecoration(
-                      icon: Icon(Icons.email), labelText: "ایمیل"),
+                      icon: Icon(Icons.perm_identity), labelText: "ایمیل"),
                   controller: _userNameController,
                 ),
                 TextFormField(obscureText: true,

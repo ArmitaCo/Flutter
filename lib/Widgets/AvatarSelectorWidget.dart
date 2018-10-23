@@ -1,9 +1,5 @@
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_app_rote/Model/AvatarModel.dart';
-import 'package:flutter_app_rote/Tools/Authentication.dart';
-import 'package:flutter_app_rote/Tools/ConstValues.dart';
-import 'package:http/http.dart' as http;
 
 class AvatarSelectorWidget extends StatefulWidget {
   @override

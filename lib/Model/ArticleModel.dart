@@ -24,7 +24,7 @@ class ArticleModel {
         imageUrl: json['ImageUrl'],
         order: json['Order'],
         externalArticles:
-        ExternalArticleModel.fromJsonArray(json['ExternalArticles']));
+            ExternalArticleModel.fromJsonArray(json['ExternalArticles']));
   }
 
   static fromJsonArray(List json) {
@@ -36,15 +36,13 @@ class ArticleModel {
   }
 }
 
-Future<List<ArticleModel>> getBoxArticles(BuildContext context,
-    int userPackageBoxId) async {
+Future<List<ArticleModel>> getBoxArticles(
+    BuildContext context, int userPackageBoxId) async {
   final header = await Authentication.getHeader(context);
   Map<String, String> x = {"id": userPackageBoxId.toString()};
   List<ArticleModel> articles = new List<ArticleModel>();
-  final response = await http.post(
-      Values.Host+"api/boxes/UserBoxArticles",
-      body: x,
-      headers: header);
+  final response = await http.post(Values.Host + "api/boxes/UserBoxArticles",
+      body: x, headers: header);
   articles =
       ArticleModel.fromJsonArray(json.decode(response.body)["Data"]["Result"]);
   return articles;
@@ -56,6 +54,6 @@ Future learningArticle(BuildContext context, int boxId, int order) async {
     "BoxId": boxId.toString(),
     "Order": order.toString()
   };
-  await http.post(Values.Host+"api/learning/LearnedArticle",
+  await http.post(Values.Host + "api/learning/LearnedArticle",
       body: x, headers: header);
 }
