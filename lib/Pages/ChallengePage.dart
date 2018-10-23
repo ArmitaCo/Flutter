@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Model/LeaderBoardModel.dart';
-import 'package:flutter_app_rote/Tools/LeaderBoardItemWidget.dart';
+import 'package:flutter_app_rote/Widgets/LeaderBoardItemWidget.dart';
 
 class ChallengePage extends StatefulWidget {
   @override
