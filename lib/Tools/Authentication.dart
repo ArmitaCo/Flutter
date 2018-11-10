@@ -21,7 +21,8 @@ class Authentication {
       "password": password
     };
 
-    final response = await http.post(Values.Host+"token", body: b);
+    final response = await http.post(Values.Host + "token", body: b);
+
     if (response.statusCode == 200) {
       if (_prefs == null) _prefs = await SharedPreferences.getInstance();
       final atByRt = TokenModel.fromJson(json.decode(response.body));
@@ -52,8 +53,7 @@ class Authentication {
             "refresh_token": rt
           };
 
-          final response =
-              await http.post(Values.Host+"token", body: b);
+          final response = await http.post(Values.Host + "token", body: b);
           final atByRt = TokenModel.fromJson(json.decode(response.body));
           at = atByRt.accessToken;
           _prefs.setString("at", at);
@@ -66,7 +66,7 @@ class Authentication {
           "refresh_token": rt
         };
 
-        final response = await http.post(Values.Host+"token", body: b);
+        final response = await http.post(Values.Host + "token", body: b);
         final atByRt = TokenModel.fromJson(json.decode(response.body));
         at = atByRt.accessToken;
         _prefs.setString("at", at);
@@ -85,33 +85,61 @@ class Authentication {
       return null;
   }
 
-  static Future<http.Response> register(BuildContext context, String email,
-      String password, String confirmPassword) async {
+  static Future<http.Response> register(
+      BuildContext context,
+      String firstName,
+      String lastName,
+      String mobileNumber,
+      String email,
+      String password,
+      String confirmPassword) async {
     Map<String, String> x = {
+      "FirstName": firstName,
+      "LastName": lastName,
+      "Mobile": mobileNumber,
       "Email": email,
       "Password": password,
       "ConfirmPassword": confirmPassword
     };
 
     final response =
-        await http.post(Values.Host+"api/account/register", body: x);
+        await http.post(Values.Host + "api/account/register", body: x);
     return response;
   }
 
-  static Future<http.Response> registerAndLogin(BuildContext context,
-      String email, String password, String confirmPassword) async {
-    final response = await register(context, email, password, confirmPassword);
-    if (response.statusCode == 200) {
+  static Future<http.Response> registerAndLogin(
+      BuildContext context,
+      String firstName,
+      String lastName,
+      String mobileNumber,
+      String email,
+      String password,
+      String confirmPassword) async {
+    final response = await register(context, firstName, lastName, mobileNumber,
+        email, password, confirmPassword);
+    int registerAndLoginStatusCode = json.decode(response.body)["Data"]["Code"];
+    if (registerAndLoginStatusCode == 200) {
       await login(context, email, password);
     }
+
     return response;
   }
 
-  static Future signout(BuildContext context) async {
+  static Future signOut(BuildContext context) async {
     at = rt = null;
     if (_prefs == null) _prefs = await SharedPreferences.getInstance();
     _prefs.setString("at", at);
     _prefs.setString("rt", rt);
     Navigator.pushReplacementNamed(context, "/account/login");
+  }
+
+  static Future<http.Response> verifyMobileNumber(
+      BuildContext context, String phoneNumber, String verifyCode) async {
+    final header = await Authentication.getHeader(context);
+    Map<String, String> x = {"PhoneNumber": phoneNumber, "Code": verifyCode};
+    final response =
+        await http.post(Values.Host + "api/account/VerifyPhoneCode", body: x,headers: header);
+
+    return response;
   }
 }

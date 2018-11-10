@@ -14,15 +14,15 @@ class MyApp extends StatelessWidget {
       routes: {
         "/account/login": (context) => new LoginPage(),
         "/packages": (context) =>
-        new MyHomePage(title: 'Flutter Demo Home Page'),
+            new MyHomePage(title: "نرم افزار مطلب",),
         "/account/register": (context) => new RegisterPage(),
       },
-
-      theme: new ThemeData(buttonColor: MyColors.appBarAndNavigationBar,
+      theme: new ThemeData(
+        buttonColor: MyColors.appBarAndNavigationBar,
+        buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
         primaryColor: MyColors.appBarAndNavigationBar,
       ),
       localizationsDelegates: [
-        // ... app-specific localization delegate[s] here
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
@@ -85,10 +85,7 @@ class MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: new Theme(
           data: Theme.of(context).copyWith(
               canvasColor: MyColors.appBarAndNavigationBar,
-              textTheme: Theme
-                  .of(context)
-                  .textTheme
-                  .copyWith(
+              textTheme: Theme.of(context).textTheme.copyWith(
                   caption: TextStyle(
                       color: Colors.red,
                       fontSize: 50.0,

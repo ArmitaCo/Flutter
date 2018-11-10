@@ -5,15 +5,11 @@ import 'package:flutter_app_rote/Pages/SelectedPackage.dart';
 import 'package:flutter_app_rote/Tools/MyColors.dart';
 
 class MyPackages extends StatefulWidget {
-
-
   @override
   State<StatefulWidget> createState() {
     return new MyPackagesState();
   }
 }
-
-
 class MyPackagesState extends State<MyPackages>
     with SingleTickerProviderStateMixin {
   AnimationController animationController;

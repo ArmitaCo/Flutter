@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_rote/Pages/AboutUs.dart';
+import 'package:flutter_app_rote/Pages/BugReportPage.dart';
 import 'package:flutter_app_rote/Tools/Authentication.dart';
 
 class ProfileButtons extends StatelessWidget {
@@ -28,37 +30,43 @@ class ProfileButtons extends StatelessWidget {
   }
 
   final RaisedButton changePassword = RaisedButton(
-      onPressed: () {},
+      onPressed: null,
       child: Text("تغییر کلمه عبور"),
       elevation: 10.0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)));
   final RaisedButton changeMobileNumber = RaisedButton(
-      onPressed: () {},
+      onPressed: null,
       child: Text("تغییر شماره موبایل"),
       elevation:
           10.0 ,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0))
       );
   final RaisedButton aboutUs = RaisedButton(
-      onPressed: () {},
+      onPressed: (){
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => AboutUs()));
+      },
       child: Text("درباره ما"),
       elevation:
           10.0 ,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0))
       );
   final RaisedButton bugReport = RaisedButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => BugReport()));
+      },
       child: Text("گزارش خرابی"),
       elevation:
           10.0 ,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0))
       );
   final RaisedButton inviteFriends = RaisedButton(
-      onPressed: () {},
+      onPressed: null,
       child: Text("دعوت دوستان"),
       elevation:
           10.0 ,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0))
       );
   final RaisedButton signOut = RaisedButton(
       onPressed: () {
-        Authentication.signout(context);
+        Authentication.signOut(context);
       },
       child: Text("خروج"),
       elevation:

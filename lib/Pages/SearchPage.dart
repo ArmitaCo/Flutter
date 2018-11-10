@@ -21,7 +21,7 @@ class SearchPageState extends State<SearchPage> {
       child: Column(
         children: <Widget>[
           Image.network(Values.Host+"Images/UC.gif"),
-          new Text("به زودی...")
+          new Text("به زودی...",textScaleFactor: 1.5,)
         ],
       ),
     );
