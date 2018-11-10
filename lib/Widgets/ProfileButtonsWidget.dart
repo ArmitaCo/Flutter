@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Pages/AboutUs.dart';
 import 'package:flutter_app_rote/Pages/BugReportPage.dart';
+import 'package:flutter_app_rote/Pages/ChangePasswordPage.dart';
 import 'package:flutter_app_rote/Tools/Authentication.dart';
 
 class ProfileButtons extends StatelessWidget {
@@ -30,7 +31,10 @@ class ProfileButtons extends StatelessWidget {
   }
 
   final RaisedButton changePassword = RaisedButton(
-      onPressed: null,
+      onPressed: (){
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ChangePasswordPage()));
+      },
       child: Text("تغییر کلمه عبور"),
       elevation: 10.0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)));

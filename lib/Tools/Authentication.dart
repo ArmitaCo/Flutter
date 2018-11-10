@@ -142,4 +142,13 @@ class Authentication {
 
     return response;
   }
+  static Future<http.Response> changePassword(
+      BuildContext context, String oldPassword, String newPassword ,String confirmNewPassword) async {
+    final header = await Authentication.getHeader(context);
+    Map<String, String> x = {"OldPassword": oldPassword, "NewPassword": newPassword,"ConfirmPassword": confirmNewPassword};
+    final response =
+    await http.post(Values.Host + "api/account/ChangePassword", body: x,headers: header);
+
+    return response;
+  }
 }

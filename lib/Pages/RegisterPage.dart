@@ -26,7 +26,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     Scaffold s = Scaffold(
         appBar: new AppBar(
-          title: new Text("نرمافزار مطلب"),
+          title: new Text("نرمافزار مطلب",textScaleFactor: 1.2,),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
