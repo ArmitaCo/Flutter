@@ -44,7 +44,7 @@ class Authentication {
       rt = _prefs.getString("rt");
       if (at == null) {
         if (rt == null) {
-          Navigator.pushNamed(context, "/account/login");
+          Navigator.pushReplacementNamed(context, "/account/login");
           return false;
         } else {
           Map<String, String> b = {

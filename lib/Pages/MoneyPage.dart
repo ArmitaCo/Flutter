@@ -1,14 +1,25 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_rote/Model/PackageModel.dart';
+import 'package:flutter_app_rote/Tools/Loading.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class MoneyPage extends StatefulWidget {
+  final int packageId;
+  MoneyPage({this.packageId});
   @override
   State<StatefulWidget> createState() => MoneyPageState();
 }
 
 class MoneyPageState extends State<MoneyPage> {
+
+
+  final flutterWebviewPlugin = new FlutterWebviewPlugin();
   @override
   Widget build(BuildContext context) {
+
     return new Scaffold(
       appBar: AppBar(
         title: Text("خرید",
@@ -20,7 +31,13 @@ class MoneyPageState extends State<MoneyPage> {
             Padding(
                 padding: EdgeInsets.all(10.0),
                 child: RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showLoadingDialog(context);
+                    moneyRequest(context,widget.packageId).then((bankUrl){
+                      Navigator.pop(context);
+                      flutterWebviewPlugin.launch(bankUrl,enableAppScheme: false,);
+                    });
+                  },
                   child:
                       Text("خرید آنلاین (درگاه بانکی)", textScaleFactor: 1.5),
                   padding: EdgeInsets.all(5.0),
@@ -61,3 +78,4 @@ class MoneyPageState extends State<MoneyPage> {
     );
   }
 }
+

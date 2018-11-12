@@ -32,8 +32,7 @@ class MySelectedPackage extends State<SelectedPackage>
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => MoneyPage(
-                )));
+                builder: (context) => MoneyPage(packageId: widget.package.id)));
       });
       setState(() {
 

@@ -26,7 +26,8 @@ class LoginPageState extends State<LoginPage> {
           body: Padding(
               padding: EdgeInsets.all(15.0),
               child: Center(
-                child: Column(
+                child: SingleChildScrollView(
+                    child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
@@ -61,27 +62,41 @@ class LoginPageState extends State<LoginPage> {
                           top: 10.0,
                           bottom: 5.0,
                         ),
-                        child: RaisedButton(textTheme: ButtonTextTheme.primary,
-                            elevation: 15.0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0)),
-                            onPressed: () {
-                              showLoadingDialog(context);
-                              if (_loginFormKey.currentState.validate()) {
-                                Authentication.login(
-                                        context,
-                                        _userNameController.text,
-                                        _passwordController.text)
-                                    .then((val) {
-                                  Navigator.pop(context);
-                                  if (val) Navigator.pop(context);
-                                });
-                              }
-                            },
-                            child: Text("ورود"))),
+                        child: Builder(
+                            builder: (context) => RaisedButton(
+                                textTheme: ButtonTextTheme.primary,
+                                elevation: 15.0,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0)),
+                                onPressed: () {
+                                  showLoadingDialog(context);
+                                  if (_loginFormKey.currentState.validate()) {
+                                    Authentication.login(
+                                            context,
+                                            _userNameController.text,
+                                            _passwordController.text)
+                                        .then((val) {
+                                      Navigator.pop(context);
+                                      if (val) {
+                                        Navigator.pop(context);
+                                      } else {
+                                        Scaffold.of(context)
+                                            .showSnackBar(new SnackBar(
+                                          duration: Duration(seconds: 5),
+                                          content: new Text(
+                                            "مقادیر دارای خطا هستند",
+                                            textScaleFactor: 1.5,
+                                          ),
+                                        ));
+                                      }
+                                    });
+                                  }
+                                },
+                                child: Text("ورود")))),
                     Padding(
                         padding: EdgeInsets.only(top: 5.0),
-                        child: RaisedButton(textTheme: ButtonTextTheme.primary,
+                        child: RaisedButton(
+                          textTheme: ButtonTextTheme.primary,
                           elevation: 15.0,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20.0)),
@@ -92,7 +107,7 @@ class LoginPageState extends State<LoginPage> {
                           child: Text("عضویت جدید"),
                         ))
                   ],
-                ),
+                )),
               )),
         ));
   }

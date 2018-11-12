@@ -40,9 +40,9 @@ class ChallengePageState extends State<ChallengePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: Column(
+      body: SingleChildScrollView(child: Column(
         children: <Widget>[upperImage, table],
-      ),
+      )),
     );
   }
 

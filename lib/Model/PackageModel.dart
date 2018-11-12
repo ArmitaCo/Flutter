@@ -80,3 +80,13 @@ Future<List<PackageModel>> getMyPackages(BuildContext context) async {
   return myPackageData;
 }
 
+Future<String> moneyRequest(
+BuildContext context, int packageId) async {
+final header = await Authentication.getHeader(context);
+Map<String, String> x = {"id": packageId.toString()};
+final response =
+await http.post(Values.Host + "api/packages/GetPackageTransactionKey", body: x,headers: header);
+String moneyUrl = json.decode(response.body)["Data"]["Result"]["ReferUrl"];
+return moneyUrl;
+}
+

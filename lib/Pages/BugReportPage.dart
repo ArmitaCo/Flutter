@@ -45,10 +45,11 @@ class BugReportState extends State<BugReport> {
                     child: RaisedButton(
                   onPressed: () {
                     sendBugReport(context, _userNameController.text);
+                    Navigator.pop(context);
                     Scaffold.of(context).showSnackBar(new SnackBar(
                       content: new Text("از اینکه در توسعه این برنامه سهیم شده اید از شما ممنونیم"),
                     ));
-                    Navigator.pop(context);
+
                   },
                   child: Text("ثبت"),
                   elevation: 15.0,

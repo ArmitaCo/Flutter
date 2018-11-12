@@ -1,15 +1,23 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Pages/LoginPage.dart';
 import 'package:flutter_app_rote/Pages/RegisterPage.dart';
 import 'package:flutter_app_rote/Tools/Dispacher.dart';
 import 'package:flutter_app_rote/Tools/MyColors.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:uni_links/uni_links.dart';
+import 'package:flutter/services.dart' show PlatformException;
 
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
+
+
     return new MaterialApp(
       routes: {
         "/account/login": (context) => new LoginPage(),
@@ -33,6 +41,8 @@ class MyApp extends StatelessWidget {
       home: new MyHomePage(title: 'نرم افزار مطلب'),
     );
   }
+
+
 }
 
 class MyHomePage extends StatefulWidget {
@@ -48,6 +58,25 @@ class MyHomePageState extends State<MyHomePage> {
   Widget body;
 
   int index = 2;
+  String l ="";
+  StreamSubscription _sub;
+  Future<Null> initUniLinks(BuildContext context) async {
+    // ... check initialLink
+
+    // Attach a listener to the stream
+
+    _sub = getLinksStream().listen((String link) {
+      l=link;
+      final u = Uri.parse(link);
+      Navigator.pushNamed(context, "/packages");
+      // Parse the link and warn the user, if it is not correct
+    }, onError: (err) {
+      l=err.toString();
+      // Handle exception by warning the user their action did not succeed
+    });
+
+    // NOTE: Don't forget to call _sub.cancel() in dispose()
+  }
 
   setBody(Widget w) {
     setState(() {
@@ -63,6 +92,7 @@ class MyHomePageState extends State<MyHomePage> {
         setBody(w);
       }
     });
+    initUniLinks(context);
     //Authentication.read(context);
   }
 
