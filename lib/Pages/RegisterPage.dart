@@ -5,6 +5,7 @@ import 'package:flutter_app_rote/Pages/LoginPage.dart';
 import 'package:flutter_app_rote/Pages/VerifyPhoneCodePage.dart';
 import 'package:flutter_app_rote/Tools/Authentication.dart';
 import 'package:flutter_app_rote/Tools/Loading.dart';
+import 'package:flutter_app_rote/Tools/MyColors.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -24,8 +25,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    Scaffold s = Scaffold(
-        appBar: new AppBar(
+    Scaffold s = Scaffold(backgroundColor: MyColors.firstBackground,
+        appBar: new AppBar(backgroundColor: MyColors.appBarAndNavigationBar,
           title: new Text("نرمافزار مطلب",textScaleFactor: 1.2,),
           centerTitle: true,
         ),
@@ -40,28 +41,28 @@ class _RegisterPageState extends State<RegisterPage> {
                   decoration: InputDecoration(
                       hintText: "نام",
                       prefixIcon: Icon(Icons.perm_identity),
-                      contentPadding: EdgeInsets.all(5.0)),
+                      contentPadding: EdgeInsets.all(5.0)),keyboardType: TextInputType.text,keyboardAppearance: Brightness.light,
                 ),
                 TextFormField(
                   controller: lastName,
                   decoration: InputDecoration(
                       hintText: "نام خانوادگی",
                       prefixIcon: Icon(Icons.perm_identity),
-                      contentPadding: EdgeInsets.all(5.0)),
+                      contentPadding: EdgeInsets.all(5.0)),keyboardType: TextInputType.text,keyboardAppearance: Brightness.light,
                 ),
                 TextFormField(
                   controller: mobileNumber,
                   decoration: InputDecoration(
                       hintText: "شماره موبایل",
                       prefixIcon: Icon(Icons.call),
-                      contentPadding: EdgeInsets.all(5.0)),
+                      contentPadding: EdgeInsets.all(5.0)),keyboardType: TextInputType.phone,keyboardAppearance: Brightness.light,
                 ),
                 TextFormField(
                   controller: email,
                   decoration: InputDecoration(
                       hintText: "نام کاربری",
                       prefixIcon: Icon(Icons.accessibility),
-                      contentPadding: EdgeInsets.all(5.0)),
+                      contentPadding: EdgeInsets.all(5.0)),keyboardType: TextInputType.emailAddress,keyboardAppearance: Brightness.light,
                   textAlign: TextAlign.start,
                 ),
                 TextFormField(
@@ -69,14 +70,14 @@ class _RegisterPageState extends State<RegisterPage> {
                   decoration: InputDecoration(
                       hintText: "رمز عبور",
                       prefixIcon: Icon(Icons.vpn_key),
-                      contentPadding: EdgeInsets.all(5.0)),
+                      contentPadding: EdgeInsets.all(5.0)),keyboardType: TextInputType.text,keyboardAppearance: Brightness.light,
                 ),
                 TextFormField(
                   controller: confirmPassword,
                   decoration: InputDecoration(
                       hintText: "تکرار رمز عبور",
                       prefixIcon: Icon(Icons.vpn_key),
-                      contentPadding: EdgeInsets.all(5.0)),
+                      contentPadding: EdgeInsets.all(5.0)),keyboardType: TextInputType.text,keyboardAppearance: Brightness.light,
                 ),
                 Builder(
                     builder: (context) => Padding(padding: EdgeInsets.only(top: 15.0,bottom: 5.0),child: RaisedButton(

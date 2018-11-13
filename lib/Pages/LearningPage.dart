@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Model/ArticleModel.dart';
 import 'package:flutter_app_rote/Model/PackageBoxModel.dart';
 import 'package:flutter_app_rote/Pages/ExaminingPage.dart';
+import 'package:flutter_app_rote/Tools/MyColors.dart';
 import 'package:flutter_app_rote/Widgets/ArticleWidget.dart';
 
 class LearningPage extends StatefulWidget {
@@ -46,15 +47,15 @@ class LearningPageState extends State<LearningPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return Scaffold(backgroundColor: MyColors.firstBackground,
+      appBar: AppBar(backgroundColor: MyColors.appBarAndNavigationBar,
         title: Text(
           widget.box.title,
           textDirection: TextDirection.rtl,
         ),
         centerTitle: true,
       ),
-      body: IndexedStack(
+      body:  IndexedStack(
         children: pages,
         index: currentArticle,
       ),

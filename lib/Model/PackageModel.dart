@@ -89,4 +89,16 @@ await http.post(Values.Host + "api/packages/GetPackageTransactionKey", body: x,h
 String moneyUrl = json.decode(response.body)["Data"]["Result"]["ReferUrl"];
 return moneyUrl;
 }
+Future boughtPackage(BuildContext context, String boughtPackageId) async {
+  final header = await Authentication.getHeader(context);
+  Map<String, String> x = {
+    "Id": boughtPackageId
+  };
+  final response =
+  await http.post(Values.Host + "api/Packages/PackageById",
+      body: x, headers: header);
 
+  PackageModel boughtPackageData = PackageModel.fromJson(
+      json.decode(response.body)["Data"]["Result"]);
+  return boughtPackageData;
+}

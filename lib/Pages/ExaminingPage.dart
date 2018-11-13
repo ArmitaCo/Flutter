@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Model/PackageBoxModel.dart';
 import 'package:flutter_app_rote/Model/QuestionsModel.dart';
+import 'package:flutter_app_rote/Tools/MyColors.dart';
 import 'package:flutter_app_rote/Widgets/QuestionsWidget.dart';
 
 class ExaminingPage extends StatefulWidget {
@@ -52,7 +53,7 @@ class ExaminingPageState extends State<ExaminingPage> {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return new SizedBox.shrink(child:AlertDialog(
+                return new  Container(color: MyColors.firstBackground,child: SizedBox.shrink(child:AlertDialog(
                   titlePadding: EdgeInsets.all(10.0),
                   contentPadding: EdgeInsets.all(10.0),
                   title: Text(
@@ -75,7 +76,7 @@ class ExaminingPageState extends State<ExaminingPage> {
                       child: Text("بستن"),
                     ),
                   ],
-                ));
+                )));
               },
             ).then((x) {
               Navigator.pop(context);

@@ -42,7 +42,7 @@ class MyPackagesState extends State<MyPackages>
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
+    return Container(color: MyColors.firstBackground,child: GridView.builder(
         itemCount: myPackageList.length,
         gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
@@ -64,7 +64,7 @@ class MyPackagesState extends State<MyPackages>
                       color: MyColors.packages,
                       margin: EdgeInsets.all(10.0),
                       shape: RoundedRectangleBorder(
-                          side: BorderSide(width: animation.value * 3.0,
+                          side: BorderSide(width: animation.value * 1.0,
                               color: MyColors.appBarAndNavigationBar),
                           borderRadius: BorderRadius.all(
                               Radius.circular(15.0))),
@@ -95,6 +95,6 @@ class MyPackagesState extends State<MyPackages>
                               child: myPackageList[index].getIcon()),
                         ],
                       ))));
-        });
+        }));
   }
 }

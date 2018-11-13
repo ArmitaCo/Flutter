@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Model/ProfileModel.dart';
 import 'package:flutter_app_rote/Pages/AvatarPage.dart';
+import 'package:flutter_app_rote/Tools/MyColors.dart';
 import 'package:flutter_app_rote/Widgets/ProfileButtonsWidget.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -31,7 +32,7 @@ class ProfilePageState extends State<ProfilePage> {
       image = Image.network(profileModel?.avatar?.image);
 
     //return ProfileButtons();
-    return new Column(children: <Widget>[
+    return new  Container(color: MyColors.firstBackground,child: Column(children: <Widget>[
       Row(
         children: <Widget>[
           Column(
@@ -75,6 +76,6 @@ class ProfilePageState extends State<ProfilePage> {
             color: Colors.black,
           )),
       Flexible(child: ProfileButtons(context))
-    ]);
+    ]));
   }
 }

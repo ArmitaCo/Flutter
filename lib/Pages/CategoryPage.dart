@@ -53,7 +53,7 @@ class CategoryPageState extends State<CategoryPage>
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
+    return  Container(color: MyColors.firstBackground,child: GridView.builder(
         itemCount: data.length,
         gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
@@ -76,13 +76,13 @@ class CategoryPageState extends State<CategoryPage>
               },
               child: new Transform.scale(
                   scale: animation.value,
-                  child: Card(
+                  child: SizedBox(height: 200.0,child: Card(
                     color: MyColors.packages,
                     elevation: animation.value * 15.0,
                     margin: EdgeInsets.all(10.0),
                     shape: RoundedRectangleBorder(
                         side: BorderSide(
-                            width: 3.0, color: MyColors.appBarAndNavigationBar),
+                            width: 1.0, color: MyColors.appBarAndNavigationBar),
                         borderRadius: BorderRadius.all(Radius.circular(15.0))),
                     child: Stack(fit: StackFit.passthrough, children: <Widget>[
                       GridTileBar(
@@ -105,7 +105,7 @@ class CategoryPageState extends State<CategoryPage>
                         ),
                       )
                     ]),
-                  )));
-        });
+                  ))));
+        }));
   }
 }

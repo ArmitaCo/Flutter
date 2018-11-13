@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Tools/Authentication.dart';
 import 'package:flutter_app_rote/Tools/ConstValues.dart';
+import 'package:flutter_app_rote/Tools/MyColors.dart';
 import 'package:http/http.dart' as http;
 
 class BugReport extends StatefulWidget {
@@ -14,12 +15,12 @@ class BugReportState extends State<BugReport> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: AppBar(
+    return new Scaffold(backgroundColor: MyColors.firstBackground,
+      appBar: AppBar(backgroundColor: MyColors.appBarAndNavigationBar,
         centerTitle: true,
         title: Text("گزارش خرابی"),
       ),
-      body: Form(
+      body:  Form(
           key: _loginFormKey,
           child: Center(
               child: Column(

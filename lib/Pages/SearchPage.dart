@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Tools/ConstValues.dart';
+import 'package:flutter_app_rote/Tools/MyColors.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -17,13 +18,13 @@ class SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Center(
+    return new  Container(color: MyColors.firstBackground,child: Center(
       child: Column(
         children: <Widget>[
           Image.network(Values.Host+"Images/UC.gif"),
           new Text("به زودی...",textScaleFactor: 1.5,)
         ],
       ),
-    );
+    ));
   }
 }

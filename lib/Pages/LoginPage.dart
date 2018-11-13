@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Tools/Authentication.dart';
 import 'package:flutter_app_rote/Tools/Loading.dart';
+import 'package:flutter_app_rote/Tools/MyColors.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -16,10 +17,10 @@ class LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Form(
+    return new  Form(
         key: _loginFormKey,
-        child: Scaffold(
-          appBar: new AppBar(
+        child: Scaffold(backgroundColor: MyColors.firstBackground,
+          appBar: new AppBar(backgroundColor: MyColors.appBarAndNavigationBar,
             title: Text("ورود کاربر"),
             centerTitle: true,
           ),

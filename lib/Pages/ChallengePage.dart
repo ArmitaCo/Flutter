@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Model/LeaderBoardItemModel.dart';
 import 'package:flutter_app_rote/Model/LeaderBoardModel.dart';
+import 'package:flutter_app_rote/Tools/MyColors.dart';
 
 class ChallengePage extends StatefulWidget {
   @override
@@ -39,7 +40,7 @@ class ChallengePageState extends State<ChallengePage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return new Scaffold(backgroundColor: MyColors.firstBackground,
       body: SingleChildScrollView(child: Column(
         children: <Widget>[upperImage, table],
       )),

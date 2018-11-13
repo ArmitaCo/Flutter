@@ -5,6 +5,7 @@ import 'package:flutter_app_rote/Model/PackageModel.dart';
 import 'package:flutter_app_rote/Pages/ExaminingPage.dart';
 import 'package:flutter_app_rote/Pages/LearningPage.dart';
 import 'package:flutter_app_rote/Pages/MoneyPage.dart';
+import 'package:flutter_app_rote/Tools/MyColors.dart';
 
 class SelectedPackage extends StatefulWidget {
   final PackageModel package;
@@ -12,9 +13,8 @@ class SelectedPackage extends StatefulWidget {
   SelectedPackage({this.package});
 
   @override
-  State<StatefulWidget> createState() {
-    return MySelectedPackage();
-  }
+  State<StatefulWidget> createState() => MySelectedPackage();
+
 }
 
 class MySelectedPackage extends State<SelectedPackage>
@@ -73,8 +73,8 @@ class MySelectedPackage extends State<SelectedPackage>
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: AppBar(
+    return new Scaffold(backgroundColor: MyColors.firstBackground,
+      appBar: AppBar(backgroundColor: MyColors.appBarAndNavigationBar,
         title: Center(child: new Text("نرم افزار مطلب")),
       ),
       body: Padding(

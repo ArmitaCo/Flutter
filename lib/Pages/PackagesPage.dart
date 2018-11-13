@@ -42,11 +42,11 @@ class PackagePageState extends State<PackagePage>
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        appBar: new AppBar(
+    return new Scaffold(backgroundColor: MyColors.firstBackground,
+        appBar: new AppBar(backgroundColor: MyColors.appBarAndNavigationBar,
           title: Center(child: new Text("نرم افزار مطلب")),
         ),
-        body: GridView.builder(
+        body:  GridView.builder(
             itemCount: widget.packageList.length,
             gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
