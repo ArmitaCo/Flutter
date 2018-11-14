@@ -1,10 +1,24 @@
-import 'package:flutter_html_view/flutter_html_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_rote/Tools/MyColors.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class Help extends StatelessWidget {
+  final String helpPageUrl;
+
+  Help({this.helpPageUrl});
+
   @override
   Widget build(BuildContext context) {
-    return new HtmlText(data: "",);
+    return new WebviewScaffold(
+      url: helpPageUrl,
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          "راهنما",
+          textScaleFactor: 1.2,
+        ),
+        backgroundColor: MyColors.appBarAndNavigationBar,
+      ),
+    );
   }
-
 }

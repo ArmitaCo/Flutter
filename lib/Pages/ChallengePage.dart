@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Model/LeaderBoardItemModel.dart';
 import 'package:flutter_app_rote/Model/LeaderBoardModel.dart';
 import 'package:flutter_app_rote/Tools/MyColors.dart';
+import 'package:flutter_app_rote/Widgets/CountDownWidget.dart';
 
 class ChallengePage extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class ChallengePageState extends State<ChallengePage> {
   Widget upperImage = Text("");
   Widget table = Text("");
   int itemsCount = 0;
+  CountDownWidget countDownWidget = CountDownWidget(dateTime: DateTime.now());
 
   @override
   void initState() {
@@ -20,12 +22,15 @@ class ChallengePageState extends State<ChallengePage> {
     getLeaderBoard(context).then((kh) {
       setState(() {
         model = kh;
+        countDownWidget = CountDownWidget(
+          dateTime: model.challenge.finish,
+        );
         upperImage = Image.network(
           model?.challenge?.imageUrl,
           fit: BoxFit.fitWidth,
         );
         itemsCount = model.leaderBoardItems.length;
-        table = Table(border: TableBorder.all(color: Colors.black,width: 1.0,style: BorderStyle.solid),
+        table = Table(
           children:
               model.leaderBoardItems.map((lbi) => _getTableRow(lbi)).toList(),
           columnWidths: const <int, TableColumnWidth>{
@@ -40,9 +45,15 @@ class ChallengePageState extends State<ChallengePage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(backgroundColor: MyColors.firstBackground,
-      body: SingleChildScrollView(child: Column(
-        children: <Widget>[upperImage, table],
+    return new Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+    child: Text("راهنما"),mini: true,),
+      backgroundColor: MyColors.firstBackground,
+      body: SingleChildScrollView(
+          child: Column(
+        children: <Widget>[upperImage, countDownWidget, table],
       )),
     );
   }
@@ -52,7 +63,7 @@ class ChallengePageState extends State<ChallengePage> {
     widgetList.add(Padding(
         padding: EdgeInsets.all(5.0),
         child: Text(
-          item.order.toString() + " - ",
+          item.order.toString(),
           textScaleFactor: 1.2,
         )));
     widgetList.add(Padding(
@@ -60,7 +71,7 @@ class ChallengePageState extends State<ChallengePage> {
         child: Text(item.name, textScaleFactor: 1.2)));
     widgetList.add(Padding(
         padding: EdgeInsets.all(5.0),
-        child: Text("امتیاز: " + item.score.toString(), textScaleFactor: 1.2)));
+        child: Text(item.score.toString(), textScaleFactor: 1.2)));
     return TableRow(children: widgetList);
   }
 }

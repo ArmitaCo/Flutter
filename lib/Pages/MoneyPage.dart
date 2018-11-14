@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_rote/Model/PackageModel.dart';
 import 'package:flutter_app_rote/Pages/PayFailpage.dart';
-import 'package:flutter_app_rote/Pages/SelectedPackage.dart';
 import 'package:flutter_app_rote/Tools/Loading.dart';
 import 'package:flutter_app_rote/Tools/MyColors.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
@@ -56,14 +55,14 @@ class MoneyPageState extends State<MoneyPage> {
             Padding(
                 padding: EdgeInsets.all(15.0),
                 child: Text(
-                  "خرید نقدی بسته از صریق درگاه بانکی . با استفاده از این روش کل بسته به صورت نقدی خریداری شده و در اختیار شما قرار می گیرد.",
+                  "خرید نقدی بسته از طریق درگاه بانکی . با استفاده از این روش کل بسته به صورت نقدی خریداری شده و در اختیار شما قرار می گیرد.",
                   textAlign: TextAlign.center,
                   textScaleFactor: 1.3,
                 )),
             Padding(
               padding: EdgeInsets.all(10.0),
               child: RaisedButton(
-                onPressed: () {},
+                onPressed: null,
                 elevation: 15.0,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0)),
@@ -104,16 +103,17 @@ class MoneyPageState extends State<MoneyPage> {
       }
       if (payUrl.startsWith("http://mohsenmeshkini.ir/mobile/success")) {
         flutterWebviewPlugin.close();
-        int y = payUrl.lastIndexOf("/");
-        String boughtPackageId = payUrl.substring(y+1);
-        boughtPackage(context, boughtPackageId).then((boughtPackageData) {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SelectedPackage(
-                        package: boughtPackageData,
-                      )));
-        });
+        Navigator.pop(context);
+        //int y = payUrl.lastIndexOf("/");
+        //String boughtPackageId = payUrl.substring(y+1);
+//        boughtPackage(context, boughtPackageId).then((boughtPackageData) {
+//          Navigator.pushReplacement(
+//              context,
+//              MaterialPageRoute(
+//                  builder: (context) => SelectedPackage(
+//                        package: boughtPackageData,
+//                      )));
+//        });
       }
     });
   }

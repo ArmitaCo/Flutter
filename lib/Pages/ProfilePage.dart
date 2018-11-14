@@ -50,7 +50,11 @@ class ProfilePageState extends State<ProfilePage> {
                   Navigator.push(context,
                           MaterialPageRoute(builder: (context) => AvatarPage()))
                       .then((x) {
-                    setState(() {});
+                    getProfileData(context).then((profile) {
+                      setState(() {
+                        profileModel = profile;
+                      });
+                    });
                   });
                 },
                 child: Text("تعویض نماد"),
