@@ -21,5 +21,6 @@
     <orderEntry type="library" name="Flutter Plugins" level="project" />
     <orderEntry type="library" name="gradle-wrapper" level="project" />
     <orderEntry type="library" name="Dart Packages" level="project" />
+    <orderEntry type="library" name="Android Libraries" level="project" />
   </component>
 </module>

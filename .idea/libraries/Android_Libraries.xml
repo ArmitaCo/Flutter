@@ -1,0 +1,37 @@
+<component name="libraryTable">
+  <library name="Android Libraries" type="AndroidModuleLibraryType">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/build/app/intermediates/flutter/flutter-x86.jar!/" />
+      <root url="file://P:/Sdk/platforms/android-28/data/res" />
+      <root url="jar://P:/Sdk/platforms/android-28/android.jar!/" />
+      <root url="jar://P:/flutter/bin/cache/artifacts/engine/android-arm/flutter.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/exoplayer-core-2.8.0.aar/9c1ab0ff43d8012ab2267e8124f05e83/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/5c266bd3520a471f6f5021060b0049f4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/bbce37b3734bd938a4ac57e69de817c2/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/bbce37b3734bd938a4ac57e69de817c2/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/support-annotations/27.0.0/a7782471b2a0de8fec071b8094a8aaf61c46ab70/support-annotations-27.0.0.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/customtabs-27.1.1.aar/22ac95df3a88c4cdba17e01abede2216/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/exoplayer-hls-2.8.0.aar/9fa8845c5cd4b519e3e37cd911dd7934/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/android.arch.lifecycle/common/1.1.0/edf3f7bfb84a7521d0599efa3b0113a0ee90f85/common-1.1.0.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/769e29d87e79a9ae95c4119597959c97/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/exoplayer-smoothstreaming-2.8.0.aar/4eef3ec9d760860f1749a215244e3bd0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/launcher-1.2.0.aar/de68fc2ea096e88d5dafdf12df2c4fee/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/exoplayer-dash-2.8.0.aar/27e327323552331a3d374d40bc3a0845/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/customtabs-27.1.1.aar/22ac95df3a88c4cdba17e01abede2216/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/support-annotations/27.1.1/39ded76b5e1ce1c5b2688e1d25cdc20ecee32007/support-annotations-27.1.1.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/launcher-1.2.0.aar/de68fc2ea096e88d5dafdf12df2c4fee/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker-qual/2.5.0/f03b9f07c2b002f35f81338e6cde3fc191b91951/checker-qual-2.5.0.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/exoplayer-dash-2.8.0.aar/27e327323552331a3d374d40bc3a0845/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/5c266bd3520a471f6f5021060b0049f4/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/exoplayer-core-2.8.0.aar/9c1ab0ff43d8012ab2267e8124f05e83/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/exoplayer-smoothstreaming-2.8.0.aar/4eef3ec9d760860f1749a215244e3bd0/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/android.arch.core/common/1.1.0/8007981f7d7540d89cd18471b8e5dcd2b4f99167/common-1.1.0.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/exoplayer-hls-2.8.0.aar/9fa8845c5cd4b519e3e37cd911dd7934/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/8a0a09695c85aa2706a27719f5ab494d/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/769e29d87e79a9ae95c4119597959c97/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/8a0a09695c85aa2706a27719f5ab494d/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
