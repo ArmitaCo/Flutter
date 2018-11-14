@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:matlab/Model/PackageModel.dart';
 import 'package:matlab/Pages/SelectedPackage.dart';
 import 'package:matlab/Tools/MyColors.dart';
+import 'package:matlab/Widgets/Help.dart';
 
 class PackagePage extends StatefulWidget {
   final List<PackageModel> packageList;
@@ -42,10 +43,14 @@ class PackagePageState extends State<PackagePage>
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        backgroundColor: MyColors.firstBackground,
-        appBar: new AppBar(
-          backgroundColor: MyColors.appBarAndNavigationBar,
+    return new Scaffold(floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Help(helpPageName: helpPages.packagesPage,)));
+          },
+          child: Text("راهنما"),mini: true,),backgroundColor: MyColors.firstBackground,
+        appBar: new AppBar(backgroundColor: MyColors.appBarAndNavigationBar,
           title: Center(child: new Text("نرم افزار مطلب")),
         ),
         body: GridView.builder(

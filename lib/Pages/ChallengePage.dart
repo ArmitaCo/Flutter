@@ -3,6 +3,7 @@ import 'package:matlab/Model/LeaderBoardItemModel.dart';
 import 'package:matlab/Model/LeaderBoardModel.dart';
 import 'package:matlab/Tools/MyColors.dart';
 import 'package:matlab/Widgets/CountDownWidget.dart';
+import 'package:matlab/Widgets/Help.dart';
 
 class ChallengePage extends StatefulWidget {
   @override
@@ -71,12 +72,12 @@ class ChallengePageState extends State<ChallengePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Text("راهنما"),
-        mini: true,
-      ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        floatingActionButton: FloatingActionButton(
+        onPressed: () {
+    Navigator.push(context,
+              MaterialPageRoute(builder: (context) => Help(helpPageName: helpPages.challengePage,)));
+        },child: Text("راهنما"),mini: true,),
       backgroundColor: MyColors.firstBackground,
       body: SingleChildScrollView(
           child: Column(

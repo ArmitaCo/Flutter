@@ -1,23 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
-import 'package:matlab/Tools/MyColors.dart';
+import 'package:matlab/Tools/ConstValues.dart';
+
+enum helpPages {
+  selectedPackage,
+  profilePage,
+  packagesPage,
+  myPackages,
+  learningPage,
+  examiningPage,
+  challengePage,
+  categoryPage
+}
 
 class Help extends StatelessWidget {
-  final String helpPageUrl;
+  final helpPages helpPageName;
 
-  Help({this.helpPageUrl});
+  Help({this.helpPageName});
 
   @override
   Widget build(BuildContext context) {
     return new WebviewScaffold(
-      url: helpPageUrl,
+      url: Values.Host + "helppage/" + helpPageName.toString(),
       appBar: AppBar(
         centerTitle: true,
         title: Text(
           "راهنما",
           textScaleFactor: 1.2,
         ),
-        backgroundColor: MyColors.appBarAndNavigationBar,
       ),
     );
   }

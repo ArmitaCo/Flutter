@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:matlab/Model/PackageBoxModel.dart';
 import 'package:matlab/Model/QuestionsModel.dart';
 import 'package:matlab/Tools/MyColors.dart';
+import 'package:matlab/Widgets/Help.dart';
 import 'package:matlab/Widgets/QuestionsWidget.dart';
 
 class ExaminingPage extends StatefulWidget {
@@ -86,6 +87,15 @@ class ExaminingPageState extends State<ExaminingPage> {
           });
     }
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => Help(helpPageName: helpPages.examiningPage,)));
+        },
+        child: Text("راهنما"),
+        mini: true,
+      ),
       appBar: AppBar(
         title: Text(
           widget.pModel.title,
