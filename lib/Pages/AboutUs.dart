@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Tools/ConstValues.dart';
-import 'package:flutter_app_rote/Tools/MyColors.dart';
+import 'package:matlab/Tools/ConstValues.dart';
+import 'package:matlab/Tools/MyColors.dart';
 
 class AboutUs extends StatelessWidget {
   @override
@@ -23,16 +23,16 @@ class AboutUs extends StatelessWidget {
               alignment: Alignment.topCenter,
               child: Column(
                 children: <Widget>[
-                    Image.network(
-                      Values.Host + "Images/UC.gif",
-                      fit: BoxFit.contain,
-                    ),
-                    Text(
-                      "نام شرکت : پایدار ارتباط آرمیتا" +
-                          "\nنام طراحان : محسن مشکینی و \n امیرحسین ترکان ملایری  ",
-                      textAlign: TextAlign.right,
-                      textScaleFactor: 1.3,
-                    ),
+                  Image.network(
+                    Values.Host + "Images/UC.gif",
+                    fit: BoxFit.contain,
+                  ),
+                  Text(
+                    "نام شرکت : پایدار ارتباط آرمیتا" +
+                        "\nنام طراحان : محسن مشکینی و \n امیرحسین ترکان ملایری  ",
+                    textAlign: TextAlign.right,
+                    textScaleFactor: 1.3,
+                  ),
                   Divider(
                     height: 10.0,
                     color: Colors.black,

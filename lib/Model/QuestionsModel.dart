@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_app_rote/Tools/Authentication.dart';
-import 'package:flutter_app_rote/Tools/ConstValues.dart';
 import 'package:http/http.dart' as http;
+import 'package:matlab/Tools/Authentication.dart';
+import 'package:matlab/Tools/ConstValues.dart';
 
 import 'AnswersModel.dart';
 
@@ -17,13 +17,14 @@ class QuestionsModel {
   final String hint;
   final List<AnswersModel> answersModel;
 
-  QuestionsModel({this.id,
-    this.questionText,
-    this.correctAnswer,
-    this.answerText,
-    this.hint,
-    this.userAnswerId,
-    this.answersModel});
+  QuestionsModel(
+      {this.id,
+      this.questionText,
+      this.correctAnswer,
+      this.answerText,
+      this.hint,
+      this.userAnswerId,
+      this.answersModel});
 
   factory QuestionsModel.fromJson(Map<String, dynamic> json) {
     return QuestionsModel(
@@ -41,8 +42,8 @@ class QuestionsModel {
   }
 }
 
-Future<List<QuestionsModel>> getQuestions(BuildContext context,
-    int userPackageBoxId) async {
+Future<List<QuestionsModel>> getQuestions(
+    BuildContext context, int userPackageBoxId) async {
   final header = await Authentication.getHeader(context);
   Map<String, String> x = {"id": userPackageBoxId.toString()};
   List<QuestionsModel> questions = new List<QuestionsModel>();
@@ -60,9 +61,8 @@ Future<Null> answerQuestion(BuildContext context, int answerId) async {
       body: x, headers: header);
 }
 
-Future<Null> questionViewed(BuildContext context, int questionId,
-    int boxId) async
-{
+Future<Null> questionViewed(
+    BuildContext context, int questionId, int boxId) async {
   final header = await Authentication.getHeader(context);
   Map<String, String> x = {
     "QuestionId": questionId.toString(),

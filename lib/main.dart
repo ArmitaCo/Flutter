@@ -1,36 +1,31 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Pages/LoginPage.dart';
-import 'package:flutter_app_rote/Pages/PayFailpage.dart';
-import 'package:flutter_app_rote/Pages/RegisterPage.dart';
-import 'package:flutter_app_rote/Tools/Dispacher.dart';
-import 'package:flutter_app_rote/Tools/MyColors.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:matlab/Pages/LoginPage.dart';
+import 'package:matlab/Pages/PayFailpage.dart';
+import 'package:matlab/Pages/RegisterPage.dart';
+import 'package:matlab/Tools/Dispacher.dart';
+import 'package:matlab/Tools/MyColors.dart';
 
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
-
-
     return new MaterialApp(
       routes: {
         "/account/login": (context) => new LoginPage(),
-        "/packages": (context) =>
-            new MyHomePage(title: "نرم افزار مطلب",),
+        "/packages": (context) => new MyHomePage(
+              title: "نرم افزار مطلب",
+            ),
         "/account/register": (context) => new RegisterPage(),
-        "/PayFailPage":(context)=> new PayFailPage()
+        "/PayFailPage": (context) => new PayFailPage()
       },
       theme: new ThemeData(
-        buttonColor: MyColors.buttons,
-        buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
-        primaryColor: MyColors.appBarAndNavigationBar,
+          buttonColor: MyColors.buttons,
+          buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          primaryColor: MyColors.appBarAndNavigationBar,
           backgroundColor: MyColors.firstBackground,
-          bottomAppBarColor: MyColors.appBarAndNavigationBar
-      ),
+          bottomAppBarColor: MyColors.appBarAndNavigationBar),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -42,8 +37,6 @@ class MyApp extends StatelessWidget {
       home: new MyHomePage(title: 'نرم افزار مطلب'),
     );
   }
-
-
 }
 
 class MyHomePage extends StatefulWidget {
@@ -59,7 +52,6 @@ class MyHomePageState extends State<MyHomePage> {
   Widget body;
 
   int index = 2;
-
 
   setBody(Widget w) {
     setState(() {

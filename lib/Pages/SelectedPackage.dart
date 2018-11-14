@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Model/PackageBoxModel.dart';
-import 'package:flutter_app_rote/Model/PackageModel.dart';
-import 'package:flutter_app_rote/Pages/ExaminingPage.dart';
-import 'package:flutter_app_rote/Pages/LearningPage.dart';
-import 'package:flutter_app_rote/Pages/MoneyPage.dart';
-import 'package:flutter_app_rote/Tools/MyColors.dart';
+import 'package:matlab/Model/PackageBoxModel.dart';
+import 'package:matlab/Model/PackageModel.dart';
+import 'package:matlab/Pages/ExaminingPage.dart';
+import 'package:matlab/Pages/LearningPage.dart';
+import 'package:matlab/Pages/MoneyPage.dart';
+import 'package:matlab/Tools/MyColors.dart';
 
 class SelectedPackage extends StatefulWidget {
   final PackageModel package;

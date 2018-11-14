@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Pages/AboutUs.dart';
-import 'package:flutter_app_rote/Pages/BugReportPage.dart';
-import 'package:flutter_app_rote/Pages/ChangePasswordPage.dart';
-import 'package:flutter_app_rote/Tools/Authentication.dart';
+import 'package:matlab/Pages/AboutUs.dart';
+import 'package:matlab/Pages/BugReportPage.dart';
+import 'package:matlab/Pages/ChangePasswordPage.dart';
+import 'package:matlab/Tools/Authentication.dart';
 
 class ProfileButtons extends StatelessWidget {
   static BuildContext context;
@@ -21,7 +21,8 @@ class ProfileButtons extends StatelessWidget {
     buttonsList.add(inviteFriends);
     buttonsList.add(signOut);
 
-    return GridView.count(padding: EdgeInsets.only(right: 20.0),
+    return GridView.count(
+      padding: EdgeInsets.only(right: 20.0),
       crossAxisCount: 2,
       children: buttonsList,
       childAspectRatio: 3.0,
@@ -31,7 +32,7 @@ class ProfileButtons extends StatelessWidget {
   }
 
   final RaisedButton changePassword = RaisedButton(
-      onPressed: (){
+      onPressed: () {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => ChangePasswordPage()));
       },
@@ -41,39 +42,34 @@ class ProfileButtons extends StatelessWidget {
   final RaisedButton changeMobileNumber = RaisedButton(
       onPressed: null,
       child: Text("تغییر شماره موبایل"),
-      elevation:
-          10.0 ,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0))
-      );
+      elevation: 10.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)));
   final RaisedButton aboutUs = RaisedButton(
-      onPressed: (){
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => AboutUs()));
+      onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => AboutUs()));
       },
       child: Text("درباره ما"),
-      elevation:
-          10.0 ,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0))
-      );
+      elevation: 10.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)));
   final RaisedButton bugReport = RaisedButton(
       onPressed: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => BugReport()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => BugReport()));
       },
       child: Text("گزارش خرابی"),
-      elevation:
-          10.0 ,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0))
-      );
+      elevation: 10.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)));
   final RaisedButton inviteFriends = RaisedButton(
       onPressed: null,
       child: Text("دعوت دوستان"),
-      elevation:
-          10.0 ,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0))
-      );
+      elevation: 10.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)));
   final RaisedButton signOut = RaisedButton(
       onPressed: () {
         Authentication.signOut(context);
       },
       child: Text("خروج"),
-      elevation:
-          10.0 ,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0))
-      );
+      elevation: 10.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)));
 }

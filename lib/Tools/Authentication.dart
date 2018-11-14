@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Model/TokenModel.dart';
-import 'package:flutter_app_rote/Tools/ConstValues.dart';
 import 'package:http/http.dart' as http;
+import 'package:matlab/Model/TokenModel.dart';
+import 'package:matlab/Tools/ConstValues.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Authentication {
@@ -137,17 +137,24 @@ class Authentication {
       BuildContext context, String phoneNumber, String verifyCode) async {
     final header = await Authentication.getHeader(context);
     Map<String, String> x = {"PhoneNumber": phoneNumber, "Code": verifyCode};
-    final response =
-        await http.post(Values.Host + "api/account/VerifyPhoneCode", body: x,headers: header);
+    final response = await http.post(
+        Values.Host + "api/account/VerifyPhoneCode",
+        body: x,
+        headers: header);
 
     return response;
   }
-  static Future<http.Response> changePassword(
-      BuildContext context, String oldPassword, String newPassword ,String confirmNewPassword) async {
+
+  static Future<http.Response> changePassword(BuildContext context,
+      String oldPassword, String newPassword, String confirmNewPassword) async {
     final header = await Authentication.getHeader(context);
-    Map<String, String> x = {"OldPassword": oldPassword, "NewPassword": newPassword,"ConfirmPassword": confirmNewPassword};
-    final response =
-    await http.post(Values.Host + "api/account/ChangePassword", body: x,headers: header);
+    Map<String, String> x = {
+      "OldPassword": oldPassword,
+      "NewPassword": newPassword,
+      "ConfirmPassword": confirmNewPassword
+    };
+    final response = await http.post(Values.Host + "api/account/ChangePassword",
+        body: x, headers: header);
 
     return response;
   }

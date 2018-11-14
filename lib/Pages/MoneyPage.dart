@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Model/PackageModel.dart';
-import 'package:flutter_app_rote/Pages/PayFailpage.dart';
-import 'package:flutter_app_rote/Tools/Loading.dart';
-import 'package:flutter_app_rote/Tools/MyColors.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:matlab/Model/PackageModel.dart';
+import 'package:matlab/Pages/PayFailpage.dart';
+import 'package:matlab/Tools/Loading.dart';
+import 'package:matlab/Tools/MyColors.dart';
 
 class MoneyPage extends StatefulWidget {
   final int packageId;
@@ -22,14 +22,16 @@ class MoneyPageState extends State<MoneyPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(backgroundColor: MyColors.firstBackground,
-      appBar: AppBar(backgroundColor: MyColors.appBarAndNavigationBar,
+    return new Scaffold(
+      backgroundColor: MyColors.firstBackground,
+      appBar: AppBar(
+          backgroundColor: MyColors.appBarAndNavigationBar,
           title: Text(
-        "خرید",
-        textScaleFactor: 1.6,
-        textAlign: TextAlign.center,
-      )),
-      body:  Center(
+            "خرید",
+            textScaleFactor: 1.6,
+            textAlign: TextAlign.center,
+          )),
+      body: Center(
         child: Column(
           children: <Widget>[
             Padding(
@@ -92,7 +94,7 @@ class MoneyPageState extends State<MoneyPage> {
       if (payUrl.startsWith("http://mohsenmeshkini.ir/mobile/fail")) {
         flutterWebviewPlugin.close();
         int x = payUrl.lastIndexOf("/");
-        traceNumber = payUrl.substring(x+1);
+        traceNumber = payUrl.substring(x + 1);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

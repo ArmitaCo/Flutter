@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Model/ChallengeModel.dart';
-import 'package:flutter_app_rote/Model/LeaderBoardItemModel.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_app_rote/Tools/Authentication.dart';
-import 'package:flutter_app_rote/Tools/ConstValues.dart';
+import 'package:matlab/Model/ChallengeModel.dart';
+import 'package:matlab/Model/LeaderBoardItemModel.dart';
+import 'package:matlab/Tools/Authentication.dart';
+import 'package:matlab/Tools/ConstValues.dart';
 
 class LeaderBoardModel {
   LeaderBoardItem userItem;
@@ -24,8 +24,6 @@ class LeaderBoardModel {
         challenge: ChallengeModel.fromJson(json['Challenge']),
         leaderBoardItems: LeaderBoardItem.fromJsonArray(json['Items']));
   }
-
-
 }
 
 Future<LeaderBoardModel> getLeaderBoard(BuildContext context) async {

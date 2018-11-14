@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_app_rote/Tools/Authentication.dart';
-import 'package:flutter_app_rote/Tools/ConstValues.dart';
 import 'package:http/http.dart' as http;
+import 'package:matlab/Tools/Authentication.dart';
+import 'package:matlab/Tools/ConstValues.dart';
 
 class AvatarModel {
   String image;
@@ -35,13 +35,12 @@ Future setAvatarImage(BuildContext context, AvatarModel model) async {
   await avatarSet(context, model.id);
 }
 
-
 Future<List<AvatarModel>> getAvatars(BuildContext context) async {
   final header = await Authentication.getHeader(context);
   List<AvatarModel> avatarData = new List<AvatarModel>();
-  final response =
-  await http.post(Values.Host+"api/profile/ProfileImagesList",headers: header);
-  avatarData = AvatarModel.fromJsonArray(
-      json.decode(response.body)["Data"]["Result"]);
+  final response = await http
+      .post(Values.Host + "api/profile/ProfileImagesList", headers: header);
+  avatarData =
+      AvatarModel.fromJsonArray(json.decode(response.body)["Data"]["Result"]);
   return avatarData;
 }

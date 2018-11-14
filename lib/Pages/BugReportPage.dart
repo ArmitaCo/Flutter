@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Tools/Authentication.dart';
-import 'package:flutter_app_rote/Tools/ConstValues.dart';
-import 'package:flutter_app_rote/Tools/MyColors.dart';
 import 'package:http/http.dart' as http;
+import 'package:matlab/Tools/Authentication.dart';
+import 'package:matlab/Tools/ConstValues.dart';
+import 'package:matlab/Tools/MyColors.dart';
 
 class BugReport extends StatefulWidget {
   @override
@@ -15,12 +15,14 @@ class BugReportState extends State<BugReport> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(backgroundColor: MyColors.firstBackground,
-      appBar: AppBar(backgroundColor: MyColors.appBarAndNavigationBar,
+    return new Scaffold(
+      backgroundColor: MyColors.firstBackground,
+      appBar: AppBar(
+        backgroundColor: MyColors.appBarAndNavigationBar,
         centerTitle: true,
         title: Text("گزارش خرابی"),
       ),
-      body:  Form(
+      body: Form(
           key: _loginFormKey,
           child: Center(
               child: Column(
@@ -48,9 +50,9 @@ class BugReportState extends State<BugReport> {
                     sendBugReport(context, _userNameController.text);
                     Navigator.pop(context);
                     Scaffold.of(context).showSnackBar(new SnackBar(
-                      content: new Text("از اینکه در توسعه این برنامه سهیم شده اید از شما ممنونیم"),
+                      content: new Text(
+                          "از اینکه در توسعه این برنامه سهیم شده اید از شما ممنونیم"),
                     ));
-
                   },
                   child: Text("ثبت"),
                   elevation: 15.0,

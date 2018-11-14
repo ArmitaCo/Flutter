@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_app_rote/Widgets/TextWithHeaderWidget.dart';
+import 'package:matlab/Widgets/TextWithHeaderWidget.dart';
 
 class TimeSpanWidget extends StatelessWidget {
   final DateTime dateTime;

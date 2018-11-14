@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
-import 'package:flutter_app_rote/Widgets/TimeSpanWidget.dart';
+import 'package:matlab/Widgets/TimeSpanWidget.dart';
 
 class CountDownWidget extends StatefulWidget {
   final DateTime dateTime;
@@ -26,10 +26,10 @@ class CountDownWidgetState extends State<CountDownWidget> {
   @override
   void initState() {
     super.initState();
-    t = Timer.periodic(Duration(seconds: 1), Ticked);
+    t = Timer.periodic(Duration(seconds: 1), ticked);
   }
 
-  void Ticked(Timer t) {
+  void ticked(Timer t) {
     setState(() {
       timeSpanWidget = TimeSpanWidget(dateTime: widget.dateTime);
     });

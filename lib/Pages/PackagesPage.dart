@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Model/PackageModel.dart';
-import 'package:flutter_app_rote/Pages/SelectedPackage.dart';
-import 'package:flutter_app_rote/Tools/MyColors.dart';
+import 'package:matlab/Model/PackageModel.dart';
+import 'package:matlab/Pages/SelectedPackage.dart';
+import 'package:matlab/Tools/MyColors.dart';
 
 class PackagePage extends StatefulWidget {
   final List<PackageModel> packageList;
@@ -42,11 +42,13 @@ class PackagePageState extends State<PackagePage>
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(backgroundColor: MyColors.firstBackground,
-        appBar: new AppBar(backgroundColor: MyColors.appBarAndNavigationBar,
+    return new Scaffold(
+        backgroundColor: MyColors.firstBackground,
+        appBar: new AppBar(
+          backgroundColor: MyColors.appBarAndNavigationBar,
           title: Center(child: new Text("نرم افزار مطلب")),
         ),
-        body:  GridView.builder(
+        body: GridView.builder(
             itemCount: widget.packageList.length,
             gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -61,33 +63,35 @@ class PackagePageState extends State<PackagePage>
                                   package: widget.packageList[index],
                                 )));
                   },
-                  child:Transform.scale(
-                  scale: animation.value,
-                  child: new Card(
-                    color: MyColors.packages,
-                    elevation: animation.value * 15.0,
-                    margin: EdgeInsets.all(10.0),
-                    shape: RoundedRectangleBorder(
-                        side: BorderSide(width: 3.0, color: MyColors.packages),
-                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                    child: GridTileBar(
-                      subtitle: Center(
-                        child: Text(
-                          widget.packageList[index].title,
-                          textDirection: TextDirection.rtl,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                  child: Transform.scale(
+                      scale: animation.value,
+                      child: new Card(
+                        color: MyColors.packages,
+                        elevation: animation.value * 15.0,
+                        margin: EdgeInsets.all(10.0),
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                                width: 3.0, color: MyColors.packages),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15.0))),
+                        child: GridTileBar(
+                          subtitle: Center(
+                            child: Text(
+                              widget.packageList[index].title,
+                              textDirection: TextDirection.rtl,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
-                          textAlign: TextAlign.center,
+                          title: Image.network(
+                            widget.packageList[index].imageUrl,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                      title: Image.network(
-                        widget.packageList[index].imageUrl,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  )));
+                      )));
             }));
   }
 }

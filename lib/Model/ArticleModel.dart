@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Model/ExternalArticleModel.dart';
-import 'package:flutter_app_rote/Tools/Authentication.dart';
-import 'package:flutter_app_rote/Tools/ConstValues.dart';
 import 'package:http/http.dart' as http;
+import 'package:matlab/Model/ExternalArticleModel.dart';
+import 'package:matlab/Tools/Authentication.dart';
+import 'package:matlab/Tools/ConstValues.dart';
 
 class ArticleModel {
   final int id;

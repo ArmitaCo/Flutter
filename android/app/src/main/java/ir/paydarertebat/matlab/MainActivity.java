@@ -1,4 +1,4 @@
-package com.example.flutterapprote;
+package ir.paydarertebat.matlab;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

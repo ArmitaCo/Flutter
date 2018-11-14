@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Model/CategoryModel.dart';
-import 'package:flutter_app_rote/Model/PackageModel.dart';
-import 'package:flutter_app_rote/Pages/PackagesPage.dart';
-import 'package:flutter_app_rote/Tools/Authentication.dart';
-import 'package:flutter_app_rote/Tools/ConstValues.dart';
-import 'package:flutter_app_rote/Tools/Loading.dart';
-import 'package:flutter_app_rote/Tools/MyColors.dart';
 import 'package:http/http.dart' as http;
+import 'package:matlab/Model/CategoryModel.dart';
+import 'package:matlab/Model/PackageModel.dart';
+import 'package:matlab/Pages/PackagesPage.dart';
+import 'package:matlab/Tools/Authentication.dart';
+import 'package:matlab/Tools/ConstValues.dart';
+import 'package:matlab/Tools/Loading.dart';
+import 'package:matlab/Tools/MyColors.dart';
 
 class CategoryPage extends StatefulWidget {
   @override
@@ -45,6 +45,7 @@ class CategoryPageState extends State<CategoryPage>
       });
     });
   }
+
   @override
   void dispose() {
     animationController.dispose();
@@ -53,59 +54,66 @@ class CategoryPageState extends State<CategoryPage>
 
   @override
   Widget build(BuildContext context) {
-    return  Container(color: MyColors.firstBackground,child: GridView.builder(
-        itemCount: data.length,
-        gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-        ),
-        itemBuilder: (BuildContext context, int index) {
-          return new GestureDetector(
-              onTap: () {
-                showLoadingDialog(context);
-                getPackages(context, data[index].id).then((packageList) {
-                  Navigator.pop(context);
+    return Container(
+        color: MyColors.firstBackground,
+        child: GridView.builder(
+            itemCount: data.length,
+            gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+            itemBuilder: (BuildContext context, int index) {
+              return new GestureDetector(
+                  onTap: () {
+                    showLoadingDialog(context);
+                    getPackages(context, data[index].id).then((packageList) {
+                      Navigator.pop(context);
 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => PackagePage(
-                              packageList: packageList,
-                            )),
-                  );
-                });
-              },
-              child: new Transform.scale(
-                  scale: animation.value,
-                  child: SizedBox(height: 200.0,child: Card(
-                    color: MyColors.packages,
-                    elevation: animation.value * 15.0,
-                    margin: EdgeInsets.all(10.0),
-                    shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                            width: 1.0, color: MyColors.appBarAndNavigationBar),
-                        borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                    child: Stack(fit: StackFit.passthrough, children: <Widget>[
-                      GridTileBar(
-                        subtitle: Center(
-                          child:
-                              Text(
-                            data[index].title,
-                            maxLines: 2,
-                            textDirection: TextDirection.rtl,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        title: Image.network(
-                          data[index].absoluteImageUrl,
-                          fit: BoxFit.cover,
-                        ),
-                      )
-                    ]),
-                  ))));
-        }));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PackagePage(
+                                  packageList: packageList,
+                                )),
+                      );
+                    });
+                  },
+                  child: new Transform.scale(
+                      scale: animation.value,
+                      child: SizedBox(
+                          height: 200.0,
+                          child: Card(
+                            color: MyColors.packages,
+                            elevation: animation.value * 15.0,
+                            margin: EdgeInsets.all(10.0),
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                    width: 1.0,
+                                    color: MyColors.appBarAndNavigationBar),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15.0))),
+                            child: Stack(
+                                fit: StackFit.passthrough,
+                                children: <Widget>[
+                                  GridTileBar(
+                                    subtitle: Center(
+                                      child: Text(
+                                        data[index].title,
+                                        maxLines: 2,
+                                        textDirection: TextDirection.rtl,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    title: Image.network(
+                                      data[index].absoluteImageUrl,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  )
+                                ]),
+                          ))));
+            }));
   }
 }

@@ -17,7 +17,7 @@
         android:label="نرم افزار مطلب"
         android:icon="@mipmap/icon">
         <activity
-            android:name="com.example.flutterapprote.MainActivity"
+            android:name="ir.paydarertebat.matlab.MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density"

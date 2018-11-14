@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Model/ArticleModel.dart';
-import 'package:flutter_app_rote/Model/PackageBoxModel.dart';
-import 'package:flutter_app_rote/Pages/ExaminingPage.dart';
-import 'package:flutter_app_rote/Tools/MyColors.dart';
-import 'package:flutter_app_rote/Widgets/ArticleWidget.dart';
+import 'package:matlab/Model/ArticleModel.dart';
+import 'package:matlab/Model/PackageBoxModel.dart';
+import 'package:matlab/Pages/ExaminingPage.dart';
+import 'package:matlab/Tools/MyColors.dart';
+import 'package:matlab/Widgets/ArticleWidget.dart';
 
 class LearningPage extends StatefulWidget {
   final PackageBoxModel box;
@@ -33,13 +33,12 @@ class LearningPageState extends State<LearningPage> {
       setState(() {
         articles = articles2;
         pages = articles
-            .map<Widget>((x) =>
-            ArticleWidget(
-              article: x,
-            ))
+            .map<Widget>((x) => ArticleWidget(
+                  article: x,
+                ))
             .toList();
         currentArticle =
-        widget.box.stateValue == 0 ? 0 : widget.box.stateValue - 1;
+            widget.box.stateValue == 0 ? 0 : widget.box.stateValue - 1;
         _articleLearned();
       });
     });
@@ -47,15 +46,17 @@ class LearningPageState extends State<LearningPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: MyColors.firstBackground,
-      appBar: AppBar(backgroundColor: MyColors.appBarAndNavigationBar,
+    return Scaffold(
+      backgroundColor: MyColors.firstBackground,
+      appBar: AppBar(
+        backgroundColor: MyColors.appBarAndNavigationBar,
         title: Text(
           widget.box.title,
           textDirection: TextDirection.rtl,
         ),
         centerTitle: true,
       ),
-      body:  IndexedStack(
+      body: IndexedStack(
         children: pages,
         index: currentArticle,
       ),
@@ -69,11 +70,11 @@ class LearningPageState extends State<LearningPage> {
         ),
         IconButton(
             icon: Icon(Icons.navigate_next),
-            onPressed:
-            (currentArticle < articles.length - 1) ? _incrementIndex : null),
+            onPressed: (currentArticle < articles.length - 1)
+                ? _incrementIndex
+                : null),
         goToExamButton
       ],
-
     );
   }
 
@@ -101,8 +102,7 @@ class LearningPageState extends State<LearningPage> {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          ExaminingPage(
+                      builder: (context) => ExaminingPage(
                             pModel: widget.box,
                           )));
             });

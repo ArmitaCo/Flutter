@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Pages/LoginPage.dart';
-import 'package:flutter_app_rote/Pages/VerifyPhoneCodePage.dart';
-import 'package:flutter_app_rote/Tools/Authentication.dart';
-import 'package:flutter_app_rote/Tools/Loading.dart';
-import 'package:flutter_app_rote/Tools/MyColors.dart';
+import 'package:matlab/Pages/LoginPage.dart';
+import 'package:matlab/Pages/VerifyPhoneCodePage.dart';
+import 'package:matlab/Tools/Authentication.dart';
+import 'package:matlab/Tools/Loading.dart';
+import 'package:matlab/Tools/MyColors.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -25,9 +25,14 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    Scaffold s = Scaffold(backgroundColor: MyColors.firstBackground,
-        appBar: new AppBar(backgroundColor: MyColors.appBarAndNavigationBar,
-          title: new Text("نرمافزار مطلب",textScaleFactor: 1.2,),
+    Scaffold s = Scaffold(
+        backgroundColor: MyColors.firstBackground,
+        appBar: new AppBar(
+          backgroundColor: MyColors.appBarAndNavigationBar,
+          title: new Text(
+            "نرمافزار مطلب",
+            textScaleFactor: 1.2,
+          ),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
@@ -41,28 +46,36 @@ class _RegisterPageState extends State<RegisterPage> {
                   decoration: InputDecoration(
                       hintText: "نام",
                       prefixIcon: Icon(Icons.perm_identity),
-                      contentPadding: EdgeInsets.all(5.0)),keyboardType: TextInputType.text,keyboardAppearance: Brightness.light,
+                      contentPadding: EdgeInsets.all(5.0)),
+                  keyboardType: TextInputType.text,
+                  keyboardAppearance: Brightness.light,
                 ),
                 TextFormField(
                   controller: lastName,
                   decoration: InputDecoration(
                       hintText: "نام خانوادگی",
                       prefixIcon: Icon(Icons.perm_identity),
-                      contentPadding: EdgeInsets.all(5.0)),keyboardType: TextInputType.text,keyboardAppearance: Brightness.light,
+                      contentPadding: EdgeInsets.all(5.0)),
+                  keyboardType: TextInputType.text,
+                  keyboardAppearance: Brightness.light,
                 ),
                 TextFormField(
                   controller: mobileNumber,
                   decoration: InputDecoration(
                       hintText: "شماره موبایل",
                       prefixIcon: Icon(Icons.call),
-                      contentPadding: EdgeInsets.all(5.0)),keyboardType: TextInputType.phone,keyboardAppearance: Brightness.light,
+                      contentPadding: EdgeInsets.all(5.0)),
+                  keyboardType: TextInputType.phone,
+                  keyboardAppearance: Brightness.light,
                 ),
                 TextFormField(
                   controller: email,
                   decoration: InputDecoration(
                       hintText: "نام کاربری",
                       prefixIcon: Icon(Icons.accessibility),
-                      contentPadding: EdgeInsets.all(5.0)),keyboardType: TextInputType.emailAddress,keyboardAppearance: Brightness.light,
+                      contentPadding: EdgeInsets.all(5.0)),
+                  keyboardType: TextInputType.emailAddress,
+                  keyboardAppearance: Brightness.light,
                   textAlign: TextAlign.start,
                 ),
                 TextFormField(
@@ -70,17 +83,23 @@ class _RegisterPageState extends State<RegisterPage> {
                   decoration: InputDecoration(
                       hintText: "رمز عبور",
                       prefixIcon: Icon(Icons.vpn_key),
-                      contentPadding: EdgeInsets.all(5.0)),keyboardType: TextInputType.text,keyboardAppearance: Brightness.light,
+                      contentPadding: EdgeInsets.all(5.0)),
+                  keyboardType: TextInputType.text,
+                  keyboardAppearance: Brightness.light,
                 ),
                 TextFormField(
                   controller: confirmPassword,
                   decoration: InputDecoration(
                       hintText: "تکرار رمز عبور",
                       prefixIcon: Icon(Icons.vpn_key),
-                      contentPadding: EdgeInsets.all(5.0)),keyboardType: TextInputType.text,keyboardAppearance: Brightness.light,
+                      contentPadding: EdgeInsets.all(5.0)),
+                  keyboardType: TextInputType.text,
+                  keyboardAppearance: Brightness.light,
                 ),
                 Builder(
-                    builder: (context) => Padding(padding: EdgeInsets.only(top: 15.0,bottom: 5.0),child: RaisedButton(
+                    builder: (context) => Padding(
+                        padding: EdgeInsets.only(top: 15.0, bottom: 5.0),
+                        child: RaisedButton(
                           onPressed: () {
                             showLoadingDialog(context);
                             Authentication.registerAndLogin(
@@ -122,17 +141,21 @@ class _RegisterPageState extends State<RegisterPage> {
                           elevation: 15.0,
                           child: Text("ثبت نام"),
                         ))),
-                Padding(padding: EdgeInsets.only(top: 5.0),child: RaisedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => LoginPage()));
-                  },
-                  child: Text("عضو هستم"),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)),
-                  elevation: 15.0,
-                  padding: EdgeInsets.all(10.0),
-                ))
+                Padding(
+                    padding: EdgeInsets.only(top: 5.0),
+                    child: RaisedButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()));
+                      },
+                      child: Text("عضو هستم"),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0)),
+                      elevation: 15.0,
+                      padding: EdgeInsets.all(10.0),
+                    ))
               ])),
         ))));
     return s;

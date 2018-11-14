@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Model/ProfileModel.dart';
-import 'package:flutter_app_rote/Pages/AvatarPage.dart';
-import 'package:flutter_app_rote/Tools/MyColors.dart';
-import 'package:flutter_app_rote/Widgets/ProfileButtonsWidget.dart';
+import 'package:matlab/Model/ProfileModel.dart';
+import 'package:matlab/Pages/AvatarPage.dart';
+import 'package:matlab/Tools/MyColors.dart';
+import 'package:matlab/Widgets/ProfileButtonsWidget.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -32,54 +32,58 @@ class ProfilePageState extends State<ProfilePage> {
       image = Image.network(profileModel?.avatar?.image);
 
     //return ProfileButtons();
-    return new  Container(color: MyColors.firstBackground,child: Column(children: <Widget>[
-      Row(
-        children: <Widget>[
-          Column(
+    return new Container(
+        color: MyColors.firstBackground,
+        child: Column(children: <Widget>[
+          Row(
             children: <Widget>[
-              Padding(
-                  padding: EdgeInsets.all(15.0),
-                  child: CircleAvatar(
-                    child: image,
-                    maxRadius: 80.0,
-                  )),
-              RaisedButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0)),
-                onPressed: () {
-                  Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => AvatarPage()))
-                      .then((x) {
-                    getProfileData(context).then((profile) {
-                      setState(() {
-                        profileModel = profile;
+              Column(
+                children: <Widget>[
+                  Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: CircleAvatar(
+                        child: image,
+                        maxRadius: 80.0,
+                      )),
+                  RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0)),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AvatarPage())).then((x) {
+                        getProfileData(context).then((profile) {
+                          setState(() {
+                            profileModel = profile;
+                          });
+                        });
                       });
-                    });
-                  });
-                },
-                child: Text("تعویض نماد"),
+                    },
+                    child: Text("تعویض نماد"),
+                  )
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text("نام: " + (profileModel?.firstName ?? "..."),
+                      maxLines: 2),
+                  Text("نام خانوادگی: " + (profileModel?.lastName ?? "..."),
+                      maxLines: 2),
+                  Text("شماره تلفن: " + (profileModel?.mobile ?? "..."),
+                      maxLines: 2),
+                  //Text("ایمیل: " + profileModel?.email ?? "...", maxLines: 2)
+                ],
               )
             ],
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text("نام: " + (profileModel?.firstName ?? "..."), maxLines: 2),
-              Text("نام خانوادگی: " + (profileModel?.lastName ?? "..."),
-                  maxLines: 2),
-              Text("شماره تلفن: " + (profileModel?.mobile ?? "..."),
-                  maxLines: 2),
-              //Text("ایمیل: " + profileModel?.email ?? "...", maxLines: 2)
-            ],
-          )
-        ],
-      ),
-      Padding(
-          padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
-          child: Divider(
-            color: Colors.black,
-          )),
-      Flexible(child: ProfileButtons(context))
-    ]));
+          Padding(
+              padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+              child: Divider(
+                color: Colors.black,
+              )),
+          Flexible(child: ProfileButtons(context))
+        ]));
   }
 }

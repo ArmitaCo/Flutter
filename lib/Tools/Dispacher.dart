@@ -1,18 +1,17 @@
 import 'dart:async';
-import 'package:flutter_app_rote/Pages/ChallengePage.dart';
-import 'package:flutter_app_rote/Pages/MyPackages.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Pages/CategoryPage.dart';
-import 'package:flutter_app_rote/Pages/ProfilePage.dart';
-import 'package:flutter_app_rote/Pages/SearchPage.dart';
-import 'package:flutter_app_rote/Tools/Authentication.dart';
 
-Future<Widget> dispatch(pages page,BuildContext context) async
-{
+import 'package:flutter/material.dart';
+import 'package:matlab/Pages/CategoryPage.dart';
+import 'package:matlab/Pages/ChallengePage.dart';
+import 'package:matlab/Pages/MyPackages.dart';
+import 'package:matlab/Pages/ProfilePage.dart';
+import 'package:matlab/Pages/SearchPage.dart';
+import 'package:matlab/Tools/Authentication.dart';
+
+Future<Widget> dispatch(pages page, BuildContext context) async {
   bool b = await Authentication.read(context);
-  if(!b) return null;
-  switch(page)
-  {
+  if (!b) return null;
+  switch (page) {
     case pages.buy:
       return CategoryPage();
     case pages.challenge:
@@ -31,15 +30,4 @@ Future<Widget> dispatch(pages page,BuildContext context) async
   return Text("nothing");
 }
 
-
-
-enum pages
-{
-  buy,
-  challenge,
-  packages,
-  search,
-  profile,
-  login,
-  register
-}
+enum pages { buy, challenge, packages, search, profile, login, register }

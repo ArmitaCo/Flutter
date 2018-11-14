@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Model/AnswersModel.dart';
-import 'package:flutter_app_rote/Model/QuestionsModel.dart';
+import 'package:matlab/Model/AnswersModel.dart';
+import 'package:matlab/Model/QuestionsModel.dart';
 
 class QuestionsWidget extends StatefulWidget {
   final QuestionsModel question;

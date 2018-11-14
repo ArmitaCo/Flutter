@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_app_rote/Model/AvatarModel.dart';
+import 'package:matlab/Model/AvatarModel.dart';
 
 class AvatarSelectorWidget extends StatefulWidget {
   @override

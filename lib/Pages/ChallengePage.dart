@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Model/LeaderBoardItemModel.dart';
-import 'package:flutter_app_rote/Model/LeaderBoardModel.dart';
-import 'package:flutter_app_rote/Tools/MyColors.dart';
-import 'package:flutter_app_rote/Widgets/CountDownWidget.dart';
+import 'package:matlab/Model/LeaderBoardItemModel.dart';
+import 'package:matlab/Model/LeaderBoardModel.dart';
+import 'package:matlab/Tools/MyColors.dart';
+import 'package:matlab/Widgets/CountDownWidget.dart';
 
 class ChallengePage extends StatefulWidget {
   @override

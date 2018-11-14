@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Model/AvatarModel.dart';
-import 'package:flutter_app_rote/Tools/Authentication.dart';
-import 'package:flutter_app_rote/Tools/ConstValues.dart';
 import 'package:http/http.dart' as http;
+import 'package:matlab/Model/AvatarModel.dart';
+import 'package:matlab/Tools/Authentication.dart';
+import 'package:matlab/Tools/ConstValues.dart';
 
 //"FirstName": "a",
 //"LastName": "b.c",
@@ -43,13 +43,11 @@ class ProfileModel {
   }
 }
 
-
-Future<ProfileModel> getProfileData(BuildContext context) async
-{
+Future<ProfileModel> getProfileData(BuildContext context) async {
   final header = await Authentication.getHeader(context);
-  final response = await http.post(
-      Values.Host+"api/Profile/ProfileData",
-      headers: header);
-  ProfileModel model = ProfileModel.fromJson(json.decode(response.body)["Data"]["Result"]);
+  final response =
+      await http.post(Values.Host + "api/Profile/ProfileData", headers: header);
+  ProfileModel model =
+      ProfileModel.fromJson(json.decode(response.body)["Data"]["Result"]);
   return model;
 }

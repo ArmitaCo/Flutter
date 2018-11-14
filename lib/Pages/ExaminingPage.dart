@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_rote/Model/PackageBoxModel.dart';
-import 'package:flutter_app_rote/Model/QuestionsModel.dart';
-import 'package:flutter_app_rote/Tools/MyColors.dart';
-import 'package:flutter_app_rote/Widgets/QuestionsWidget.dart';
+import 'package:matlab/Model/PackageBoxModel.dart';
+import 'package:matlab/Model/QuestionsModel.dart';
+import 'package:matlab/Tools/MyColors.dart';
+import 'package:matlab/Widgets/QuestionsWidget.dart';
 
 class ExaminingPage extends StatefulWidget {
   final PackageBoxModel pModel;
@@ -53,30 +53,31 @@ class ExaminingPageState extends State<ExaminingPage> {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return new  Container(color: MyColors.firstBackground,child: SizedBox.shrink(child:AlertDialog(
-                  titlePadding: EdgeInsets.all(10.0),
-                  contentPadding: EdgeInsets.all(10.0),
-                  title: Text(
-                    widget.pModel.title,
-                    textAlign: TextAlign.center,
-                  ),
-                  content:
-                      Text("شما از تعداد" +
+                return new Container(
+                    color: MyColors.firstBackground,
+                    child: SizedBox.shrink(
+                        child: AlertDialog(
+                      titlePadding: EdgeInsets.all(10.0),
+                      contentPadding: EdgeInsets.all(10.0),
+                      title: Text(
+                        widget.pModel.title,
+                        textAlign: TextAlign.center,
+                      ),
+                      content: Text("شما از تعداد" +
                           questionss.length.toString() +
                           " سوال" +
                           _getScore().toString() +
-                          " را درست جواب دادید\n""امتیاز شما : " + (_getScore()*5).toString()),
-
-
-                  actions: <Widget>[
-                    new FlatButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text("بستن"),
-                    ),
-                  ],
-                )));
+                          " را درست جواب دادید\n" "امتیاز شما : " +
+                          (_getScore() * 5).toString()),
+                      actions: <Widget>[
+                        new FlatButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text("بستن"),
+                        ),
+                      ],
+                    )));
               },
             ).then((x) {
               Navigator.pop(context);
