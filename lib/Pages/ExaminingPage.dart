@@ -96,7 +96,8 @@ class ExaminingPageState extends State<ExaminingPage> {
         child: Text("راهنما"),
         mini: true,
       ),
-      appBar: AppBar(
+      backgroundColor: MyColors.firstBackground,
+      appBar: AppBar(backgroundColor: MyColors.appBarAndNavigationBar,
         title: Text(
           widget.pModel.title,
           textDirection: TextDirection.rtl,

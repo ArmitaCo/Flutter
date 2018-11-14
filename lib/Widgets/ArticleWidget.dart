@@ -19,7 +19,7 @@ class ArticleWidget extends StatelessWidget {
                 )
               : Text(""),
           Text(
-            article.title,
+            article.title,textScaleFactor: 1.2,
           ),
           Column(
             children: article.externalArticles.map((x) {

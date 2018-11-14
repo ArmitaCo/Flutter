@@ -47,7 +47,8 @@ class LearningPageState extends State<LearningPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+    return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context,
@@ -61,13 +62,14 @@ class LearningPageState extends State<LearningPage> {
         ),
         centerTitle: true,
       ),
-      body: IndexedStack(
+      body: Padding(padding: EdgeInsets.all(15.0),child: IndexedStack(
         children: pages,
         index: currentArticle,
-      ),
+      )),
       bottomSheet: LinearProgressIndicator(
         value: (currentArticle.ceilToDouble() + 1) / articles.length,
       ),
+
       persistentFooterButtons: <Widget>[
         IconButton(
           icon: Icon(Icons.navigate_before),
