@@ -55,7 +55,7 @@ class CategoryPageState extends State<CategoryPage>
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return  Scaffold(backgroundColor: MyColors.firstBackground,
           floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
           floatingActionButton: FloatingActionButton(
             onPressed: () {

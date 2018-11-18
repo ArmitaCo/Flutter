@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:matlab/Tools/ConstValues.dart';
-import 'package:matlab/Tools/MyColors.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -19,7 +18,7 @@ class SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-        color: MyColors.firstBackground,
+
         child: Center(
           child: Column(
             children: <Widget>[

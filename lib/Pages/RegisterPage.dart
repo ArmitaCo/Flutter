@@ -22,12 +22,14 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController firstName = TextEditingController();
   TextEditingController lastName = TextEditingController();
   TextEditingController mobileNumber = TextEditingController();
+  TextEditingController presenterCode = TextEditingController();
   FocusNode firstNameNode = FocusNode();
   FocusNode lastNameNode = FocusNode();
   FocusNode mobileNumberNode = FocusNode();
   FocusNode emailNode = FocusNode();
   FocusNode passwordNode = FocusNode();
   FocusNode confirmPasswordNode = FocusNode();
+  FocusNode presenterCodeNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     controller: firstName,
                     decoration: InputDecoration(
                         hintText: "نام",
-                        prefixIcon: Icon(Icons.perm_identity,color: Colors.black,),
+                        prefixIcon: Icon(
+                          Icons.perm_identity,
+                          color: Colors.black,
+                        ),
                         contentPadding: EdgeInsets.all(5.0)),
                     keyboardType: TextInputType.text,
                     keyboardAppearance: Brightness.light,
@@ -65,7 +70,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     controller: lastName,
                     decoration: InputDecoration(
                         hintText: "نام خانوادگی",
-                        prefixIcon: Icon(Icons.perm_identity,color: Colors.black),
+                        prefixIcon:
+                            Icon(Icons.perm_identity, color: Colors.black),
                         contentPadding: EdgeInsets.all(5.0)),
                     keyboardType: TextInputType.text,
                     keyboardAppearance: Brightness.light,
@@ -79,7 +85,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     controller: mobileNumber,
                     decoration: InputDecoration(
                         hintText: "شماره موبایل",
-                        prefixIcon: Icon(Icons.call,color: Colors.black),
+                        prefixIcon: Icon(Icons.call, color: Colors.black),
                         contentPadding: EdgeInsets.all(5.0)),
                     keyboardType: TextInputType.phone,
                     keyboardAppearance: Brightness.light,
@@ -93,7 +99,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     controller: email,
                     decoration: InputDecoration(
                         hintText: "ایمیل",
-                        prefixIcon: Icon(Icons.accessibility,color: Colors.black),
+                        prefixIcon:
+                            Icon(Icons.accessibility, color: Colors.black),
                         contentPadding: EdgeInsets.all(5.0)),
                     keyboardType: TextInputType.emailAddress,
                     keyboardAppearance: Brightness.light,
@@ -109,7 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     controller: password,
                     decoration: InputDecoration(
                         hintText: "رمز عبور",
-                        prefixIcon: Icon(Icons.vpn_key,color: Colors.black),
+                        prefixIcon: Icon(Icons.vpn_key, color: Colors.black),
                         contentPadding: EdgeInsets.all(5.0)),
                     keyboardType: TextInputType.text,
                     keyboardAppearance: Brightness.light,
@@ -120,15 +127,31 @@ class _RegisterPageState extends State<RegisterPage> {
                       FocusScope.of(context).requestFocus(confirmPasswordNode);
                     }),
                 TextFormField(
+                    obscureText: true,
+                    controller: confirmPassword,
+                    decoration: InputDecoration(
+                        hintText: "تکرار رمز عبور",
+                        prefixIcon: Icon(Icons.vpn_key, color: Colors.black),
+                        contentPadding: EdgeInsets.all(5.0)),
+                    keyboardType: TextInputType.text,
+                    keyboardAppearance: Brightness.light,
+                    textInputAction: TextInputAction.next,
+                    focusNode: confirmPasswordNode,
+                    onFieldSubmitted: (term) {
+                      confirmPasswordNode.unfocus();
+                      FocusScope.of(context).requestFocus(presenterCodeNode);
+                    }),
+                TextFormField(
                   obscureText: true,
-                  controller: confirmPassword,
+                  controller: presenterCode,
                   decoration: InputDecoration(
-                      hintText: "تکرار رمز عبور",
-                      prefixIcon: Icon(Icons.vpn_key,color: Colors.black),
+                      hintText: "کد معرف (اختیاری)",
+                      prefixIcon:
+                          Icon(Icons.assignment_ind, color: Colors.black),
                       contentPadding: EdgeInsets.all(5.0)),
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.number,
                   keyboardAppearance: Brightness.light,
-                  focusNode: confirmPasswordNode,
+                  focusNode: presenterCodeNode,
                 ),
                 Builder(
                     builder: (context) => Padding(
@@ -143,7 +166,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                     mobileNumber.text,
                                     email.text,
                                     password.text,
-                                    confirmPassword.text)
+                                    confirmPassword.text,
+                                presenterCode.text)
                                 .then((response) {
                               Navigator.pop(context);
                               int verifyStatusCode =
@@ -176,7 +200,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: Text("ثبت نام"),
                         ))),
                 Padding(
-                    padding: EdgeInsets.only(top: 5.0),
+                    padding: EdgeInsets.only(top: 5.0,bottom: 30.0),
                     child: RaisedButton(
                       onPressed: () {
                         Navigator.pushReplacement(

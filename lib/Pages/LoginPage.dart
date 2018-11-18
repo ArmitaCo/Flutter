@@ -14,6 +14,8 @@ class LoginPageState extends State<LoginPage> {
   final _loginFormKey = GlobalKey<FormState>();
   final _userNameController = TextEditingController();
   final _passwordController = TextEditingController();
+  final   FocusNode emailNode = FocusNode();
+  final FocusNode passwordNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,15 @@ class LoginPageState extends State<LoginPage> {
                           ),
                           labelText: "ایمیل"),
                       controller: _userNameController,
+                      keyboardAppearance: Brightness.light,
+                      keyboardType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
+                      focusNode: emailNode,
+                        onFieldSubmitted: (term) {
+                          emailNode.unfocus();
+                          FocusScope.of(context).requestFocus(passwordNode);
+                        }
+
                     ),
                     TextFormField(
                       obscureText: true,
@@ -59,6 +70,11 @@ class LoginPageState extends State<LoginPage> {
                           icon: Icon(Icons.lock_outline, color: Colors.black),
                           labelText: "کلمه عبور"),
                       controller: _passwordController,
+                      keyboardAppearance: Brightness.light,
+                      keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.done,
+                      focusNode: passwordNode,
+
                     ),
                     Padding(
                         padding: EdgeInsets.only(
@@ -97,7 +113,7 @@ class LoginPageState extends State<LoginPage> {
                                 },
                                 child: Text("ورود")))),
                     Padding(
-                        padding: EdgeInsets.only(top: 5.0),
+                        padding: EdgeInsets.only(top: 5.0,bottom: 30.0),
                         child: RaisedButton(
                           textTheme: ButtonTextTheme.primary,
                           elevation: 15.0,

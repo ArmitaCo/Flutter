@@ -92,14 +92,16 @@ class Authentication {
       String mobileNumber,
       String email,
       String password,
-      String confirmPassword) async {
+      String confirmPassword,
+      String presenterCode) async {
     Map<String, String> x = {
       "FirstName": firstName,
       "LastName": lastName,
       "Mobile": mobileNumber,
       "Email": email,
       "Password": password,
-      "ConfirmPassword": confirmPassword
+      "ConfirmPassword": confirmPassword,
+      "PresenterCode": presenterCode
     };
 
     final response =
@@ -114,9 +116,10 @@ class Authentication {
       String mobileNumber,
       String email,
       String password,
-      String confirmPassword) async {
+      String confirmPassword,
+      String presenterCode) async {
     final response = await register(context, firstName, lastName, mobileNumber,
-        email, password, confirmPassword);
+        email, password, confirmPassword,presenterCode);
     int registerAndLoginStatusCode = json.decode(response.body)["Data"]["Code"];
     if (registerAndLoginStatusCode == 200) {
       await login(context, email, password);
