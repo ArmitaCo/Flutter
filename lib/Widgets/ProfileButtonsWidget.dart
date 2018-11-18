@@ -6,6 +6,7 @@ import 'package:matlab/Tools/Authentication.dart';
 
 class ProfileButtons extends StatelessWidget {
   static BuildContext context;
+  static String message;
 
   ProfileButtons(BuildContext c) {
     context = c;
@@ -55,7 +56,15 @@ class ProfileButtons extends StatelessWidget {
   final RaisedButton bugReport = RaisedButton(
       onPressed: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => BugReport()));
+                context, MaterialPageRoute(builder: (context) => BugReport()))
+            .then((c) {
+          if (ProfileButtons.message != null) {
+            Scaffold.of(context).showSnackBar(new SnackBar(
+              content: Text(ProfileButtons.message),
+            ));
+            ProfileButtons.message = null;
+          }
+        });
       },
       child: Text("گزارش خرابی"),
       elevation: 10.0,
