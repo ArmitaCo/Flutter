@@ -109,9 +109,14 @@ class ExaminingPageState extends State<ExaminingPage> {
               onPressed: () {
                 showDialog(
                     context: context,
-                    builder: (c) => SimpleDialog(
-                          children: <Widget>[
-                            Text(questionsList[currentQuestion].hint)
+                    builder: (c) => SimpleDialog(title: Center(child: Text("راهنما")),
+                          children: <Widget>[Container(
+
+                              padding: EdgeInsets.all(10.0),
+                              margin: EdgeInsets.all(5.0),
+                              foregroundDecoration: BoxDecoration(border: Border.all(color: Colors.black,width: 2.0),borderRadius: BorderRadius.circular(15.0))
+                              ,child:
+                            SingleChildScrollView(child: Text(questionsList[currentQuestion].hint,textScaleFactor: 1.1,)))
                           ],
                         ));
               })
