@@ -91,4 +91,13 @@ class VerifyPhoneCodePageState extends State<VerifyPhoneCodePage> {
           ),
         ));
   }
+
+  void alert(BuildContext context) {
+    Scaffold.of(context).showSnackBar(SnackBar(
+        duration: Duration(seconds: 5),
+        content: Text(
+          "test",
+          textScaleFactor: 1.5,
+        )));
+  }
 }
