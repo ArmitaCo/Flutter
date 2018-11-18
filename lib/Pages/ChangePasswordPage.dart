@@ -40,7 +40,10 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                   obscureText: true,
                 controller: oldPassword,
                 decoration: InputDecoration(
-                    hintText: "رمز عبور قدیمی",
+                    hintText:
+                    "حداقل 6 کاراکتر(شامل حروف بزرگ ، کوچک و عدد)",
+                    hintStyle: TextStyle(fontSize: 14.0,color: Colors.black),
+                    labelText: "رمز عبور قدیمی",
                     prefixIcon: Icon(Icons.lock),
                     contentPadding: EdgeInsets.all(5.0)),
                   keyboardType: TextInputType.text,
@@ -56,7 +59,10 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                   obscureText: true,
                 controller: newPassword,
                 decoration: InputDecoration(
-                    hintText: "رمز عبور جدید",
+                    hintText:
+                    "حداقل 6 کاراکتر(شامل حروف بزرگ ، کوچک و عدد)",
+                    hintStyle: TextStyle(fontSize: 14.0,color: Colors.black),
+                    labelText: "رمز عبور جدید",
                     prefixIcon: Icon(Icons.lock_outline),
                     contentPadding: EdgeInsets.all(5.0)),
                   keyboardType: TextInputType.text,
@@ -72,7 +78,10 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
                 obscureText: true,
                 controller: confirmNewPassword,
                 decoration: InputDecoration(
-                    hintText: "تکرار رمز عبور جدید",
+                    hintText:
+                    "حداقل 6 کاراکتر(شامل حروف بزرگ ، کوچک و عدد)",
+                    hintStyle: TextStyle(fontSize: 14.0,color: Colors.black),
+                    labelText: "تکرار رمز عبور جدید",
                     prefixIcon: Icon(Icons.lock_outline),
                     contentPadding: EdgeInsets.all(5.0)),
                   keyboardType: TextInputType.text,
