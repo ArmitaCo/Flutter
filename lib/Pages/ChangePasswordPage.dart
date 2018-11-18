@@ -14,6 +14,9 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
   TextEditingController oldPassword = TextEditingController();
   TextEditingController newPassword = TextEditingController();
   TextEditingController confirmNewPassword = TextEditingController();
+  FocusNode oldPasswordNode = FocusNode();
+  FocusNode newPasswordNode = FocusNode();
+  FocusNode confirmNewPasswordNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -34,25 +37,48 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextFormField(
+                  obscureText: true,
                 controller: oldPassword,
                 decoration: InputDecoration(
                     hintText: "رمز عبور قدیمی",
                     prefixIcon: Icon(Icons.lock),
                     contentPadding: EdgeInsets.all(5.0)),
+                  keyboardType: TextInputType.text,
+                  keyboardAppearance: Brightness.light,
+                  textInputAction: TextInputAction.next,
+                  focusNode: oldPasswordNode,
+                  onFieldSubmitted: (term) {
+                    oldPasswordNode.unfocus();
+                    FocusScope.of(context).requestFocus(newPasswordNode);
+                  }
               ),
               TextFormField(
+                  obscureText: true,
                 controller: newPassword,
                 decoration: InputDecoration(
                     hintText: "رمز عبور جدید",
                     prefixIcon: Icon(Icons.lock_outline),
                     contentPadding: EdgeInsets.all(5.0)),
+                  keyboardType: TextInputType.text,
+                  keyboardAppearance: Brightness.light,
+                  textInputAction: TextInputAction.next,
+                  focusNode: newPasswordNode,
+                  onFieldSubmitted: (term) {
+                    newPasswordNode.unfocus();
+                    FocusScope.of(context).requestFocus(confirmNewPasswordNode);
+                  }
               ),
               TextFormField(
+                obscureText: true,
                 controller: confirmNewPassword,
                 decoration: InputDecoration(
                     hintText: "تکرار رمز عبور جدید",
                     prefixIcon: Icon(Icons.lock_outline),
                     contentPadding: EdgeInsets.all(5.0)),
+                  keyboardType: TextInputType.text,
+                  keyboardAppearance: Brightness.light,
+                  textInputAction: TextInputAction.done,
+                  focusNode: confirmNewPasswordNode,
               ),
               Builder(
                   builder: (context) => Padding(
