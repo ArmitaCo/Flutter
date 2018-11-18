@@ -19,16 +19,16 @@ class LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Form(
-        key: _loginFormKey,
-        child: Scaffold(
-          backgroundColor: MyColors.firstBackground,
-          appBar: new AppBar(
-            backgroundColor: MyColors.appBarAndNavigationBar,
-            title: Text("ورود کاربر"),
-            centerTitle: true,
-          ),
-          body: Padding(
+    return Scaffold(
+        backgroundColor: MyColors.firstBackground,
+        appBar: new AppBar(
+          backgroundColor: MyColors.appBarAndNavigationBar,
+          title: Text("ورود کاربر"),
+          centerTitle: true,
+        ),
+        body: new Form(
+          key: _loginFormKey,
+          child: Padding(
               padding: EdgeInsets.all(15.0),
               child: Center(
                 child: SingleChildScrollView(
@@ -97,7 +97,8 @@ class LoginPageState extends State<LoginPage> {
                                         .then((val) {
                                       Navigator.pop(context);
                                       if (val) {
-                                        Navigator.pop(context);
+                                        Navigator.pushReplacementNamed(
+                                            context, "/packages");
                                       } else {
                                         Scaffold.of(context)
                                             .showSnackBar(new SnackBar(

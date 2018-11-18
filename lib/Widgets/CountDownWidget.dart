@@ -30,6 +30,9 @@ class CountDownWidgetState extends State<CountDownWidget> {
   }
 
   void ticked(Timer t) {
+    if (widget.dateTime.isBefore(DateTime.now())) {
+      return;
+    }
     setState(() {
       timeSpanWidget = TimeSpanWidget(dateTime: widget.dateTime);
     });
