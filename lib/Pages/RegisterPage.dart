@@ -115,7 +115,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     obscureText: true,
                     controller: password,
                     decoration: InputDecoration(
-                        hintText: "رمز عبور",
+                        hintText:
+                            "حداقل 6 کاراکتر(شامل حروف بزرگ ، کوچک و عدد)",
+                        hintStyle: TextStyle(fontSize: 14.0,color: Colors.black),
+                        labelText: "رمز عبور",
                         prefixIcon: Icon(Icons.vpn_key, color: Colors.black),
                         contentPadding: EdgeInsets.all(5.0)),
                     keyboardType: TextInputType.text,
@@ -167,7 +170,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     email.text,
                                     password.text,
                                     confirmPassword.text,
-                                presenterCode.text)
+                                    presenterCode.text)
                                 .then((response) {
                               Navigator.pop(context);
                               int verifyStatusCode =
@@ -200,7 +203,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: Text("ثبت نام"),
                         ))),
                 Padding(
-                    padding: EdgeInsets.only(top: 5.0,bottom: 30.0),
+                    padding: EdgeInsets.only(top: 5.0, bottom: 30.0),
                     child: RaisedButton(
                       onPressed: () {
                         Navigator.pushReplacement(
