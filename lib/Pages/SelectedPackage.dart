@@ -6,6 +6,7 @@ import 'package:matlab/Pages/ExaminingPage.dart';
 import 'package:matlab/Pages/LearningPage.dart';
 import 'package:matlab/Pages/MoneyPage.dart';
 import 'package:matlab/Tools/MyColors.dart';
+import 'package:matlab/Widgets/Help.dart';
 
 class SelectedPackage extends StatefulWidget {
   final PackageModel package;
@@ -88,9 +89,11 @@ class MySelectedPackage extends State<SelectedPackage>
     return new Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Text("راهنما"),
-      ),
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => Help(helpPageName: helpPages.selectedPackage,)));
+        },
+        child: Text("راهنما"),mini: true,),
       backgroundColor: MyColors.firstBackground,
       appBar: AppBar(
         backgroundColor: MyColors.appBarAndNavigationBar,

@@ -22,6 +22,12 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController firstName = TextEditingController();
   TextEditingController lastName = TextEditingController();
   TextEditingController mobileNumber = TextEditingController();
+  FocusNode firstNameNode = FocusNode();
+  FocusNode lastNameNode = FocusNode();
+  FocusNode mobileNumberNode = FocusNode();
+  FocusNode emailNode = FocusNode();
+  FocusNode passwordNode = FocusNode();
+  FocusNode confirmPasswordNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -42,59 +48,87 @@ class _RegisterPageState extends State<RegisterPage> {
               padding: EdgeInsets.all(20.0),
               child: Column(children: <Widget>[
                 TextFormField(
-                  controller: firstName,
-                  decoration: InputDecoration(
-                      hintText: "نام",
-                      prefixIcon: Icon(Icons.perm_identity),
-                      contentPadding: EdgeInsets.all(5.0)),
-                  keyboardType: TextInputType.text,
-                  keyboardAppearance: Brightness.light,
-                ),
+                    controller: firstName,
+                    decoration: InputDecoration(
+                        hintText: "نام",
+                        prefixIcon: Icon(Icons.perm_identity,color: Colors.black,),
+                        contentPadding: EdgeInsets.all(5.0)),
+                    keyboardType: TextInputType.text,
+                    keyboardAppearance: Brightness.light,
+                    textInputAction: TextInputAction.next,
+                    focusNode: firstNameNode,
+                    onFieldSubmitted: (term) {
+                      firstNameNode.unfocus();
+                      FocusScope.of(context).requestFocus(lastNameNode);
+                    }),
                 TextFormField(
-                  controller: lastName,
-                  decoration: InputDecoration(
-                      hintText: "نام خانوادگی",
-                      prefixIcon: Icon(Icons.perm_identity),
-                      contentPadding: EdgeInsets.all(5.0)),
-                  keyboardType: TextInputType.text,
-                  keyboardAppearance: Brightness.light,
-                ),
+                    controller: lastName,
+                    decoration: InputDecoration(
+                        hintText: "نام خانوادگی",
+                        prefixIcon: Icon(Icons.perm_identity,color: Colors.black),
+                        contentPadding: EdgeInsets.all(5.0)),
+                    keyboardType: TextInputType.text,
+                    keyboardAppearance: Brightness.light,
+                    textInputAction: TextInputAction.next,
+                    focusNode: lastNameNode,
+                    onFieldSubmitted: (term) {
+                      lastNameNode.unfocus();
+                      FocusScope.of(context).requestFocus(mobileNumberNode);
+                    }),
                 TextFormField(
-                  controller: mobileNumber,
-                  decoration: InputDecoration(
-                      hintText: "شماره موبایل",
-                      prefixIcon: Icon(Icons.call),
-                      contentPadding: EdgeInsets.all(5.0)),
-                  keyboardType: TextInputType.phone,
-                  keyboardAppearance: Brightness.light,
-                ),
+                    controller: mobileNumber,
+                    decoration: InputDecoration(
+                        hintText: "شماره موبایل",
+                        prefixIcon: Icon(Icons.call,color: Colors.black),
+                        contentPadding: EdgeInsets.all(5.0)),
+                    keyboardType: TextInputType.phone,
+                    keyboardAppearance: Brightness.light,
+                    textInputAction: TextInputAction.next,
+                    focusNode: mobileNumberNode,
+                    onFieldSubmitted: (term) {
+                      mobileNumberNode.unfocus();
+                      FocusScope.of(context).requestFocus(emailNode);
+                    }),
                 TextFormField(
-                  controller: email,
-                  decoration: InputDecoration(
-                      hintText: "نام کاربری",
-                      prefixIcon: Icon(Icons.accessibility),
-                      contentPadding: EdgeInsets.all(5.0)),
-                  keyboardType: TextInputType.emailAddress,
-                  keyboardAppearance: Brightness.light,
-                  textAlign: TextAlign.start,
-                ),
+                    controller: email,
+                    decoration: InputDecoration(
+                        hintText: "ایمیل",
+                        prefixIcon: Icon(Icons.accessibility,color: Colors.black),
+                        contentPadding: EdgeInsets.all(5.0)),
+                    keyboardType: TextInputType.emailAddress,
+                    keyboardAppearance: Brightness.light,
+                    textAlign: TextAlign.start,
+                    textInputAction: TextInputAction.next,
+                    focusNode: emailNode,
+                    onFieldSubmitted: (term) {
+                      emailNode.unfocus();
+                      FocusScope.of(context).requestFocus(passwordNode);
+                    }),
                 TextFormField(
-                  controller: password,
-                  decoration: InputDecoration(
-                      hintText: "رمز عبور",
-                      prefixIcon: Icon(Icons.vpn_key),
-                      contentPadding: EdgeInsets.all(5.0)),
-                  keyboardType: TextInputType.text,
-                  keyboardAppearance: Brightness.light,
-                ),
+                    obscureText: true,
+                    controller: password,
+                    decoration: InputDecoration(
+                        hintText: "رمز عبور",
+                        prefixIcon: Icon(Icons.vpn_key,color: Colors.black),
+                        contentPadding: EdgeInsets.all(5.0)),
+                    keyboardType: TextInputType.text,
+                    keyboardAppearance: Brightness.light,
+                    textInputAction: TextInputAction.next,
+                    focusNode: passwordNode,
+                    onFieldSubmitted: (term) {
+                      passwordNode.unfocus();
+                      FocusScope.of(context).requestFocus(confirmPasswordNode);
+                    }),
                 TextFormField(
+                  obscureText: true,
                   controller: confirmPassword,
                   decoration: InputDecoration(
                       hintText: "تکرار رمز عبور",
-                      prefixIcon: Icon(Icons.vpn_key),
+                      prefixIcon: Icon(Icons.vpn_key,color: Colors.black),
                       contentPadding: EdgeInsets.all(5.0)),
                   keyboardType: TextInputType.text,
                   keyboardAppearance: Brightness.light,
+                  focusNode: confirmPasswordNode,
                 ),
                 Builder(
                     builder: (context) => Padding(

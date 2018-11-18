@@ -9,6 +9,7 @@ import 'package:matlab/Tools/Authentication.dart';
 import 'package:matlab/Tools/ConstValues.dart';
 import 'package:matlab/Tools/Loading.dart';
 import 'package:matlab/Tools/MyColors.dart';
+import 'package:matlab/Widgets/Help.dart';
 
 class CategoryPage extends StatefulWidget {
   @override
@@ -54,19 +55,26 @@ class CategoryPageState extends State<CategoryPage>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: MyColors.firstBackground,
-        child: GridView.builder(
-            itemCount: data.length,
-            gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-            ),
-            itemBuilder: (BuildContext context, int index) {
-              return new GestureDetector(
-                  onTap: () {
-                    showLoadingDialog(context);
-                    getPackages(context, data[index].id).then((packageList) {
-                      Navigator.pop(context);
+    return  Scaffold(
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Help(helpPageName: helpPages.categoryPage,)));
+            },child: Text("راهنما"),
+            mini: true,
+          ),
+          body:GridView.builder(
+        itemCount: data.length,
+        gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+        ),
+        itemBuilder: (BuildContext context, int index) {
+          return new GestureDetector(
+              onTap: () {
+                showLoadingDialog(context);
+                getPackages(context, data[index].id).then((packageList) {
+                  Navigator.pop(context);
 
                       Navigator.push(
                         context,

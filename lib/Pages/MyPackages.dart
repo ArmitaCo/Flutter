@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:matlab/Model/PackageModel.dart';
 import 'package:matlab/Pages/SelectedPackage.dart';
 import 'package:matlab/Tools/MyColors.dart';
+import 'package:matlab/Widgets/Help.dart';
 
 class MyPackages extends StatefulWidget {
   @override
@@ -16,6 +17,7 @@ class MyPackagesState extends State<MyPackages>
   AnimationController animationController;
   Animation<double> animation;
   List<PackageModel> myPackageList = new List();
+
   @override
   void initState() {
     super.initState();
@@ -43,43 +45,48 @@ class MyPackagesState extends State<MyPackages>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: MyColors.firstBackground,
-        child: GridView.builder(
-            itemCount: myPackageList.length,
-            gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.8,
-            ),
-            itemBuilder: (BuildContext context, int index) {
-              return new GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SelectedPackage(
-                                  package: myPackageList[index],
-                                )));
-                  },
-                  child: Transform.scale(
-                      scale: animation.value,
-                      child: Card(
-                          elevation: animation.value * 15.0,
-                          color: MyColors.packages,
-                          margin: EdgeInsets.all(10.0),
-                          shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: animation.value * 1.0,
-                                  color: MyColors.appBarAndNavigationBar),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15.0))),
-                          child: new Stack(
-                            fit: StackFit.passthrough,
-                            children: <Widget>[
-                              GridTileBar(
-                                subtitle: Center(
-                                  child: SizedBox(
-                                      child: Text(
+    return new Scaffold(
+        backgroundColor: MyColors.firstBackground,floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Help(helpPageName: helpPages.myPackages,)));
+          },child: Text("راهنما"),
+          mini: true,
+        ),
+        body:GridView.builder(
+        itemCount: myPackageList.length,
+        gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 0.8,
+        ),
+        itemBuilder: (BuildContext context, int index) {
+          return new GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SelectedPackage(
+                          package: myPackageList[index],
+                            )));
+              },
+              child: Transform.scale(
+                  scale: animation.value,
+                  child: Card(elevation: animation.value * 15.0,
+                      color: MyColors.packages,
+                      margin: EdgeInsets.all(10.0),
+                      shape: RoundedRectangleBorder(
+                          side: BorderSide(width: animation.value * 1.0,
+                              color: MyColors.appBarAndNavigationBar),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(15.0))),
+                      child: new Stack(
+                        fit: StackFit.passthrough,
+                        children: <Widget>[
+                          GridTileBar(
+                            subtitle: Center(
+                              child: SizedBox(
+                                  child: Text(
                                     myPackageList[index].title,
                                     maxLines: 2,
                                     style: TextStyle(

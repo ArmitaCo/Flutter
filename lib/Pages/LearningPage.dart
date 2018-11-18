@@ -4,6 +4,7 @@ import 'package:matlab/Model/PackageBoxModel.dart';
 import 'package:matlab/Pages/ExaminingPage.dart';
 import 'package:matlab/Tools/MyColors.dart';
 import 'package:matlab/Widgets/ArticleWidget.dart';
+import 'package:matlab/Widgets/Help.dart';
 
 class LearningPage extends StatefulWidget {
   final PackageBoxModel box;
@@ -47,22 +48,28 @@ class LearningPageState extends State<LearningPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.firstBackground,
-      appBar: AppBar(
-        backgroundColor: MyColors.appBarAndNavigationBar,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => Help(helpPageName: helpPages.learningPage,)));
+        },
+        child: Text("راهنما"),mini: true,),backgroundColor: MyColors.firstBackground,
+      appBar: AppBar(backgroundColor: MyColors.appBarAndNavigationBar,
         title: Text(
           widget.box.title,
           textDirection: TextDirection.rtl,
         ),
         centerTitle: true,
       ),
-      body: IndexedStack(
+      body: Padding(padding: EdgeInsets.all(15.0),child: IndexedStack(
         children: pages,
         index: currentArticle,
-      ),
+      )),
       bottomSheet: LinearProgressIndicator(
         value: (currentArticle.ceilToDouble() + 1) / articles.length,
       ),
+
       persistentFooterButtons: <Widget>[
         IconButton(
           icon: Icon(Icons.navigate_before),
