@@ -18,6 +18,16 @@ class VerifyPhoneCodePageState extends State<VerifyPhoneCodePage> {
   final _verifyCodeController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    _verifyCodeController.addListener(() {
+      if (_verifyCodeController.text.length == 6) {
+        _submitForm();
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return new Form(
         key: _verifyCode,
@@ -58,30 +68,7 @@ class VerifyPhoneCodePageState extends State<VerifyPhoneCodePage> {
                   )),
               Builder(
                   builder: (context) => RaisedButton(
-                        onPressed: () {
-                          if (_verifyCode.currentState.validate()) {
-                            String verifyCode = _verifyCodeController.text;
-                            Authentication.verifyMobileNumber(
-                                    context, widget.phoneNumber, verifyCode)
-                                .then((response) {
-                              int registerAndLoginStatusCode =
-                                  json.decode(response.body)["Data"]["Code"];
-                              String registerAndLoginStatusMessage =
-                                  json.decode(response.body)["Data"]["Message"];
-                              if (registerAndLoginStatusCode == 200) {
-                                Navigator.pushReplacementNamed(
-                                    context, "/packages");
-                              } else {
-                                Scaffold.of(context).showSnackBar(SnackBar(
-                                    duration: Duration(seconds: 5),
-                                    content: Text(
-                                      registerAndLoginStatusMessage,
-                                      textScaleFactor: 1.5,
-                                    )));
-                              }
-                            });
-                          }
-                        },
+                        onPressed: _submitForm,
                         child: Text("فعال سازی"),
                         elevation: 15.0,
                         shape: RoundedRectangleBorder(
@@ -99,5 +86,28 @@ class VerifyPhoneCodePageState extends State<VerifyPhoneCodePage> {
           "test",
           textScaleFactor: 1.5,
         )));
+  }
+
+  void _submitForm() {
+    if (_verifyCode.currentState.validate()) {
+      String verifyCode = _verifyCodeController.text;
+      Authentication.verifyMobileNumber(context, widget.phoneNumber, verifyCode)
+          .then((response) {
+        int registerAndLoginStatusCode =
+            json.decode(response.body)["Data"]["Code"];
+        String registerAndLoginStatusMessage =
+            json.decode(response.body)["Data"]["Message"];
+        if (registerAndLoginStatusCode == 200) {
+          Navigator.pushReplacementNamed(context, "/packages");
+        } else {
+          Scaffold.of(context).showSnackBar(SnackBar(
+              duration: Duration(seconds: 5),
+              content: Text(
+                registerAndLoginStatusMessage,
+                textScaleFactor: 1.5,
+              )));
+        }
+      });
+    }
   }
 }

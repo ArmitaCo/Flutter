@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:matlab/Tools/Authentication.dart';
 import 'package:matlab/Tools/ConstValues.dart';
 import 'package:matlab/Tools/MyColors.dart';
+import 'package:matlab/Widgets/ProfileButtonsWidget.dart';
 
 class BugReport extends StatefulWidget {
   @override
@@ -48,11 +49,9 @@ class BugReportState extends State<BugReport> {
                     child: RaisedButton(
                   onPressed: () {
                     sendBugReport(context, _userNameController.text);
+                    ProfileButtons.message =
+                        "از اینکه در توسعه این برنامه سهیم شده اید از شما ممنونیم";
                     Navigator.pop(context);
-                    Scaffold.of(context).showSnackBar(new SnackBar(
-                      content: new Text(
-                          "از اینکه در توسعه این برنامه سهیم شده اید از شما ممنونیم"),
-                    ));
                   },
                   child: Text("ثبت"),
                   elevation: 15.0,

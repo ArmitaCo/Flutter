@@ -41,8 +41,9 @@ class AvatarSelectorWidgetState extends State<AvatarSelectorWidget> {
               ],
             ),
             onTap: () {
-              setAvatarImage(context, avatarData[index]).then((c){Navigator.pop(c);});
-
+              setAvatarImage(context, avatarData[index]).then((c) {
+                Navigator.pop(context);
+              });
             },
           );
         });
