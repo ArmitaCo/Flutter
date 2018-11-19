@@ -6,19 +6,8 @@ Future<Null> showLoadingDialog(BuildContext context) async {
   await showDialog(
       context: context,
       builder: (ctx) {
-        return SimpleDialog(
-          title: Text("Loading"),
-          children: <Widget>[
-            new FittedBox(
-              child: Padding(
-                padding: EdgeInsets.all(5.0),
-                child: new CircularProgressIndicator(
-                  value: null,
-                ),
-              ),
-            )
-          ],
-        );
+        return new FlatButton(onPressed: null, child: CircularProgressIndicator(strokeWidth: 5.0,));
+
       });
 
   return;
