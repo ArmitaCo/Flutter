@@ -107,6 +107,7 @@ class CategoryPageState extends State<CategoryPage>
                                       child: Text(
                                         data[index].title,
                                         maxLines: 2,
+                                        textScaleFactor: 1.2,
                                         textDirection: TextDirection.rtl,
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
