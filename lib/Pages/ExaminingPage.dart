@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:matlab/Model/PackageBoxModel.dart';
 import 'package:matlab/Model/QuestionsModel.dart';
+import 'package:matlab/Tools/Loading.dart';
 import 'package:matlab/Tools/MyColors.dart';
 import 'package:matlab/Widgets/Help.dart';
 import 'package:matlab/Widgets/QuestionsWidget.dart';
@@ -13,7 +14,6 @@ class ExaminingPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return new ExaminingPageState();
-
   }
 }
 
@@ -26,15 +26,20 @@ class ExaminingPageState extends State<ExaminingPage> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration(milliseconds: 100)).then((_) {
+      _getQuestions();
+    });
+  }
+
+  Future _getQuestions() async {
+    showLoadingDialog(context);
     getQuestions(context, widget.pModel.userPackageBoxId).then((q) {
       setState(() {
         questionsList = q;
         currentQuestion =
             widget.pModel.stateValue == 0 ? 0 : widget.pModel.stateValue - 1;
-//        if (!questionsList.any((x) => x.userAnswerId == null)) {
-//          finishExam = IconButton(icon: Icon(Icons.message), onPressed: null);
-//        }
       });
+      Navigator.pop(context);
     });
   }
 
@@ -57,48 +62,64 @@ class ExaminingPageState extends State<ExaminingPage> {
               builder: (BuildContext context) {
                 return new Container(
                     color: MyColors.firstBackground,
-                    child: SizedBox.shrink(
-                        child: AlertDialog(
-                      titlePadding: EdgeInsets.all(10.0),
-                      contentPadding: EdgeInsets.all(10.0),
-                      title: Text(
+                    child: SimpleDialog(
+                      title: Center(
+                          child: Text(
                         widget.pModel.title,
                         textAlign: TextAlign.center,
-                      ),
-                      content: Text("شما از تعداد" +
-                          questionss.length.toString() +
-                          " سوال" +
-                          _getScore().toString() +
-                          " را درست جواب دادید\n" "امتیاز شما : " +
-                          (_getScore() * 5).toString()),
-                      actions: <Widget>[
-                        new FlatButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Text("بستن"),
-                        ),
+                        textScaleFactor: 1.1,
+                      )),
+                      children: <Widget>[
+                        Container(
+                            padding: EdgeInsets.all(10.0),
+                            margin: EdgeInsets.all(10.0),
+                            foregroundDecoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.black, width: 2.0),
+                                borderRadius: BorderRadius.circular(15.0)),
+                            child: Center(
+                                child: Column(children: <Widget>[
+                              Text("شما از تعداد " +
+                                  questionss.length.toString() +
+                                  " سوال " +
+                                  _getScore().toString() +
+                                  " را درست جواب دادید\n" "امتیاز شما : " +
+                                  (_getScore() * 5).toString()),
+                              RaisedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text("بستن"),
+                                elevation: 10.0,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0)),
+                              )
+                            ])))
                       ],
-                    )));
+                    ));
               },
             ).then((x) {
               Navigator.pop(context);
             });
-            // Navigator.pop(context);
           });
     }
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Help(helpPageName: helpPages.examiningPage,)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Help(
+                        helpPageName: helpPages.examiningPage,
+                      )));
         },
         child: Text("راهنما"),
         mini: true,
       ),
       backgroundColor: MyColors.firstBackground,
-      appBar: AppBar(backgroundColor: MyColors.appBarAndNavigationBar,
+      appBar: AppBar(
+        backgroundColor: MyColors.appBarAndNavigationBar,
         title: Text(
           widget.pModel.title,
           textDirection: TextDirection.rtl,
@@ -110,14 +131,21 @@ class ExaminingPageState extends State<ExaminingPage> {
               onPressed: () {
                 showDialog(
                     context: context,
-                    builder: (c) => SimpleDialog(title: Center(child: Text("راهنما")),
-                          children: <Widget>[Container(
-
-                              padding: EdgeInsets.all(10.0),
-                              margin: EdgeInsets.all(5.0),
-                              foregroundDecoration: BoxDecoration(border: Border.all(color: Colors.black,width: 2.0),borderRadius: BorderRadius.circular(15.0))
-                              ,child:
-                            SingleChildScrollView(child: Text(questionsList[currentQuestion].hint,textScaleFactor: 1.1,)))
+                    builder: (c) => SimpleDialog(
+                          title: Center(child: Text("راهنما")),
+                          children: <Widget>[
+                            Container(
+                                padding: EdgeInsets.all(10.0),
+                                margin: EdgeInsets.all(5.0),
+                                foregroundDecoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.black, width: 2.0),
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                child: SingleChildScrollView(
+                                    child: Text(
+                                  questionsList[currentQuestion].hint,
+                                  textScaleFactor: 1.1,
+                                )))
                           ],
                         ));
               })

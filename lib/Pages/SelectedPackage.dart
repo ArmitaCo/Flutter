@@ -5,6 +5,7 @@ import 'package:matlab/Model/PackageModel.dart';
 import 'package:matlab/Pages/ExaminingPage.dart';
 import 'package:matlab/Pages/LearningPage.dart';
 import 'package:matlab/Pages/MoneyPage.dart';
+import 'package:matlab/Tools/Loading.dart';
 import 'package:matlab/Tools/MyColors.dart';
 import 'package:matlab/Widgets/Help.dart';
 
@@ -51,7 +52,7 @@ class MySelectedPackage extends State<SelectedPackage>
           });
       setState(() {});
     }
-    _getPackageBoxes();
+
     animationController = new AnimationController(
       duration: new Duration(milliseconds: 1000),
       vsync: this,
@@ -60,6 +61,9 @@ class MySelectedPackage extends State<SelectedPackage>
         new CurvedAnimation(parent: animationController, curve: Curves.easeIn)
           ..addListener(() => this.setState(() {}))
           ..addStatusListener((AnimationStatus status) {});
+    Future.delayed(Duration(milliseconds: 100)).then((_) {
+      _getPackageBoxes();
+    });
   }
 
   @override
@@ -69,6 +73,7 @@ class MySelectedPackage extends State<SelectedPackage>
   }
 
   _getPackageBoxes() {
+    showLoadingDialog(context);
     getPackageBox(context, package.id).then((packageBoxList2) {
       setState(() {
         packageBoxList = packageBoxList2;
@@ -80,6 +85,7 @@ class MySelectedPackage extends State<SelectedPackage>
         package.description = "";
       }
     });
+    Navigator.pop(context);
   }
 
   int boxState;

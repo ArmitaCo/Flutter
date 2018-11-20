@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:matlab/Model/ArticleModel.dart';
 import 'package:matlab/Model/PackageBoxModel.dart';
 import 'package:matlab/Pages/ExaminingPage.dart';
+import 'package:matlab/Tools/Loading.dart';
 import 'package:matlab/Tools/MyColors.dart';
 import 'package:matlab/Widgets/ArticleWidget.dart';
 import 'package:matlab/Widgets/Help.dart';
@@ -24,24 +25,36 @@ class LearningPageState extends State<LearningPage> {
   List<Widget> pages = new List();
   IconButton goToExamButton;
 
+
   @override
   void initState() {
     super.initState();
 //    if (widget.isLearning) {
 //      goToExamButton = IconButton(icon: Icon(Icons.extension), onPressed: null);
 //    }
+    Future.delayed(Duration(milliseconds: 100)).then((_) {
+      _getPackages();
+    });
+
+  }
+
+  Future _getPackages() async
+  {
+    showLoadingDialog(context);
     getBoxArticles(context, widget.box.userPackageBoxId).then((articles2) {
+      Navigator.pop(context);
       setState(() {
         articles = articles2;
         pages = articles
             .map<Widget>((x) => ArticleWidget(
-                  article: x,
-                ))
+          article: x,
+        ))
             .toList();
         currentArticle =
-            widget.box.stateValue == 0 ? 0 : widget.box.stateValue - 1;
+        widget.box.stateValue == 0 ? 0 : widget.box.stateValue - 1;
         _articleLearned();
       });
+
     });
   }
 
