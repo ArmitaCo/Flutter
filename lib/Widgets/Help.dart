@@ -13,15 +13,25 @@ enum helpPages {
   categoryPage
 }
 
-class Help extends StatelessWidget {
+class Help extends StatefulWidget {
   final helpPages helpPageName;
 
   Help({this.helpPageName});
 
   @override
+  State<StatefulWidget> createState() => HelpState();
+}
+
+class HelpState extends State<Help> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return new WebviewScaffold(
-      url: Values.Host + "helppage/" + helpPageName.toString(),
+      url: Values.Host + "helppage/" + widget.helpPageName.toString(),
       appBar: AppBar(
         centerTitle: true,
         title: Text(
