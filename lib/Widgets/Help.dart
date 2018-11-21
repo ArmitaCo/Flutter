@@ -32,13 +32,6 @@ class HelpState extends State<Help> {
   Widget build(BuildContext context) {
     return new WebviewScaffold(
       url: Values.Host + "helppage/" + widget.helpPageName.toString(),
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          "راهنما",
-          textScaleFactor: 1.2,
-        ),
-      ),
     );
   }
 }

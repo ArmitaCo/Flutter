@@ -21,7 +21,7 @@ class ExaminingPageState extends State<ExaminingPage> {
   List<QuestionsModel> questionsList = new List();
   List<Widget> questionss = new List();
   int currentQuestion = 0;
-  IconButton finishExam;
+  FlatButton finishExam;
 
   @override
   void initState() {
@@ -54,8 +54,8 @@ class ExaminingPageState extends State<ExaminingPage> {
     if (questionsList != null &&
         questionsList.length > 0 &&
         !questionsList.any((x) => x.userAnswerId == null)) {
-      finishExam = IconButton(
-          icon: Icon(Icons.send),
+      finishExam = FlatButton(
+          child: Text("آزمون"),
           onPressed: () {
             showDialog(
               context: context,
