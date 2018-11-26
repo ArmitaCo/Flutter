@@ -32,8 +32,13 @@ class ChallengePageState extends State<ChallengePage> {
           fit: BoxFit.fitWidth,
         );
         itemsCount = model.leaderBoardItems.length;
-        List<TableRow> rows =
-            model.leaderBoardItems.map((lbi) => _getTableRow(lbi)).toList();
+        List<TableRow> rows = model.leaderBoardItems
+            .map((lbi) => _getTableRow(lbi, false))
+            .toList();
+        if (model.userItem != null) {
+          itemsCount++;
+          rows.insert(0, _getTableRow(model.userItem, true));
+        }
         rows.insert(
             0,
             TableRow(
@@ -72,12 +77,19 @@ class ChallengePageState extends State<ChallengePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-        floatingActionButton: FloatingActionButton(
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton(
         onPressed: () {
-    Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Help(helpPageName: helpPages.challengePage,)));
-        },child: Text("راهنما"),mini: true,),
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Help(
+                        helpPageName: helpPages.challengePage,
+                      )));
+        },
+        child: Text("راهنما"),
+        mini: true,
+      ),
       backgroundColor: MyColors.firstBackground,
       body: SingleChildScrollView(
           child: Column(
@@ -86,28 +98,65 @@ class ChallengePageState extends State<ChallengePage> {
     );
   }
 
-  TableRow _getTableRow(LeaderBoardItem item) {
+  TableRow _getTableRow(LeaderBoardItem item, bool highlighted) {
     List<Widget> widgetList = new List();
-    widgetList.add(Padding(
-        padding: EdgeInsets.all(5.0),
-        child: Text(
-          item.order.toString(),
-          textScaleFactor: 1.2,
-          textAlign: TextAlign.center,
-        )));
-    widgetList.add(Padding(
-        padding: EdgeInsets.only(
-          bottom: 5.0,
-          right: 5.0,
-        ),
-        child: Text(item.name, textScaleFactor: 1.2)));
-    widgetList.add(Padding(
-        padding: EdgeInsets.all(5.0),
-        child: Text(
-          item.score.toString(),
-          textScaleFactor: 1.2,
-          textAlign: TextAlign.center,
-        )));
-    return TableRow(children: widgetList);
+    if (highlighted) {
+      widgetList.add(Padding(
+          padding: EdgeInsets.all(5.0),
+          child: Text(
+            item.order.toString(),
+            textScaleFactor: 1.5,
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.purple),
+          )));
+      widgetList.add(Padding(
+          padding: EdgeInsets.only(
+            bottom: 5.0,
+            right: 5.0,
+          ),
+          child: Text(
+            item.name,
+            textScaleFactor: 1.5,
+            style: TextStyle(color: Colors.purple),
+          )));
+      widgetList.add(Padding(
+          padding: EdgeInsets.all(5.0),
+          child: Text(
+            item.score.toString(),
+            textScaleFactor: 1.5,
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.purple),
+          )));
+      return TableRow(
+          children: widgetList,
+          decoration: BoxDecoration(
+              border: Border(
+                  bottom: BorderSide(
+                      style: BorderStyle.solid,
+                      color: MyColors.borders,
+                      width: 1.0))));
+    } else {
+      widgetList.add(Padding(
+          padding: EdgeInsets.all(5.0),
+          child: Text(
+            item.order.toString(),
+            textScaleFactor: 1.2,
+            textAlign: TextAlign.center,
+          )));
+      widgetList.add(Padding(
+          padding: EdgeInsets.only(
+            bottom: 5.0,
+            right: 5.0,
+          ),
+          child: Text(item.name, textScaleFactor: 1.2)));
+      widgetList.add(Padding(
+          padding: EdgeInsets.all(5.0),
+          child: Text(
+            item.score.toString(),
+            textScaleFactor: 1.2,
+            textAlign: TextAlign.center,
+          )));
+      return TableRow(children: widgetList);
+    }
   }
 }
