@@ -30,8 +30,8 @@ class HelpState extends State<Help> {
 
   @override
   Widget build(BuildContext context) {
-    return new WebviewScaffold(
-      url: Values.Host + "helppage/" + widget.helpPageName.toString(),
+    return new WebviewScaffold(primary: true,
+      url: Values.Host + "helppage/" + widget.helpPageName.toString().split(".")[1],
     );
   }
 }

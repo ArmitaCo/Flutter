@@ -47,19 +47,18 @@ class PackageModel {
   Icon getIcon() {
     int packageState = userPackageState;
     switch (packageState) {
-      case 0:
-        return new Icon(
-          Icons.sim_card,
-          color: Colors.white,
-        );
       case 1:
-        return new Icon(Icons.shopping_basket, color: Colors.white);
+        return new Icon(Icons.sim_card, color: Colors.black);
       case 2:
-        return new Icon(Icons.check, color: Colors.white);
+        return new Icon(Icons.shopping_basket, color: Colors.black);
       case 3:
-        return new Icon(Icons.check_circle, color: Colors.white);
-      default:
-        return new Icon(Icons.error, color: Colors.white);
+        return new Icon(Icons.check, color: Colors.black);
+      case 4:
+        return new Icon(Icons.check_box, color: Colors.black);
+      default:return new Icon(
+        Icons.error,
+        color: Colors.black,
+      );
     }
   }
 }

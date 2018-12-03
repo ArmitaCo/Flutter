@@ -55,7 +55,7 @@ class ExaminingPageState extends State<ExaminingPage> {
         questionsList.length > 0 &&
         !questionsList.any((x) => x.userAnswerId == null)) {
       finishExam = FlatButton(
-          child: Text("آزمون"),
+          child: Text("پایان",textScaleFactor: 1.5,),
           onPressed: () {
             showDialog(
               context: context,
@@ -159,12 +159,12 @@ class ExaminingPageState extends State<ExaminingPage> {
         value: (currentQuestion.ceilToDouble() + 1) / questionsList.length,
       ),
       persistentFooterButtons: <Widget>[
-        IconButton(
-          icon: Icon(Icons.navigate_before),
+        FlatButton(
+          child: Text("قبلی",textScaleFactor: 1.5,),
           onPressed: (currentQuestion > 0) ? _decrementIndex : null,
         ),
-        IconButton(
-            icon: Icon(Icons.navigate_next),
+        FlatButton(
+            child: Text("بعدی",textScaleFactor: 1.5,),
             onPressed: (currentQuestion < questionsList.length - 1)
                 ? _incrementIndex
                 : null),

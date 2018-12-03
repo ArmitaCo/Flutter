@@ -19,6 +19,7 @@ class LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         backgroundColor: MyColors.firstBackground,
         appBar: new AppBar(
@@ -27,6 +28,7 @@ class LoginPageState extends State<LoginPage> {
           centerTitle: true,
         ),
         body: new Form(
+
           key: _loginFormKey,
           child: Padding(
               padding: EdgeInsets.all(15.0),

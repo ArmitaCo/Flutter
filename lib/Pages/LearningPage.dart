@@ -23,7 +23,7 @@ class LearningPageState extends State<LearningPage> {
   List<ArticleModel> articles = new List();
   int currentArticle = 0;
   List<Widget> pages = new List();
-  IconButton goToExamButton;
+  FlatButton goToExamButton;
 
 
   @override
@@ -84,12 +84,12 @@ class LearningPageState extends State<LearningPage> {
       ),
 
       persistentFooterButtons: <Widget>[
-        IconButton(
-          icon: Icon(Icons.navigate_before),
+        FlatButton(
+          child: Text("قبلی",textScaleFactor: 1.5,),
           onPressed: (currentArticle > 0) ? _decrementIndex : null,
         ),
-        IconButton(
-            icon: Icon(Icons.navigate_next),
+        FlatButton(
+            child: Text("بعدی",textScaleFactor: 1.5,),
             onPressed: (currentArticle < articles.length - 1)
                 ? _incrementIndex
                 : null),
@@ -116,8 +116,8 @@ class LearningPageState extends State<LearningPage> {
     if (widget.isLearning) {
       articles[currentArticle].articleLearned(context, widget.box.id);
       if (currentArticle + 1 == articles.length) {
-        goToExamButton = IconButton(
-            icon: Icon(Icons.extension),
+        goToExamButton = FlatButton(
+            child: Text("شروع آزمون",textScaleFactor: 1.5,),
             onPressed: () {
               Navigator.pushReplacement(
                   context,
